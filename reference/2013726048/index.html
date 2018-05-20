@@ -1,0 +1,145 @@
+<html>
+    <head>
+        <title>계산기</title>
+        <style type="text/css">
+            body{
+                margin: 0px 0px 0px 0px;
+            }
+
+            #calculator {
+                width: 540px;
+                height: 960px;
+                background-color:rgba(0, 0, 0, .75);
+                padding: 20px;
+                margin: auto;
+                border-radius: 10px;
+            }
+
+            #result {
+                width: 540px;
+                height: 390px;
+                background-color:#4649ac;
+                color:white;
+                text-align: right;
+                font-size: 200%;
+            }
+
+            #columnb{
+                width: 100%;
+                height: 90px;
+                background-color:rgb(69, 37, 102);
+                border-bottom: 5px solid rgb(154, 85, 228);
+            }
+
+            #column{
+                width: 100%;
+                height: 90px;
+                background-color:rgb(69, 37, 102);
+            }
+
+            .key5 {
+                width: 18%;
+                height: 80%;
+                background-color: #eeeeee;
+                display: inline-flex;
+                margin: 3px 5px 8px 0px;
+                vertical-align: middle;
+                justify-content: center;
+                align-items: center;
+                padding: 5px 0px 5px 0px;
+                border-radius: 4px;
+                cursor: pointer;
+                box-shadow: 0 3px 0 #a1a1a1, 0 2px 5px rgba(0, 0, 0, .75);
+                font: bold 200% sans-serif;
+            }
+
+            .key6 {
+                width: 90px;
+                height: 90px;
+                display: block;
+                background-color: aliceblue;
+                margin: 3px 5px 8px 0px;
+                vertical-align: middle;
+                justify-content: center;
+                align-items: center;
+                padding: 5px 0px 5px 0px;
+                border-radius: 4px;
+                cursor: pointer;
+                box-shadow: 0 3px 0 #a1a1a1, 0 2px 5px rgba(0, 0, 0, .75);
+                font: bold 20px sans-serif;
+            }
+        </style>
+        
+        <script src='/source/math.js' type='text/javascript'></script>
+    
+        <script type="text/javascript">
+            $(document).ready(function(){
+                var displayvalue = '0';
+                $('#result').text(displayvalue);
+
+                $('.key5').each(function(index, key5){
+                    $(this).click(function(e){
+                        if(displayvalue =='0')
+                        displayvalue = '';
+                        if($(this).text() == 'sin'){
+                            ;//삼각함수 div열 생성
+                        }
+                        else if($(this).text() == 'x'){
+                            ; //미지수 div열 생성
+                        }
+                        else if($(this).text() == 'f( )'){
+                            ;//함수 div열 생성
+                        }
+                        else if($(this).text() == '( )'){
+                            displayvalue += '(';//더블클릭시 ')'추가
+                        }
+                        else if($(this).text() == 'C'){
+                            displayvalue = '0';
+                        }
+                        else if($(this).text() == '='){
+                            ;//계산
+                        }
+                        else{
+                            displayvalue += $(this).text();
+                        }
+                    })
+                })
+            })
+        </script>
+    </head>
+    <body>
+        <div id="calculator">
+            <div id="result"></div>
+            <div id="columnb"></div>
+            <div id="columnb"></div>
+            <div id="columnb">
+                <span class="key5">7</span>
+                <span class="key5">8</span>
+                <span class="key5">9</span>
+                <span class="key5">*</span>
+                <span class="key5">/</span>
+            </div>
+            <div id="columnb">
+                <span class="key5">4</span>
+                <span class="key5">5</span>
+                <span class="key5">6</span>
+                <span class="key5">+</span>
+                <span class="key5">-</span>
+            </div>
+            <div id="columnb">
+                <span class="key5">1</span>
+                <span class="key5">2</span>
+                <span class="key5">3</span>
+                <span class="key5">sin</span>
+                <span class="key5">x</span>
+            </div>
+            <div id="column">
+                <span class="key5">0</span>
+                <span class="key5">=</span>
+                <span class="key5"><-</span>
+                <span class="key5">f( )</span>
+                <span class="key5">( )</span>
+            </div>  
+        </div>
+    </body>
+</html>

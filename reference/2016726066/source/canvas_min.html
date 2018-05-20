@@ -1,0 +1,89 @@
+<html>
+	<head>
+	</head>
+
+	<style type="text/css" media="screen">
+		#img {
+			border: 1px solid black;
+		}
+	</style>
+
+	<script type="text/javascript" charset="utf-8">
+		window.onload = function() {
+			var canvas = document.getElementById("img");
+			var pen = document.getElementById("ch");
+			var img = canvas.getContext("2d");
+			var ch;
+
+			pen.onchange = function() {
+				ch = this.value
+				var x = 0;
+				var y = 0;
+				img.beginPath();
+				canvas.onmousedown = function() {
+					if (ch == "del") {
+						canvas.onmousemove = function() {
+							img.fillStyle = "white";
+							img.fillRect(event.x -canvas.offsetLeft  -15, event.y-canvas.offsetTop  -15, 30, 30);
+						}
+						canvas.onmouseup = function() {
+							canvas.onmousemove = null;
+						}
+					}
+					else if (ch == "black_pen") {
+						img.strokeStyle = "black";
+						img.lineWidth = "1";
+						img.lineCap = "circle";
+						img.moveTo(event.x -canvas.offsetLeft, event.y-canvas.offsetTop);
+						canvas.onmousemove = function() {
+							img.lineTo(event.x -canvas.offsetLeft, event.y-canvas.offsetTop);
+							img.stroke();
+						}
+						canvas.onmouseup = function() {
+							canvas.onmousemove = null;
+						}
+					}
+					else if (ch == "red_pen") {
+						img.strokeStyle = "red";
+						img.lineWidth = "1";
+						img.lineCap = "circle";
+						img.moveTo(event.x -canvas.offsetLeft, event.y-canvas.offsetTop);
+						canvas.onmousemove = function() {
+							img.lineTo(event.x -canvas.offsetLeft, event.y-canvas.offsetTop);
+							img.stroke();
+						}
+						canvas.onmouseup = function() {
+							canvas.onmousemove = null;
+						}
+					}
+					else if (ch == "blue_pen") {
+						img.strokeStyle = "blue";
+						img.lineWidth = "1";
+						img.lineCap = "circle";
+						img.moveTo(event.x -canvas.offsetLeft, event.y-canvas.offsetTop);
+						canvas.onmousemove = function() {
+							img.lineTo(event.x -canvas.offsetLeft, event.y-canvas.offsetTop);
+							img.stroke();
+						}
+						canvas.onmouseup = function() {
+							canvas.onmousemove = null;
+						}
+					}
+				}
+			}
+		}
+	</script>
+
+	<body>
+		<canvas id="img" width="500" height="500">
+		</canvas>
+		<select id="ch">
+			<option>Select</option>
+			<option value="black_pen">Black_Pen</option>
+			<option value="red_pen">Red_Pen</option>
+			<option value="blue_pen">Blue_Pen</option>
+			<option value="del">Eraser</option>
+		</select>
+	</body>
+
+</html>

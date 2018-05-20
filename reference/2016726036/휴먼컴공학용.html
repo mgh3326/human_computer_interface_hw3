@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<!--
+Created using JS Bin
+http://jsbin.com
+
+Copyright (c) 2018 by anonymous (http://jsbin.com/yugimecoso/1/edit)
+
+Released under the MIT license: http://jsbin.mit-license.org
+-->
+<meta name="robots" content="noindex">
+<html>
+<head>
+	<style type="text/css">
+	#input,#result{
+	width: 295px;
+	height:40px;
+	margin:5px;
+	border : 2px solid black;
+	font-size: 22pt;
+	}
+	.btn{
+	width: 50px;
+	height:40px;
+	margin:5px;
+	font-size: 15pt;
+	
+	}
+	.cal{
+	width: 50px;
+	height:40px;
+	margin:5px;
+	font-size: 15pt;
+	font-color : gray;
+	background-color : blue;
+	}
+	.sam{
+	width: 50px;
+	height:40px;
+	margin:5px;
+	font-size: 15pt;
+	font-color : gray;
+	background-color : yellow;
+	}
+	.cle{
+	width: 50px;
+	height:40px;
+	margin:5px;
+	font-size: 15pt;
+	font-color : gray;
+	background-color : red;
+	}
+	
+	</style>
+  <script language="JavaScript">
+  
+    function Click(num){
+        calculator.input.value  += num;
+    }
+    function Sin(){
+      document.calculator.result.value= Math.sin(document.calculator.input.value);
+    }
+    function Cos(){
+      document.calculator.result.value= Math.cos(document.calculator.input.value);
+    }
+    function Tan(){
+      document.calculator.result.value= Math.tan(document.calculator.input.value);
+    }
+    function Sqrt(){
+      document.calculator.result.value= Math.sqrt(document.calculator.input.value);
+    }
+    function Log(){
+      document.calculator.result.value= Math.log(document.calculator.input.value)/Math.log(10);
+    }
+    function Exp(){
+      document.calculator.result.value= Math.exp(document.calculator.input.value);
+    }
+    function Pi(){
+      document.calculator.result.value= Math.PI*document.calculator.input.value;
+    }
+    function EE(){
+      document.calculator.result.value= Math.E*document.calculator.input.value;
+    }
+    function Calc(){
+        try{
+         document.calculator.result.value  = eval(document.calculator.input.value);
+        }catch(e){alert('오류메세지')}
+    }
+    
+    function Clear(){
+        calculator.input.value = "";
+        calculator.result.value="result :";
+    }
+
+</script>
+
+</head>
+
+<body>
+	<script language="JavaScript" type="text/javascript" scr="cal.js"></script>
+	<form name = "calculator">
+	<table border="0" align="center" cellspacing="0" style="border:3px solid black;">
+      <div>
+      
+	
+      <tr>
+		<td colspan="7"><input type="text" name="input"id="input"></td>
+		
+      </tr>
+	    <tr>
+		<td colspan="7"><div><input type="text" name="result"id="result" value="result :"></div></td>
+	    </tr>
+	    <tr>
+		<td><div><input type="button" value="tan" class="sam"onclick ="Tan('tan')"></div></td>
+		<td><div><input type="button" value="cos" class="sam"onclick ="Cos('cos')"></div></td>
+		<td><div><input type="button" value="sin" class="sam" onclick ="Sin('sin')"></div></td>
+		<td><div><input type="button" value="x^"class="btn"onclick ="Click('^')"></div></td>
+		<td><div><input type="button" value="n!"class="btn"></div></td>
+	    </tr>
+	    <tr>
+		<td><div><input type="button" value=">  "class="btn"onclick ="Click('>')"></div></td>
+		<td><div><input type="button" value="<  "class="btn c"onclick ="Click('<')"></div></td>
+		<td><div><input type="button" value="Φ  "class="btn"onclick ="Pi('pi')"></div></td>
+		<td><div><input type="button" value="exp "class="btn"onclick ="Exp('exp')"></div></td>
+		<td><div><input type="button" value="e"class="btn"onclick ="EE('e')"></div></td>
+	    </tr>
+	    <tr>
+		<td><div><input type="button" value="(  "class="btn"onclick ="Click('(')"></div></td>
+		<td><div><input type="button" value=")  "class="btn"onclick ="Click(')')"></div></td>
+		<td><div><input type="button" value="√  "class="btn"onclick ="Sqrt('sqrt')"></div></td>
+		<td><div><input type="button" value="÷ "class="cal"onclick ="Click('/')"></div></td>
+		<td><div><input type="button" value="lg"class="btn"onclick ="Log('log')"></div></td>
+`		
+	    </tr>
+	    <tr>
+		<td><div><input type="button" value="7  "class="btn" onclick ="Click('7')"></div></td>
+		<td><div><input type="button" value="8  "class="btn c"onclick ="Click('8')"></div></td>
+		<td><div><input type="button" value="9  "class="btn"onclick ="Click('9')"></div></td>
+		<td><div><input type="button" value="× "class="cal"onclick ="Click('*')"></div></td>
+		<td><div><input type="button" value="f(x)"class="btn"onclick ="Click('f(x)')"></div></td>
+	    </tr>
+	    <tr>
+		<td><div><input type="button" value="4  "class="btn c"onclick ="Click('4')"></div></td>
+		<td><div><input type="button" value="5  "class="btn"onclick ="Click('5')"></div></td>
+		<td><div><input type="button" value="6  "class="btn c"onclick ="Click('6')"></div></td>
+		<td><div><input type="button" value="－"class="cal"onclick ="Click('-')"></div></td>
+		<td><div><input type="button" value="% "class="cal"onclick ="Click('%')"></div></td>
+	    </tr>
+	    <tr>
+		<td><div><input type="button" value="1  "class="btn"onclick ="Click('1')"></div></td>
+		<td><div><input type="button" value="2  "class="btn c"onclick ="Click('2')"></div></td>
+		<td><div><input type="button" value="3  "class="btn"onclick ="Click('3')"></div></td>
+		<td><div><input  type="button" value="＋"class="cal"onclick ="Click('+')"></div></td>
+		<td><div><input type="button" value="CE"class="cle"onclick ="Clear('CE')"></div></td>
+`	    </tr>	
+	    <tr>
+		<td><div><input type="button" value="0  "class="btn"onclick ="Click('0')"></div></td>
+		<td><div><input type="button" value=".  "class="btn"onclick ="Click('.')"></div></td>
+		<td><div><input type="button" value="!="class="btn"onclick ="Click('!=')"></div></td>
+		<td><div><input type="button" value="=  "class="cal" onclick ="Calc('=')"></div></td>
+		<td><div><input type="button" value="x "class="btn" onclick ="Click('x')"></div></td>
+      </div>
+            </tr>
+        </table>
+	</form>
+</body>
+</html>

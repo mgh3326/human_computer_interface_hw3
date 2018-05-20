@@ -1,0 +1,501 @@
+<html>
+<head>
+	<title>MyCalculator example using JQuery and math.js</title>
+	<style type="text/css">
+		body {
+			margin: 0px 0px 0px 0px;
+		}
+		h1 {
+			font-family: "맑은 고딕","돋움",dotum,"Arial", Arial;
+			font-size: 30px;
+			padding: 10px 10px;
+			text-align: center;
+			color: #ff5733;
+		}
+
+		#calculator {
+            font-size: 0;
+            width: 640px;
+			background-color: white;
+            padding: 20px;
+            margin: auto;
+			border-radius:2px;
+			border: 1px solid;
+        }
+		#result {
+			width: 630px;
+            height: 75px;
+            margin-bottom: 15px;
+            padding: 5px 5px 5px 5px;
+			background-color:white;
+            display: inline-flex;
+            justify-content: flex-end;
+            align-items: center;
+            overflow: hidden;
+            font: 20px digital;
+			border-bottom:1px solid; 
+			pointer-events: none;
+		}
+		
+		.left{
+			width: 48px;
+			height: 30px;
+			cursor: pointer;
+			margin: 0px 10px 0px 5px;
+		}
+		.right{
+			width: 48px;
+			height: 30px;
+			cursor: pointer;
+			margin: 0px 5px 0px 10px;
+		}
+		.empty {
+			width: 40px;
+			height: 20px;
+			margin: 0px 43px 0px 43px;
+		}
+		.key {
+            width: 60px;
+            height: 35px;
+            background-color: rgb(224,224,224);
+            display: inline-flex;
+            margin: 1px 2px 1px 1px;
+            vertical-align: middle;
+            justify-content: center;
+            align-items: center;
+            padding: 5px 0px 5px 0px;
+            border-radius: 5px;
+            cursor: pointer;
+            font: 20px sans-serif;
+        }
+		.bra-key {
+			width: 55px;
+			background-color:rgb(94,94,94);
+			color:white;
+			margin: 0px 4px 0px 4px;
+		}
+		.clear-key {
+			width: 118px;
+			background-color:rgb(255,24,0);
+			color:white;
+			margin: 0px 4px 0px 4px;
+		}
+		.color-key {
+			background-color:rgb(219,88,52);
+			color:white;
+		}
+		.table-key {
+			border-radius: 0px;
+			border:0.5px solid;
+			border-color: #B0B0B0;
+			margin: 1px 1px 1px 1px;
+			background-color: white;
+		}
+		.eval-key{
+			width: 123px;
+		}
+		.change-key {
+			background-color:#FFD3D3;
+		}
+		.key:active {
+				transform: translateY(2px);
+		}
+		.left:active {
+				transform: translateY(2px);
+		}
+		.right:active {
+				transform: translateY(2px);
+		}
+	</style>
+	<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js' type='text/javascript'></script>
+    <script src='math.js' type='text/javascript'></script>
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>  
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          "HTML-CSS": { scale: 75}
+        });
+    </script>
+      
+    <script type="text/javascript">
+		
+		$.fn.selectRange = function(start, end) {
+				if(end === undefined) {
+					end = start;
+				}
+				return this.each(function() {
+					if('selectionStart' in this) {
+						this.selectionStart = start;
+						this.selectionEnd = end;
+					} else if(this.setSelectionRange) {
+						this.setSelectionRange(start, end);
+					} else if(this.createTextRange) {
+						var range = this.createTextRange();
+						range.collapse(true);
+						range.moveEnd('character', end);
+						range.moveStart('character', start);
+						range.select();
+					}
+				});
+			};
+			
+		$(document).ready(function(){
+			var parser = math.parser();
+			
+			var currentInequl_1='0';
+			var currentInequl_2='0';
+			
+			var currentHyper = '0';
+			var currentFunc = '0';
+			var currentVari = '0';
+			var currentTrigo = '0';
+			var displayValue = '0';
+			
+			var leng = $('#result').val().length; //전체길이만 계속 업뎃
+			var currentLeng = leng; //변화시켜줄 길이
+			
+			$('#result').on('keyup', function() { //키보드입력 No
+				if($(this).val().length >= 1) {
+					alert("no");
+					document.getElementById("result").value=displayValue;
+				}
+			});
+			
+			$('.right').click(function() {
+				if(currentLeng >= $('#result').val().length)
+				{
+					$('#result').selectRange(currentLeng);
+					$("#result").focus();
+				}
+				else
+				{
+					$('#result').selectRange(currentLeng=currentLeng+1);
+					$("#result").focus();
+				}
+			});
+			
+			$('.left').click(function() {
+				if(currentLeng > 0)
+				{
+					$('#result').selectRange(currentLeng=currentLeng-1);
+					$("#result").focus();
+				}
+				else
+				{
+					$('#result').selectRange(currentLeng);
+					$("#result").focus();
+				}
+			});
+			
+			$('.key').each(function(index, key) {
+				$(this).click(function(e) {
+					if(displayValue == '0') displayValue= '';
+					
+					if($(this).text() == '=' && $(this).hasClass("eval-key")==true) //결과값 =인 경우
+					{
+						try
+						{
+							displayValue = parser.eval(displayValue).toString();
+							var tokens = displayValue.split(' ');
+							if(tokens[0] == 'function')
+							{
+								displayValue=tokens[0];
+							}
+
+							//$('#result').text(displayValue);
+							document.getElementById("result").value=displayValue;
+							displayValue='0';
+						}
+						catch(e)
+						{
+							displayValue='0';
+							if(displayValue!='function')
+							{
+								//$('#result').text(e);
+								document.getElementById("result").value = e;
+							}
+						}
+					}
+					else //결과구해주는게 아닌 모든 경우
+					{
+						if($(this).text() == 'Clear') //clear 경우
+						{
+							currentInequl_1='0';
+							currentInequl_2='0';
+						
+							currentHyper='0';
+							displayValue='0';
+							currentTrigo='0';
+							currentVari='0';
+							currentFunc='0';
+							//$('#result').text(displayValue);
+							document.getElementById("result").value = displayValue;
+						}
+						else
+						{
+							
+							if($(this).text() == 'sin') //sin
+							{
+								if(currentTrigo == '0') //처음 sin클릭할 때
+								{
+									currentTrigo = 'sin';
+									displayValue += currentTrigo;
+								}
+								else if(currentTrigo=='sin') //이미 sin일 때(한 번 클릭)
+								{
+									currentTrigo='cos';
+								}
+								else if(currentTrigo=='cos') //이미 cos일 때(두 번 클릭)
+								{
+									currentTrigo='tan';
+								}
+								else if(currentTrigo=='tan') //이미 tan일 때(세 번 클릭)
+								{
+									currentTrigo='sin';
+								}
+								if(currentTrigo !='0') //0 아닐때만 수행으로
+								{
+									var save = displayValue.substr(0,displayValue.length-3);
+									displayValue = save;
+									displayValue += currentTrigo;
+								}
+							}
+							else if($(this).text() == 'sinh') //sinh
+							{
+								if(currentHyper == '0')
+								{
+									currentHyper = 'sinh';
+									displayValue += currentHyper;
+								}
+								else if(currentHyper=='sinh') //이미 sin일 때(한 번 클릭)
+								{
+									currentHyper='cosh';
+								}
+								else if(currentHyper=='cosh') //이미 cos일 때(두 번 클릭)
+								{
+									currentHyper='tanh';
+								}
+								else if(currentHyper=='tanh') //이미 tan일 때(세 번 클릭)
+								{
+									currentHyper='sinh';
+								}
+								if(currentHyper !='0') //0 아닐때만 수행으로
+								{
+									var save = displayValue.substr(0,displayValue.length-4);
+									displayValue = save;
+									displayValue += currentHyper;
+								}
+							}
+							else if($(this).text()=='x') //x
+							{
+								if(currentVari == '0')
+								{
+									currentVari = 'x';
+									displayValue += currentVari;
+								}
+								else if(currentVari == 'x')
+								{
+									currentVari = 'y';
+								}
+								else if(currentVari == 'y')
+								{
+									currentVari = 'z';
+								}
+								else if(currentVari == 'z')
+								{
+									currentVari = 'x';
+								}
+								if(currentVari != '0')
+								{
+									var save = displayValue.substr(0,displayValue.length-1);
+									displayValue = save;
+									displayValue += currentVari;
+								}
+							}
+							else if($(this).text()=='f') //f
+							{
+								if(currentFunc == '0')
+								{
+									currentFunc = 'f';
+									displayValue += currentFunc;
+								}
+								else if(currentFunc == 'f')
+								{
+									currentFunc = 'g';
+								}
+								else if(currentFunc == 'g')
+								{
+									currentFunc = 'f';
+								}
+								if(currentFunc != '0')
+								{
+									var save = displayValue.substr(0,displayValue.length-1);
+									displayValue = save;
+									displayValue += currentFunc;
+								}
+							}
+							else if($(this).text()=='<=')
+							{
+								if(currentInequl_1 =='0')
+								{
+									currentInequl_1 = '<=';
+									displayValue += currentInequl_1;
+								}
+								else if(currentInequl_1 == '<=')
+								{
+									currentInequl_1 = '< ';
+								}
+								else if(currentInequl_1 == '< ')
+								{
+									currentInequl_1 = '<=';
+								}
+								if(currentInequl_1 != '0')
+								{
+									var save = displayValue.substr(0,displayValue.length-2);
+									displayValue = save;
+									displayValue += currentInequl_1;
+								}
+							}
+							else if($(this).text()=='>=')
+							{
+								if(currentInequl_2 =='0')
+								{
+									currentInequl_2 = '>=';
+									displayValue += currentInequl_2;
+								}
+								else if(currentInequl_2 == '>=')
+								{
+									currentInequl_2 = '> ';
+								}
+								else if(currentInequl_2 == '> ')
+								{
+									currentInequl_2 = '>=';
+								}
+								if(currentInequl_2 != '0')
+								{
+									var save = displayValue.substr(0,displayValue.length-2);
+									displayValue = save;
+									displayValue += currentInequl_2;
+								}
+							}
+							else if($(this).text()=='<-') //backspace
+							{	
+								leng = $('#result').val().length;
+								if(currentLeng <= leng) //갱신 안해줌, 대신 전체길이보다 작으면 실행
+								{
+									var saveBack_1 = displayValue.substring(0,currentLeng-1 );
+									var saveBack_2 = displayValue.substring(currentLeng,displayValue.length);
+									displayValue = saveBack_1 + saveBack_2;
+									
+									//$('#result').selectRange(currentLeng); //이건 안되면 뭐 어쩔수없음 기본 세팅이 그런건데
+									
+									leng = $('#result').val().length;
+									currentLeng=leng;
+								}
+								//displayValue = displayValue.substr(0, displayValue.length-1);
+							}
+							else
+							{
+								currentInequl_1='0';
+								currentInequl_2='0';
+							
+								currentHyper='0';
+								currentFunc='0';
+								currentTrigo='0';
+								currentVari='0';
+								displayValue += $(this).text();
+							}
+							document.getElementById("result").value=displayValue;
+							
+							var lastLeng = $('#result').val().length;
+							 
+							if(currentLeng != leng)
+							{
+								var saveS_1 = displayValue.substring(0,currentLeng );
+								var saveS_2 = displayValue.substring(leng,lastLeng);
+								var saveS_3 = displayValue.substring(currentLeng, leng);
+								displayValue = saveS_1 + saveS_2 + saveS_3;
+								
+							}
+							document.getElementById("result").value=displayValue;
+							leng = $('#result').val().length; //문자열 바뀔때마다 길이 매번 갱신
+							
+							//$('#result').selectRange(currentLeng+($(this).val().length)); 
+							
+							//if(leng != currentLeng) //끝에서 그냥 추가한 경우가 아닐 때
+							//	$('#result').selectRange(currentLeng+1);
+							
+							currentLeng = leng;
+						}
+					}
+					e.preventDefault()
+					$("#result").focus();
+				})
+				$("#result").focus();
+			})
+		})
+	</script>
+</head>
+
+<body>
+	<h1>
+		HyeLyn's Calculator
+	</h1>
+	<div id="calculator">
+        <form id="res">
+			<input id="result" type="text" value="">
+		</form>
+		<span class="key">det</span>
+		<span class="key">cross</span>
+		<span class="key">:</span>
+		<span class="key">;</span>
+		<span class="key">.</span>
+		<span class="key">,</span>
+		<span class="key">[</span>
+		<span class="key">]</span>
+		<span class="key">%</span>
+		<span class="key">/</span>
+		<span class="key change-key">x</span>
+		<span class="key table-key change-key">sin</span>
+		<span class="key table-key change-key">sinh</span>
+		<span class="key table-key">pi</span>
+		<img class="empty" src="./img/empty.png">
+		
+		<span class="key table-key">1</span>
+		<span class="key table-key">2</span>
+		<span class="key table-key">3</span>
+		<span class="key">*</span>
+		<span class="key change-key">f</span>
+		<span class="key table-key">root</span>
+		<span class="key table-key">^</span>
+		<span class="key table-key">!</span>
+		
+		<img class="left" src="./img/left_ori.png">
+		<img class="right" src="./img/right_ori.png">
+		<span class="key table-key">4</span>
+		<span class="key table-key">5</span>
+		<span class="key table-key">6</span>
+		<span class="key">-</span>
+		<span class="key">=</span>
+		<span class="key table-key">i</span>
+		<span class="key table-key">log</span>
+		<span class="key table-key">e</span>
+		<span class="key bra-key">(</span>
+		<span class="key bra-key">)</span>
+		<span class="key table-key">7</span>
+		<span class="key table-key">8</span>
+		<span class="key table-key">9</span>
+		<span class="key">+</span>
+		<span class="key change-key"><=</span>
+		<span class="key change-key">>=</span>
+		<span class="key">==</span>
+		<span class="key">!=</span>
+		<span class="key clear-key">Clear</span>
+		<span class="key color-key"><-</span>
+		<span class="key">0</span>
+		<span class="key color-key eval-key">=</span>
+	</div>
+	
+</body>
+</html>

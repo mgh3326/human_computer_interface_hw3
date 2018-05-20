@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html>
+    <head>        
+        <title>HCI HW2</title>
+
+        <script src="src/jquery.js"></script>
+        <script src="src/math.js"></script>
+
+        <link rel="stylesheet" href="src/jquery-ui/jquery-ui.css">
+        <script src="src/jquery-ui/jquery-ui.js"></script>
+
+        <script type="text/javascript" async
+            src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+        </script>
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({            
+            "HTML-CSS": {
+                linebreaks: {automatic: true, width: "container"},
+                scale: 100
+            }
+            });
+        </script>
+
+        <style>
+            #frame {
+                width: 1280px;
+                height: 800px;
+                background: orange;
+                border: 3px solid black;
+                margin: auto;                
+                text-align: center;
+            }
+            #input {
+                width: 350px;                
+                display:inline-table;
+                background: purple;
+                float: left;
+            }
+            #numpad {
+                width: 300px;
+                height: auto;
+                background: grey;
+                margin: 5px;
+                margin-left: auto;
+                margin-right: auto;
+                padding: 5px 3px;
+                border: 1px solid black;                
+            }
+            #sidebar {
+                width: 100px;
+                background: pink;
+                display: inline-table;
+                float: left;
+            }            
+            #show {
+                width: 700px;
+                height: auto;                
+                float: right;
+                display: block;
+                background: brown;
+                font: 20px Aerial;
+                word-break: break-all;
+                padding: 3px 5px;                
+            }
+            #stack {
+                width: 500px;
+                height: 200px;
+                display: inline-block;
+                background: lightgreen;
+                overflow: auto;
+                margin: 3px 5px;
+                padding: 5px;
+                text-align: left;                
+            }
+            #normal_progress {
+                width: 500px;
+                height: 150px;
+                display: inline-block;
+                background: greenyellow;
+                padding: 5px;
+                text-align: left;
+                margin: 3px 5px;
+            }
+            #math_progress {
+                width: 500px;
+                height: 200px;
+                display: inline-block;
+                overflow-x: auto;
+                background: gold;
+                padding: 5px;
+                font-size: 30px;
+                margin: 3px 5px;
+            }
+            #result {
+                width: 500px;
+                height: 160px;                
+                display: inline-block;
+                background: skyblue;
+                padding: 5px;
+                text-align: left;
+                margin: 3px 5px;
+            }
+            #menu {
+                width: 120px;                
+                text-align: center;
+                margin: 10px auto;
+                padding: 10px 10px;
+                position: relative;
+            }
+            #switch {
+                font: 16px Consolas;
+            }            
+            .key {
+                width: 40px;
+                height: 30px;
+                background: white;
+                font: bold 16px Consolas;
+                margin: 3px 4px 3px;
+                text-align: center;
+                text-anchor: middle;
+            }
+            .function-key {
+                font: italic 16px "Times New Roman" !important;
+                text-align: center;
+            }
+            .menu-key {
+                width: 40px;
+                height: auto;
+                font: 12px Consolas;
+                text-align: center;
+                margin: 3px 4px 3px;
+                padding: 3px;
+                display: inline-block;
+            }            
+            .text-key {
+                font: 12px Consolas;
+                text-align: center;
+            }
+        </style>                
+
+        
+        <script>
+            $(document).ready(function() {
+                var parser = math.parser();
+                var showValue = '0';                                
+                var log = "User define Log : <br>";
+                var head_num = 1;
+                var head = '';
+                var flag = false;
+
+                $('#stack').html(log);
+                $('#normal_progress').text(showValue);
+                $('#math_progress').html('$$' + math.parse(showValue).toTex() + '$$');
+                $('#result').text(showValue);
+                
+                $('.text-key').each(function (index, key) {                    
+                        $(this).click(function(e){
+                            var push = '';
+                            $('#result').css('opacity', '0.7');
+                            if (showValue == '0') {
+                                showValue = '';
+                            }
+
+                            if ($(this).text() == 'open') {
+                                push += '[';
+                            }
+                            else if ($(this).text() == 'close') {
+                                push += ']';
+                            }
+                            else if ($(this).text() == 'NEXT Elem') {
+                                push += ',';
+                            }
+                            else if ($(this).text() == 'NEXT Line') {
+                                push += ';';
+                            }
+                            else if ($(this).text() == '√n') {
+                                push += 'sqrt';
+                            }
+                            else if ($(this).text() == 'en') {
+                                push += 'exp';
+                            }
+                            else if ($(this).text() == 'n2') {
+                                push += '^2';
+                            }
+                            else if ($(this).text() == 'n3') {
+                                push += '^3';
+                            }
+
+                            showValue += push;
+                            if (flag == true) {
+                                log += push;
+                                $('#stack').html(log);
+                            }
+                            $('#normal_progress').text(showValue);
+
+                            var node = math.parse(showValue);
+                            var latex = node.toTex({parenthesis: 'keep', implicit: 'hide'});
+                            var elem = MathJax.Hub.getAllJax('latex')[0];
+                            MathJax.Hub.Queue(['Text', elem, latex]);
+                            e.preventDefault();
+                        });
+
+                });
+                
+                
+                $('.key').each(function(index, key) {
+                    $(this).click(function(e){                        
+                        $('#result').css('opacity', '1');
+
+                        if (showValue == '0')
+                            showValue = '';
+
+                        if ($(this).text() == 'CAL' || $(this).text() == 'Save')
+                        {
+                            try {
+                                showValue = parser.eval(showValue).toString();
+                                var tokens = showValue.split(' ');
+                                if (tokens[0] == 'function') {
+                                    showValue = tokens[0];
+                                }
+                                $('#result').text(showValue);
+                                showValue = '0';
+
+                                if (flag == true) {
+                                    log += '<br>';
+                                    flag = false;
+                                    $('#stack').html(log);
+                                }
+                            }
+                            catch (e) {
+                                showValue = '0';
+                                if (showValue != 'function') {
+                                    $('#result').text(e);
+                                    
+                                    if (flag == true) {
+                                        var logString = '';
+                                        logString = log.split('<br>');
+                                        log='';
+                                        for (var i = 0; i < logString.length - 1; i++) {
+                                            log += logString[i];
+                                            log += '<br>';
+                                        }
+                                        $('#stack').html(log);
+                                        head_num--;
+                                        flag = false;
+                                    }
+                                }
+                            }
+                        }
+                        else {
+                            if ($(this).text() == 'CL') {
+                                showValue = '0';
+                                $('#result').text(showValue);
+                                $('#normal_progress').text(showValue);
+
+                                if (flag == true) {
+                                    var logString = '';
+                                    logString = log.split('<br>');
+                                    log='';
+                                    for (var i = 0; i < logString.length - 1; i++) {
+                                        log += logString[i];
+                                        log += '<br>';
+                                    }
+                                    $('#stack').html(log);
+                                    head_num--;
+                                    flag = false;
+                                }
+                            }                            
+                            else {
+                                var push = '';
+
+                                if ($(this).text() == 'BACK') {
+                                    showValue = showValue.slice(0, -1);
+                                    if (showValue.length == 0) {
+                                        showValue = '0';
+                                    }
+                                    if (flag == true) {
+                                        if (log.charAt(log.length - 2) != ' ')
+                                            log = log.slice(0, -1);
+                                        else {
+                                            log = log.slice(0, -7);
+                                            head_num--;
+                                            flag = false;
+                                        }
+                                    }
+                                }
+                                else {
+                                    if ($(this).text() == '=') {
+                                        flag = true;
+                                        log += '(' + head_num + ') : ';
+                                        head_num++;
+                                        log += showValue;
+                                    }
+
+                                    if ($(this).is('.text-key') == false) {
+                                        push += $(this).text();
+                                    }
+                                }
+
+                                if ($(this).is('.function-key') == true) {
+                                    push += '(';
+                                }
+
+                                showValue += push;
+                                if (flag == true)
+                                    log += push;
+
+                                $('#result').css('opacity', '0.7');
+                                $('#normal_progress').text(showValue);
+                                $('#stack').html(log);
+                            }
+                            var node = math.parse(showValue);
+                            var latex = node.toTex({parenthesis: 'keep', implicit: 'hide'});
+                            var elem = MathJax.Hub.getAllJax('latex')[0];
+                            MathJax.Hub.Queue(['Text', elem, latex]);
+                            e.preventDefault();
+                        }
+                    });
+                });
+
+                $('#switch').click(function(event) {
+                    $('div').eq(5).children('span') .toggle();
+                    if ($(this).text() == "Show Advanced Operation...") {
+                        $(this).text("Hide...");
+                    }
+                    else if ($(this).text() == "Hide...") {
+                        $(this).text("Show Advanced Operation...");
+                    }
+                });
+            });
+        </script>
+        
+        <script>
+            $(function () {
+                $('#menu').menu();
+            });
+            $(function() {
+                $('.key').button();                
+            });
+            $(function() {
+                $('div').eq(4).children('span') .hide();
+            });            
+        </script>
+    </head>
+    <body>
+    <div id='frame'>
+        <div id='input'>
+            <div id='numpad'>
+                <span class='key'>1</span>
+                <span class='key'>2</span>
+                <span class='key'>3</span>
+                <span class='key'>4</span>
+                <span class='key'>5</span>
+                <span class='key'>6</span>
+                <span class='key'>7</span>
+                <span class='key'>8</span>
+                <span class='key'>9</span>
+                <span class='key'>00</span>
+                <span class='key'>0</span>
+                <span class='key'>.</span>
+            </div>
+            
+            <div id='numpad'>
+                <span class='key'>BACK</span>
+                <span class='key'>CL</span>
+                <span class='key'>CAL</span>
+            </div>
+
+            <div id='numpad'>                
+                <span class='key'>%</span>
+                <span class='key'>^</span>
+                <span class='key text-key function-key'>√n</span>
+                <div><a id='switch' href="#">Show Advanced Operation...</a></div>                
+            </div>
+
+            <div id='numpad'>
+            <ul id='menu'>
+                <li>
+                    <div>Constant</div>
+                    <ul>
+                            <li><div class='key menu-key'>e</div></li>
+                            <li><div class='key menu-key'>pi</div></li>
+                    </ul>
+                </li>
+                <li><div>Variable</div>
+                    <ul>
+                        <li><div class='key menu-key'>x</div></li>
+                        <li><div class='key menu-key'>y</div></li>
+                        <li><div class='key menu-key'>z</div></li>
+                    </ul>
+                </li>
+                <li><div>Boolean</div>
+                    <ul>
+                            <li><div class='key menu-key'>==</div></li>
+                            <li><div class='key menu-key'>!=</div></li>
+                            <li><div class='key menu-key'>></div></li>
+                            <li><div class='key menu-key'><</div></li>
+                            <li><div class='key menu-key'>>=</div></li>
+                            <li><div class='key menu-key'><=</div></li>
+                    </ul>
+                </li>
+                <li><div>trigonomial</div>
+                    <ul>
+                            <li><div class='key menu-key function-key'>sin</div></li>
+                            <li><div class='key menu-key function-key'>cos</div></li>
+                            <li><div class='key menu-key function-key'>tan</div></li>
+                    </ul>
+                </li>
+                <li><div>exponential</div>
+                    <ul>
+                        <li><div class='key menu-key text-key function-key'>e<sup>n</sup></div></li>
+                        <li><div class='key menu-key text-key'>n<sup>2</sup></div></li>
+                        <li><div class='key menu-key text-key'>n<sup>3</sup></div></li>
+                    </ul>
+                </li>                
+                <li><div>logarithm</div>
+                    <ul>
+                        <li><div class='key menu-key function-key'>log</div></li>
+                        <li><div class='key menu-key function-key'>log10</div></li>                        
+                    </ul>
+                </li>
+                <li><div>matrix/vector</div>
+                    <ul>
+                        <li><div class='key menu-key text-key'>open</div></li>
+                        <li><div class='key menu-key text-key'>close</div></li>
+                        <li><div class='key menu-key text-key'>NEXT Elem</div></li>
+                        <li><div class='key menu-key text-key'>NEXT Line</div></li>
+                        <li><div class='key menu-key function-key'>det</div></li>
+                        <li><div class='key menu-key function-key'>inv</div></li>
+                        <li><div class='key menu-key function-key'>cross</div></li>
+                    </ul>
+                </li>
+                <li><div>userFunction</div>
+                    <ul>
+                        <li><div class='key menu-key'>f</div></li>
+                        <li><div class='key menu-key'>g<div></li>
+                        <li><div class='key menu-key'>p</div></li>
+                        <li><div class='key menu-key'>q<div></li>
+                        <li><div class='key menu-key'>r<div></li>
+                    </ul>
+                </li>                
+            </ul>
+            </div>
+        </div>
+
+        <span id='sidebar'>            
+            <span class='key'>+</span>
+            <span class='key'>-</span>
+            <span class='key'>*</span>
+            <span class='key'>/</span>
+        </span>
+        <span id='sidebar'>
+            <span class='key'>(</span>
+            <span class='key'>)</span>
+            <span class='key'>=</span>
+            <span class='key'>Save</span>            
+        </span>
+
+        <div id='show'>
+            <div id='stack'></div>
+            <div id='normal_progress'></div>
+            <div id='math_progress'></div>
+            <div id='result'></div>
+        </div>
+
+    </div>
+
+    
+    </body>
+</html>

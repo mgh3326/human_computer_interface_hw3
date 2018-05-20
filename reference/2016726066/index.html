@@ -1,0 +1,355 @@
+<html>
+<head>
+    <title>Min's calculator</title>
+    <style type="text/css">
+        body {
+            margin: 0px 0px 0px 0px;
+        }
+
+        #calculator {
+            font-size: 0;
+            width: 160px;
+            background-color: pink;
+            padding: 20px;
+            margin: auto;
+            position: relative;
+            top: 300px;
+            left: 0px;
+            border: 3px solid black;
+        }
+
+        #calculator1 {
+          font-size: 0;
+          width: 120px;
+          background-color: blue;
+          padding: 20px;
+          margin: auto;
+          position: relative;
+          top: 70px;
+          left: -185px;
+          border: 3px solid black;
+        }
+        #calculator2 {
+          font-size: 0;
+          width: 80px;
+          background-color: yellow;
+          padding: 20px;
+          margin: auto;
+          position: relative;
+          top: -206px;
+          left: 165px;
+          border: 3px solid black;
+        }
+        #calculator3 {
+          font-size: 0;
+          width: 120px;
+          background-color: purple;
+          padding: 20px;
+          margin: auto;
+          position: relative;
+          top: -570px;
+          left: -185px;
+          border: 3px solid black;
+        }
+
+        #result {
+            width: 145px;
+            height: 35px;
+            margin-bottom: 15px;
+            padding: 0px 5px 0px 5px;
+            background-color: orange;
+            display: inline-flex;
+            justify-content: flex-end;
+            align-items: center;
+            overflow: hidden;
+            font: 20px digital;
+        }
+
+        #latex {
+            width: 145px;
+            height: 70px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            padding: 0px 5px 0px 5px;
+            background-color: powderblue;
+            border-radius: 5px;
+            display: inline-flex;
+            justify-content: flex-end;
+            align-items: center;
+            overflow: hidden;
+            font: 20px digital;
+        }
+
+        #img {
+          margin: auto;
+          position: relative;
+          background-color: white;
+          top: -347px;
+          left: 372px;
+          border: 3px solid black;
+    		}
+
+        .key {
+            width: 35px;
+            height: 25px;
+            background-color: powderblue;
+            display: inline-flex;
+            margin: 3px 5px 8px 0px;
+            vertical-align: middle;
+            justify-content: center;
+            align-items: center;
+            padding: 5px 0px 5px 0px;
+            cursor: pointer;
+            font: bold 20px digital;
+        }
+
+        .keyzero {
+            width: 75px;
+            height: 25px;
+            background-color: powderblue;
+            display: inline-flex;
+            margin: 3px 5px 8px 0px;
+            vertical-align: middle;
+            justify-content: center;
+            align-items: center;
+            padding: 5px 0px 5px 0px;
+            cursor: pointer;
+            font: bold 20px digital;
+        }
+
+        .symbol-key {
+            font: italic 20px "Times New Roman"
+        }
+
+        .function-key {
+            font: italic 15px "Times New Roman"
+        }
+
+        .eval-key {
+            background-color: green;
+            color: white;
+        }
+
+        .clear-key {
+            background-color: red;
+            color: white;
+        }
+
+        .key:active {
+            background-color: white;
+            transform: translateY(4px);
+        }
+    </style>
+
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js' type='text/javascript'></script>
+    <script src='math.js' type='text/javascript'></script>
+
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          "HTML-CSS": { scale: 75}
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            var parser = math.parser();
+
+            var displayValue = '0';
+            $('#result').text(displayValue);
+            $('#latex').html('$$' + math.parse(displayValue).toTex() + '$$');
+
+            $('.key').each(function(index, key){
+                $(this).click(function(e){
+                    if(displayValue == '0') displayValue = '';
+
+                    if($(this).text() == 'EV')
+                    {
+                        try
+                        {
+                            displayValue = parser.eval(displayValue).toString();
+                            var tokens = displayValue.split(' ');
+                            if(tokens[0] == 'function')
+                            {
+                                displayValue = tokens[0];
+                            }
+                            $('#result').text(displayValue);
+                            displayValue = '0';
+                        }
+                        catch (e)
+                        {
+                            displayValue = '0';
+                            if(displayValue != 'function')
+                            {
+                                $('#result').text(e);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if($(this).text() == 'AC')
+                        {
+                            displayValue = '0';
+                            $('#result').text(displayValue);
+                        }
+                        else
+                        {
+                            displayValue += $(this).text();
+                            $('#result').text(displayValue);
+                        }
+
+                        var node = math.parse(displayValue);
+                        var latex = node.toTex({parenthesis: 'keep', implicit: 'hide'});
+                        var elem = MathJax.Hub.getAllJax('latex')[0];
+                        MathJax.Hub.Queue(['Text', elem, latex]);
+                    }
+
+                    e.preventDefault()
+                })
+            })
+        })
+    </script>
+</head>
+
+<script type="text/javascript" charset="utf-8">
+  window.onload = function() {
+    var canvas = document.getElementById("img");
+    var pen = document.getElementById("ch");
+    var img = canvas.getContext("2d");
+    var ch;
+
+    pen.onchange = function() {
+      ch = this.value
+      var x = 0;
+      var y = 0;
+      img.beginPath();
+      canvas.onmousedown = function() {
+        if (ch == "del") {
+          canvas.onmousemove = function() {
+            img.fillStyle = "white";
+            img.fillRect(event.x -canvas.offsetLeft  -15, event.y-canvas.offsetTop  -15, 30, 30);
+          }
+          canvas.onmouseup = function() {
+            canvas.onmousemove = null;
+          }
+        }
+        else if (ch == "black_pen") {
+          img.strokeStyle = "black";
+          img.lineWidth = "1";
+          img.lineCap = "circle";
+          img.moveTo(event.x -canvas.offsetLeft, event.y-canvas.offsetTop);
+          canvas.onmousemove = function() {
+            img.lineTo(event.x -canvas.offsetLeft, event.y-canvas.offsetTop);
+            img.stroke();
+          }
+          canvas.onmouseup = function() {
+            canvas.onmousemove = null;
+          }
+        }
+        else if (ch == "red_pen") {
+          img.strokeStyle = "red";
+          img.lineWidth = "1";
+          img.lineCap = "circle";
+          img.moveTo(event.x -canvas.offsetLeft, event.y-canvas.offsetTop);
+          canvas.onmousemove = function() {
+            img.lineTo(event.x -canvas.offsetLeft, event.y-canvas.offsetTop);
+            img.stroke();
+          }
+          canvas.onmouseup = function() {
+            canvas.onmousemove = null;
+          }
+        }
+        else if (ch == "blue_pen") {
+          img.strokeStyle = "blue";
+          img.lineWidth = "1";
+          img.lineCap = "circle";
+          img.moveTo(event.x -canvas.offsetLeft, event.y-canvas.offsetTop);
+          canvas.onmousemove = function() {
+            img.lineTo(event.x -canvas.offsetLeft, event.y-canvas.offsetTop);
+            img.stroke();
+          }
+          canvas.onmouseup = function() {
+            canvas.onmousemove = null;
+          }
+        }
+      }
+    }
+  }
+</script>
+
+<body>
+    <div id="calculator">
+        <div id="result"></div>
+        <div id="latex"></div>
+        <span class="key clear-key">AC</span>
+        <span class="key">^</span>
+        <span class="key">%</span>
+        <span class="key">/</span>
+
+        <span class="key">7</span>
+        <span class="key">8</span>
+        <span class="key">9</span>
+        <span class="key">*</span>
+
+        <span class="key">4</span>
+        <span class="key">5</span>
+        <span class="key">6</span>
+        <span class="key">-</span>
+
+        <span class="key">1</span>
+        <span class="key">2</span>
+        <span class="key">3</span>
+        <span class="key">+</span>
+
+        <span class="key keyzero">0</span>
+        <span class="key">.</span>
+        <span class="key eval-key">EV</span>
+    </div>
+    <div id="calculator1">
+      <span class="key symbol-key">x</span>
+      <span class="key symbol-key">y</span>
+      <span class="key symbol-key">z</span>
+      <span class="key symbol-key">f</span>
+      <span class="key symbol-key">g</span>
+      <span class="key">=</span>
+      <span class="key symbol-key">pi</span>
+      <span class="key symbol-key">e</span>
+      <span class="key">,</span>
+      <span class="key">:</span>
+      <span class="key">;</span>
+    </div>
+    <div id="calculator2">
+      <span class="key"><</span>
+      <span class="key">></span>
+      <span class="key"><=</span>
+      <span class="key">>=</span>
+      <span class="key">==</span>
+      <span class="key">!=</span>
+      <span class="key">(</span>
+      <span class="key">)</span>
+      <span class="key">[</span>
+      <span class="key">]</span>
+    </div>
+    <div id="calculator3">
+      <span class="key function-key">sin</span>
+      <span class="key function-key">cos</span>
+      <span class="key function-key">tan</span>
+      <span class="key function-key">exp</span>
+      <span class="key function-key">log</span>
+      <span class="key function-key">sqrt</span>
+    </div>
+
+    <canvas id="img" width="490" height="360">
+		</canvas>
+		<select id="ch">
+			<option>Select</option>
+			<option value="black_pen">Black_Pen</option>
+			<option value="red_pen">Red_Pen</option>
+			<option value="blue_pen">Blue_Pen</option>
+			<option value="del">Eraser</option>
+		</select>
+</body>
+</html>

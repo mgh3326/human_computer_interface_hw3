@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Calculator</title>
+    <link rel="stylesheet" href="./JS&Css/css.css" type="text/css">
+    <script src="./JS&Css/math.js" type="text/javascript"></script>
+    <script src="./JS&Css/js.js" type="text/javascript"></script>
+  </head>
+  <body>
+    <div class="pan">
+      <input type="text" class="inputText" id="InputTxt" placeholder="  Input!" disabled>
+      <div class="ButtonPan">
+        <table class="ButtonGrp">
+          <tr>
+            <td>Function</td>
+            <td>Operation</td>
+            <td>Number</td>
+          </tr>
+          <tr>
+            <td>
+              <table class="FunctionPan RBPan">
+                <tr>
+                  <td class="funbtn"><input type="button" class="button" value="(" onclick="ClickBtn(this.value)"></input></td>
+                  <td class="funbtn"><input type="button" class="button" value=")" onclick="ClickBtn(this.value)"></input></td>
+                  <td class="funbtn"><input type="button" class="button" value="[" onclick="ClickBtn(this.value)"></input></td>
+                  <td class="funbtn"><input type="button" class="button" value="]" onclick="ClickBtn(this.value)"></input></td>
+                </tr>
+                <tr>
+                  <td class="funbtn"><input type="button" class="button" value="exp" onclick="ClickBtn(this.value)"></input></td>
+                  <td class="funbtn"><input type="button" class="button" value="log" onclick="ClickBtn(this.value)"></input></td>
+                  <td class="funbtn"><input type="button" class="button" value="sqrt" onclick="ClickBtn(this.value)"></input></td>
+                  <td class="funbtn"><input type="button" class="button" value="det" onclick="ClickBtn(this.value)"></input></td>
+                </tr>
+                <tr>
+                  <td class="funbtn"><input type="button" class="button" value="w" onclick="ClickBtn(this.value)"></input></td>
+                  <td class="funbtn"><input type="button" class="button" value="x" onclick="ClickBtn(this.value)"></input></td>
+                  <td class="funbtn"><input type="button" class="button" value="y" onclick="ClickBtn(this.value)"></input></td>
+                  <td class="funbtn"><input type="button" class="button" value="z" onclick="ClickBtn(this.value)"></input></td>
+                </tr>
+                <tr>
+                  <td class="funbtn"><input type="button" class="button" value=">" onclick="ClickBtn(this.value)"></input></td>
+                  <td class="funbtn"><input type="button" class="button" value="<" onclick="ClickBtn(this.value)"></input></td>
+                  <td class="funbtn"><input type="button" class="button" value="=" onclick="ClickBtn(this.value)"></input></td>
+                  <td class="funbtn"><input type="button" class="button" value="!" onclick="ClickBtn(this.value)"></input></td>
+                </tr>
+                <tr>
+                  <td class="funbtn"><input type="button" class="button" value="," onclick="ClickBtn(this.value)"></input></td>
+                  <td class="funbtn"><input type="button" class="button" value=":" onclick="ClickBtn(this.value)"></input></td>
+                  <td class="funbtn"><input type="button" class="button" value=";" onclick="ClickBtn(this.value)"></input></td>
+                  <td class="funbtn"><input type="button" class="button" value="f" onclick="ClickBtn(this.value)"></input></td>
+                </tr>
+                <tr>
+                  <td class="funbtn"><input type="button" class="button" value="i" onclick="ClickBtn(this.value)"></input></td>
+                  <td class="funbtn"><input type="button" class="button" value="e" onclick="ClickBtn(this.value)"></input></td>
+                  <td class="funbtn"><input type="button" class="button" value="pi" onclick="ClickBtn(this.value)"></input></td>
+                  <td class="funbtn"><input type="button" class="button" value="g" onclick="ClickBtn(this.value)"></input></td>
+                </tr>
+                <tr>
+                  <td class="funbtn"><input type="button" class="button" value="sin" onclick="ClickBtn(this.value)"></input></td>
+                  <td class="funbtn"><input type="button" class="button" value="cos" onclick="ClickBtn(this.value)"></input></td>
+                  <td class="funbtn"><input type="button" class="button" value="tan" onclick="ClickBtn(this.value)"></input></td>
+                  <td class="funbtn"><input type="button" class="button" value="Help" onclick="ClickBtn(this.value)" id="HelpBtn"></input></td>
+                </tr>
+
+              </table>
+            </td>
+            <td>
+              <table class="OperatorPan RBPan">
+                <tr>
+                  <td><input type="button" class="buttonO" value="+" onclick="ClickBtn(this.value)"></input></td>
+                </tr>
+                <tr>
+                  <td><input type="button" class="buttonO" value="-" onclick="ClickBtn(this.value)"></input></td>
+                </tr>
+                <tr>
+                  <td><input type="button" class="buttonO" value="*" onclick="ClickBtn(this.value)"></input></td>
+                </tr>
+                <tr>
+                  <td><input type="button" class="buttonO" value="/" onclick="ClickBtn(this.value)"></input></td>
+                </tr>
+                <tr>
+                  <td><input type="button" class="buttonO" value="^" onclick="ClickBtn(this.value)"></input></td>
+                </tr>
+              </table>
+            </td>
+            <td>
+              <table class="NumberPan RBPan">
+                <tr>
+                  <td><input type="button" class="buttonN" value="7" onclick="ClickBtn(this.value)"></input></td>
+                  <td><input type="button" class="buttonN" value="8" onclick="ClickBtn(this.value)"></input></td>
+                  <td><input type="button" class="buttonN" value="9" onclick="ClickBtn(this.value)"></input></td>
+                </tr>
+                <tr>
+                  <td><input type="button" class="buttonN" value="4" onclick="ClickBtn(this.value)"></input></td>
+                  <td><input type="button" class="buttonN" value="5" onclick="ClickBtn(this.value)"></input></td>
+                  <td><input type="button" class="buttonN" value="6" onclick="ClickBtn(this.value)"></input></td>
+                </tr>
+                <tr>
+                  <td><input type="button" class="buttonN" value="1" onclick="ClickBtn(this.value)"></input></td>
+                  <td><input type="button" class="buttonN" value="2" onclick="ClickBtn(this.value)"></input></td>
+                  <td><input type="button" class="buttonN" value="3" onclick="ClickBtn(this.value)"></input></td>
+                </tr>
+                <tr>
+                  <td><input type="button" class="buttonN" value="0" onclick="ClickBtn(this.value)"></input></td>
+                  <td><input type="button" class="buttonN" value="%" onclick="ClickBtn(this.value)"></input></td>
+                  <td><input type="button" class="buttonN" value="." onclick="ClickBtn(this.value)"></input></td>
+                </tr>
+                <tr>
+                  <td><input type="button" class="buttonN" value="delete" onclick="ClickBtn(this.value)" id="DNCbtn"></input></td>
+                  <td><input type="button" class="buttonN" value="Clear" onclick="ClickBtn(this.value)" id="DNCbtn"></input></td>
+                  <td><input type="button" class="buttonN" value="Enter" onclick="ClickBtn(this.value)" id="EnterBtn"></input></td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

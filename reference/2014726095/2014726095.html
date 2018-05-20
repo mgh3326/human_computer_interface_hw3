@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Kwangwoo calculator using JQuery and math.js</title>
+        <style type="text/css">
+            .bas{
+                width: 45px;
+                height: 35px;
+                margin: 5px;
+                font-size: 15pt;
+                color: white;
+                background-color: lightgray;
+                border-radius: 10px
+            }
+            .func1{
+                width: 45px;
+                height: 35px;
+                margin: 5px;
+                font-size: 15pt;
+                color: white;
+                background-color: lightgreen;
+                border-radius: 10px
+            }
+            .func2{
+                width: 45px;
+                height: 35px;
+                margin: 5px;
+                font-size: 15pt;
+                color: white;
+                background-color: skyblue;
+                border-radius: 10px
+            }
+            .sec{
+                width: 45px;
+                height: 35px;
+                margin: 5px;
+                font: italic;
+                font-size: 15pt;
+                color: white;
+                background-color: rgb(241, 197, 115);
+                border-radius: 10px
+            }
+            .cle{
+                width: 45px;
+                height: 35px;
+                margin: 5px;
+                font-size: 15pt;
+                color: white;
+                background-color:hotpink;
+                border-radius: 10px
+            }
+            #latex{
+                width: 280px;
+                height: 100px;
+                margin-left: 5px;
+                margin-top: 10px;
+                border:1px solid gray;
+                font-size: 15pt;
+                text-align: right;
+                background-color:white;
+                overflow-y: scroll;
+            }
+            #calc{
+                width: 280px;
+                height: 40px;
+                margin: 5px;
+                margin-top: 0px;
+                border:1px solid gray;
+                font-size: 15pt;
+                text-align: right;
+                background-color:white;
+                overflow-y: scroll;
+            }
+        </style>
+
+        <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js' type='text/javascript'></script>
+        <script src='math.js' type='text/javascript'></script>
+
+        <script type="text/javascript" async
+            src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+        </script>  
+
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({
+            "HTML-CSS": { scale: 75}
+            });
+        </script>
+
+        <script type = "text/javascript">
+            var In;
+
+            function syn_err(){  
+                var k = document.calculform ; 
+                k.calc.value="Syntax Error";
+                k.latex.value="Syntax Error";
+                }
+                          
+            function cl(){  
+                var k = document.calculform ;
+   
+                k.calc.value = "";
+                k.latex.value = "";     
+            }
+            
+            function key(In){ 
+                var k = document.calculform ;
+             
+                if(k.calc.value == 0)
+                    cl();
+               
+                k.calc.value += In;
+                k.latex.value +=In;
+            }
+
+            function result(){  
+                var k = document.calculform ;
+                try 
+                {
+                    k.calc.value = math.eval(k.calc.value);  
+                }
+                catch (e)
+                {
+                    syn_err(); 
+                    return;
+                }
+            }
+        </script>
+    </head>
+
+    <body>
+        <h2 align="center">Kwangwoo's Calculator</h2>
+        <form name="calculform">
+        <table border="0" align="center" cellspacing="0" style=" background: rgb(3, 3, 65) ;">
+            <tr>
+                <td colspan="10"><input type="text" name="latex" id="latex" value=""></td>
+            
+            </tr>
+            <tr>
+                <td colspan="10"><input type="text" name="calc" id="calc" value="0"></td>                
+            </tr>
+            <tr>
+                <td><input type="button" value="7" class="bas" onclick="key(7)"></td>
+                <td><input type="button" value="8" class="bas" onclick="key(8)"></td>
+                <td><input type="button" value="9" class="bas" onclick="key(9)"></td>
+                <td><input type="button" value="CL" class="cle" onclick="cl()"></td>
+                <td><input type="button" value="EV" class="cle" onclick="result()"></td>
+            </tr>
+            <tr>
+                <td><input type="button" value="4" class="bas" onclick="key(4)"></td>
+                <td><input type="button" value="5" class="bas" onclick="key(5)"></td>
+                <td><input type="button" value="6" class="bas" onclick="key(6)"></td>
+                <td><input type="button" value="*" class="func1" onclick="key('*')"></td>
+                <td><input type="button" value="/" class="func1" onclick="key('/')"></td>
+            </tr>
+            <tr>
+                <td><input type="button" value="1" class="bas" onclick="key(1)"></td>
+                <td><input type="button" value="2" class="bas" onclick="key(2)"></td>
+                <td><input type="button" value="3" class="bas" onclick="key(3)"></td>
+                <td><input type="button" value="+" class="func1" onclick="key('+')"></td>
+                <td><input type="button" value="-" class="func1" onclick="key('-')"></td>
+            </tr>
+            <tr>
+                <td><input type="button" value="0" class="bas" onclick="key(0)"></td>
+                <td><input type="button" value="." class="bas" onclick="key('.')"></td>
+                <td><input type="button" value="(" class="func2" onclick="key('(')"></td>
+                <td><input type="button" value=")" class="func2" onclick="key(')')"></td>
+                <td><input type="button" value="=" class="func1" onclick="key('=')"></td>
+            </tr>
+        <tr>
+                    <td><input type="button" value="^" class="sec" onclick="key('^')"></td>
+                    <td><input type="button" value="<" class="sec" onclick="key('<')"></td>
+                    <td><input type="button" value=">" class="sec" onclick="key('>')"></td>
+                    <td><input type="button" value="<=" class="sec" onclick="key('<=')"></td>
+                    <td><input type="button" value=">=" class="sec" onclick="key('>=')"></td>
+            </tr>
+            <tr>
+                    <td><input type="button" value="%" class="sec" onclick="key('%')"></td>
+                    <td><input type="button" value="[" class="sec" onclick="key('[')"></td>
+                    <td><input type="button" value="]" class="sec" onclick="key(']')"></td>
+                    <td><input type="button" value="," class="sec" onclick="key(',')"></td>
+                    <td><input type="button" value=":" class="sec" onclick="key(':')"></td>
+            </tr>
+            <tr>
+                    <td><input type="button" value="==" class="sec" onclick="key('==')"></td>
+                    <td><input type="button" value="!=" class="sec" onclick="key('!=')"></td>
+                    <td><input type="button" value="i" class="sec" onclick="key('i')"></td>
+                    <td><input type="button" value="e" class="sec" onclick="key('e')"></td>
+                    <td><input type="button" value="pi" class="sec" onclick="key('pi')"></td>
+            </tr>
+            <tr>
+                    <td><input type="button" value="x" class="sec" onclick="key('x')"></td>
+                    <td><input type="button" value="hyp" class="sec" onclick="key('hyp')"></td>
+                    <td><input type="button" value="sin" class="sec" onclick="key('sin')"></td>
+                    <td><input type="button" value="cos" class="sec" onclick="key('cos')"></td>
+                    <td><input type="button" value="tan" class="sec" onclick="key('tan')"></td>
+            </tr>
+            <tr>
+                    <td><input type="button" value="y" class="sec" onclick="key('y')"></td>
+                    <td><input type="button" value="z" class="sec" onclick="key('z')"></td>
+                    <td><input type="button" value="w" class="sec" onclick="key('w')"></td>
+                    <td><input type="button" value="f" class="sec" onclick="key('f')"></td>
+                    <td><input type="button" value="g" class="sec" onclick="key('g')"></td>
+            </tr>
+            <tr>
+                    <td><input type="button" value="exp" class="sec" onclick="key('exp')"></td>
+                    <td><input type="button" value="log" class="sec" onclick="key('log')"></td>
+                    <td><input type="button" value="sqrt" class="sec" onclick="key('sqrt')"></td>
+                    <td><input type="button" value="cross" class="sec" onclick="key('cross')"></td>
+                    <td><input type="button" value="det" class="sec" onclick="key('det')"></td>
+            </tr>
+        </table>
+    </form>     
+</body>
+</html>

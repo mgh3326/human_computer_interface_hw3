@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>HCI_2014726093</title>
+        <link rel="stylesheet" href="hci.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" type="text/javascript"></script>
+        <script src="math.js" type="text/javascript"></script>
+        <script src="hci.js" type="text/javascript"></script>
+    </head>
+
+    <body>
+            <h1>Calculator 2014726093</h1>
+            <hr>
+
+            <div id="wrapper">
+                <div id="result_field">
+                    <div id="result"></div>
+                    <span id="symbol_x" class="symbol">x = </span> <br/>
+                    <span id="symbol_y" class="symbol">y = </span><br/>
+                    <span id="symbol_z" class="symbol">z = </span><br/>
+                    <p id="function_f" class="symbol">f(x) = </p>
+                    <p id="function_g" class="symbol">g(x) = </p>
+                    <select id="history" name="history" size='6'></select>
+                </div>
+
+                <div id="calculator_field">
+
+                    <div class='shift_back'>
+                        <button class='shift_toggle'></button>
+                    </div>
+                            
+                    <div style="line-height:50%"><br/></div> 
+                    <div>
+                        <span class="button symbol_button" >x</span>
+                        <span class="button symbol_button" >y</span>
+                        <span class="button symbol_button" >z</span>&nbsp;
+                        <span class="button symbol_button">i</span>
+                        <br/>
+                        <span class="button symbol_button" >f</span>
+                        <span class="button symbol_button" >g</span>
+                        <span class="button symbol_button" >=</span>&nbsp;
+                        <span class="button symbol_button" >pi</span>
+                        <span class="button symbol_button">e</span>
+                    </div>
+                    <div style="line-height:40%"><br/></div> 
+                    <div>
+                        <span id="vec1" class="button">[</span>
+                        <span id="vec2" class="button">]</span>
+                        <span class="button">,</span>&nbsp;
+                        <span class="button cal_button">his-</span>
+                        <span class="button cal_button">his+</span>
+                        <br/>
+                        <span class="button function_button">exp</span>
+                        <span class="button function_button">log</span>
+                        <span class="button function_button">sqrt</span>&nbsp;
+                        <span class="button">:</span>
+                        <span class="button">;</span>
+                        <br/>
+                        <span class="button function_button">sin</span>
+                        <span class="button function_button">cos</span>
+                        <span class="button function_button">tan</span>&nbsp;
+                        <span class="button function_button">cross</span>&nbsp;
+                        <span class="button function_button">det</span>&nbsp;
+                    </div>
+                    <div style="line-height:40%"><br/></div> 
+                    <div>
+                        <span class="button num_button">7</span>
+                        <span class="button num_button">8</span>
+                        <span class="button num_button">9</span>&nbsp;
+                        <span class="button cal_button" style="font-size: 15px">DEL</span>
+                        <span class="button cal_button" style="font-size: 15px">AC</span>
+                        <br/>
+                        <span class="button num_button">4</span>
+                        <span class="button num_button">5</span>
+                        <span class="button num_button">6</span>&nbsp;
+                        <span id="oper1" class="button oper_button">+</span>
+                        <span id="oper2" class="button oper_button">-</span>
+                        <br/>
+                        <span class="button num_button">1</span>
+                        <span class="button num_button">2</span>
+                        <span class="button num_button">3</span>&nbsp;
+                        <span id="oper3" class="button oper_button">*</span>
+                        <span id="oper4" class="button oper_button">/</span>
+                        <br/>
+                        <span class="button">0</span>
+                        <span class="button">.</span>
+                        <span class="button cal_button">EV</span>&nbsp;
+                        <span id="oper5" class="button oper_button">%</span>
+                        <span id="oper6" class="button oper_button">^</span>
+
+                        
+                    </div>
+                </div>
+            </div>
+            <hr>
+    </body>
+</html>

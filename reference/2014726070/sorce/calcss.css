@@ -1,0 +1,327 @@
+@charset "utf-8";
+
+body { margin: 0px 0px 0px 0px; }
+span{height:20px; width:20px; display:block; position:relative;}
+
+h1 {	
+	font-size: 30px;
+	padding: 20px 10px;
+	text-align: center;
+	text-transform: uppercase;
+}
+
+#calOutLayer {
+	width: 534px;
+	height: 320px;
+    background-color: #193081;
+    padding: 5px 10px 10px 5px;
+    margin: auto;
+    border-radius: 10px;
+}
+
+#resultLayer {
+	width: 534px;
+	height: 100px;
+	background-color: #cfddfd;
+	box-shadow: inset 0 0px 3px;
+	border-radius: 10px;
+	margin: 0px 0px 10px 0px;
+}
+
+#resultArea{
+	font: bold 17px sans-serif;
+	width: 524px;
+	height: 60px;
+	padding: 5px;
+	margin: 0px;
+	float: left;	
+	overflow: auto;
+}
+
+#inputArea{
+	font: bold 20px sans-serif;
+	width: 518px;
+	height: 30px;
+	background-color: #fff;
+	border-radius: 6px;
+	box-shadow: inset 0 0px 3px;
+	padding-left: 8px;
+	padding-right: 8px;
+	margin: 0px;
+	overflow: auto;
+	float: left;	
+}
+
+#buttonLayer {
+	font-size: 0;
+	width: 534px;
+	height: 190px;
+    background-color: #006;
+	margin: 0px;
+}
+
+#complexOpLayer{
+	width: 348px;
+	height: 180px;
+    background-color: #006;
+	margin: 0px;
+	float: left;
+	padding: 5px;
+}
+
+#basicOpLayer{
+	width: 164px;
+	height: 180px;
+    background-color: #006;
+	margin: 0px;
+	float: right;
+	padding: 5px;
+}
+
+.basic-key{
+	font: bold 20px sans-serif;
+	width: 37px;
+    height: 30px;
+    background-color: #fff;
+    display: inline-flex;
+    margin: 1px 3px 4px 1px;
+    vertical-align: middle;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 0px 5px 0px;
+    border-radius: 4px;
+	box-shadow: 0px 3px 0 #999;
+    cursor: pointer;
+}
+
+.key:active {
+    background-color: #a1a1a1;
+    box-shadow: 0 1px #666;
+    transform: translateY(2px);
+}
+.clear-key{
+		color: #fff;
+	background-color: #aa1234;
+}
+
+.clear-all{
+	color: #fff;
+	background-color: #ff2955;
+}
+
+.backspace{
+		color: #fff;
+	background-color: #aa1234;
+}
+
+.eval-key{	
+	background-color: #618875;
+	width: 78px;
+}
+
+/* 상단 메뉴 */
+
+#topMenu{
+	width: 534px;
+	height: 20px;
+	font: bold 12px sans-serif;
+	border-radius: 4px;
+	margin: 0px 0px 5px 0px;
+}
+.Tmenu{	
+	color: #fff;
+	text-align: center;
+	background-color: #666;
+	float: left;
+	width: 100px;
+	height: 20px;
+	border:1px solid #555; 
+	border-radius: 4px;
+	cursor: pointer;
+}
+.Tmenu:hover {
+    background-color: #733;
+}
+
+.Tmenu-block {
+	color: #fff;
+	text-align: center;
+	background-color: #333;
+	float: left;
+	width: 100px;
+	height: 20px;
+	border:1px solid #333; 
+	border-radius: 4px;	
+}
+
+
+.logo{
+	background-color: #aaa;
+	border-radius: 7px;
+	width: 20px;
+	cursor: default;
+}
+.logo:hover {
+	background-color: #aaa;
+}
+
+.t-title{	
+	font: bold 14px sans-serif;
+	background-color: #193081;
+	border:1px solid #193081; 
+	cursor: default;
+}
+.t-title:hover {
+	background-color: #193081;
+}
+
+/*      */
+
+#calEditText{
+	width: 164px;
+	height: 180px;
+    background-color: #aac;
+	border-radius: 4px;	
+	margin: 0px;
+	padding: 5px;	
+	display: none;
+	float: right;
+}
+
+.text0 {
+	width: 150px;
+	text-align: center;
+	color: #000;
+	margin: 20px 0px 20px 0px;
+	font: bold 11px sans-serif;	
+}
+.text1 {
+	width: 150px;
+	color: #000;
+	font: bold 12px sans-serif;
+	margin: 10px 0px 10px 0px;
+	vertical-align: middle;
+	float: left;
+}
+.opBox{
+	width: 50px;
+	color: #000;
+	font: bold 18px sans-serif;
+	line-height: 15px;
+	margin: 0px 0px 0px 0px;
+	float: right;	
+}
+
+#calEdit1 {
+	width: 534px;
+	height: 100px;
+	background-color: #eee;
+	box-shadow: inset 0 0px 3px;
+	border-radius: 10px;
+	margin: 0px 0px 10px 0px;
+	display:none;	
+}
+
+#calEdit_groupBox{
+	font: bold 3px sans-serif;
+	width: 200px;
+	height: 100%;
+    background-color: #bbb;
+	margin: 0px 0px 10px 0px;
+	border-radius: 4px;	
+	display: block;
+	float: left;
+}
+
+.calGroup {
+	width: 90px;
+    height: 17px;
+    background-color: #fff;
+    display: inline-flex;
+    margin: 5px 0px 0px 5px;
+    vertical-align: middle;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 0px 5px 0px;
+    border-radius: 4px;
+	box-shadow: 0px 3px 0 #999;
+    cursor: pointer;
+}
+
+.mylist{
+	width: 300px;
+	height: 94%;
+	margin: 1px 1px 1px 10px;
+	float: left;	
+	overflow: auto;
+	padding: 0px;
+	cursor: pointer;
+}
+
+uuu {
+	display: none;	
+}
+ul.mylist tag{
+	color:#888;
+	font-size: 8px;
+	float:right;
+}
+ul.mylist li{
+	list-style: none;
+    padding: 0px;
+	padding-right: 20px;
+    margin-bottom: 1px;
+    border-bottom: 1px solid #000;
+    font-size: 10px;
+}
+
+ul.mylist li:before{
+    content: "> ";
+    display: inline-block;
+    vertical-align: middle;
+    padding: 0px 5px 4px 0px;
+}
+ul.mylist li:hover {
+	background-color: #999;
+}
+
+spliter li {
+	background-color: #999;
+	font-size: 5px !IMPORTANT;
+	text-align: center;
+}
+
+
+
+
+
+
+
+
+
+/* 빈 연산자의 추가 버튼 
+
+.addNewOP{
+	border-radius:30px;
+	border:3px solid #CCC; 
+	width:16px; height:16px;
+}
+.addNewOP:before, 
+.addNewOP:after{
+	content:''; 
+	height:2px; 
+	width:12px; 
+	display:block; 
+	background:#CCC; 
+	border-radius:10px;
+	position:absolute; 
+	top:7px; 
+	left:2px;
+}
+.addNewOP:after{
+	height:12px; 
+	width:2px; 
+	top:2px; 
+	left:7px;
+}
+*/

@@ -1,0 +1,406 @@
+
+<html>
+
+    <head>
+        <title>2015726101 김주윤</title>
+        <style type="text/css">
+           
+           #tabs{
+            font-size: 15;
+           width: 360px;
+           height: 640px;
+           background-color:rgb(9, 40, 44);
+           padding: 5px;
+           margin: auto;
+           border-radius: 5px;
+           box-shadow: 0 3px 0 #a1a1a1, 0 2px 5px rgba(0, 0, 0, .75);  
+
+       }
+       #tab-2{
+
+           background-color: aliceblue;
+       }
+       #list {
+                width: 49%;
+                height: 155px;
+                margin-bottom: 2px;
+                margin-right:1px;
+                float: left; 
+                background-color: rgb(226, 226, 235);
+                box-shadow: inset 0 0px 1px;
+                overflow: hidden;
+                font-size:20px digital;
+            }
+
+            #result {                  
+                width: 306px;
+                height: 35px;
+                margin-bottom: 15px;
+                padding: 0px 5px 0px 5px;
+                background-color: rgb(226, 226, 235);
+                border-radius: 5px;
+                display: inline-flex;
+                justify-content: flex-end;
+                align-items: center;
+                overflow: hidden;
+                box-shadow: inset 0 0px 3px;
+                font-size: 20px digital;
+            }
+            
+            #latex { 
+                width: 50%;
+                height: 155px;
+                margin-bottom: 2px;
+                float: left; 
+                background-color:rgb(226, 226, 235);
+                justify-content: flex-end;
+                display: inline-flex;
+                overflow: hidden;
+                box-shadow: inset 0 0px 1px;
+                font-size: 20px digital;
+            }
+           
+           
+    
+            #aa {
+                width: 320px;
+                height: 130px;
+                background-color:beige;
+                overflow: scroll;
+            }
+            #bb{           
+                width: 360px;
+                height: 130px;
+                
+             }
+             #save{
+
+                font-size: 14px;
+               background-color:paleturquoise;
+
+             }
+             #delete{
+                font-size: 14px;
+                background-color:paleturquoise;
+
+             }
+             #get{
+                font-size: 14px;
+                background-color:paleturquoise;
+             }
+      
+     
+         
+            .key {
+                width: 55px;
+                height: 30px;
+                background-color:ivory;
+                display: inline-flex;
+                margin: 3px 5px 8px 0px;
+                justify-content: center;
+                padding: 5px 0px 5px 0px;
+                border-radius: 4px;
+                cursor: pointer;
+                box-shadow: 0 3px 0 #a1a1a1, 0 2px 5px rgba(0, 0, 0, .75);
+                font: bold 20px sans-serif;
+            }
+    
+    
+            .key2 {
+                width: 42px;
+                height: 35px;
+                background-color:ivory;
+                display: inline-flex;
+                margin: 3px 5px 8px 0px;
+                justify-content: center;
+                padding: 5px 0px 5px 0px;
+                border-radius: 4px;
+                cursor: pointer;
+                box-shadow: 0 3px 0 #a1a1a1, 0 2px 5px rgba(0, 0, 0, .75);
+                font: bold 20px sans-serif;
+            }
+           
+        
+          
+        </style>
+    
+        <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js' type='text/javascript'></script>
+        <script src='math.js' type='text/javascript'></script>
+    
+        <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+        </script>
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({
+              "HTML-CSS": { scale: 75}
+            });
+        </script>
+    
+        <script type="text/javascript">
+    
+            $(function () {
+                $("#tabs").tabs();
+            });
+
+            $(function(){
+           max = 30;      //글씨 최대 크기
+           min = 10;     //글씨 최소 크기
+           var fontSize = 20; 
+        $("#zoomin").click(function (e){    //+버튼을 누르면
+        if(fontSize < max){
+            fontSize = fontSize + 2; 
+        }else alert("가장 큰 폰트크기 입니다.");
+        $("#list").css({"font-size": fontSize + "px"});//폰트사이즈 변경
+        $("#latex").css({"font-size": fontSize + "px"});
+    });
+    $("#zoomout").click(function (e){   //-버튼을 누르면
+        if(fontSize > min){ 
+            fontSize = fontSize-2;  
+        }else alert("가장 작은 폰트크기 입니다.");
+        $("#list").css({"font-size": fontSize + "px"});//폰트사이즈 변경 
+        $("#latex").css({"font-size": fontSize + "px"});
+    }); 
+});
+
+    
+            $(document).ready(function () {
+                var parser = math.parser();
+    
+                var value = '0'; //계산값들을 보여주는 변수
+                var saveValue=''; //계산 결과값 저장해주는 변수
+                var infor=''; //계산과정을 저장해주는 변수
+    
+              
+                $('#result').text(value);
+                $('#latex').html('$$' + math.parse(value).toTex() + '$$');
+                       
+                $('.key2').each(function (index, key2) {   //key2에 있는 버튼이 눌릴때
+                    $(this).click(function (e) {
+                        if (value == '0') value = '';
+    
+                        value += $(this).val();
+                        $('#result').text(value);
+                        var node = math.parse(value);
+                            var latex = node.toTex({ parenthesis: 'keep', implicit: 'hide' });
+                            var elem = MathJax.Hub.getAllJax('latex')[0];
+                            MathJax.Hub.Queue(['Text', elem, latex])
+  
+                    })
+                })
+    
+            
+
+
+    
+    
+                $('.key').each(function (index, key) {  //key에 있는 버튼이 눌릴때
+                    $(this).click(function (e) {
+                        if (value == '0') value = '';
+    
+    
+    
+                        if($(this).text() =='Enter')//Enter버튼이 눌릴때
+                    {
+                        try
+                        {   infor=infor+value+"   ";//infor 계산과정을 저장해주는 변수 
+                            $('#list').text(infor);  
+                            value = parser.eval(value).toString();
+                            var tokens = value.split(' ');
+                            if(tokens[0] == 'function')
+                            {
+                                value = tokens[0];
+                            
+                            }
+                            $('#result').text(value); 
+                                    saveValue='';               
+                                   saveValue=value;//저장된 값을 나타내주기 위한 변수
+                                  value = '0';
+                        }
+                        catch (e)
+                        {
+                            value = '0';
+                            if(value != 'function')
+                            {
+                                $('#result').text(e);
+                            }
+                        }               
+                    }
+    
+                        else {
+                            if ($(this).text() == 'CL') {    //CL 버튼이 눌릴때
+                                value = '0';
+                                infor='';
+                                saveValue='';
+                                $('#list').text(infor);  
+                                $('#result').text(value);
+                            }
+                            else if ($(this).text() == '←') {  //←버튼이 눌릴때
+                                value = value.substring(0, value.length - 1);
+                                $('#result').text(value);}
+                            else {
+                                value += $(this).text();
+                                $('#result').text(value);
+                            }
+    
+                            var node = math.parse(value);
+                            var latex = node.toTex({ parenthesis: 'keep', implicit: 'hide' });
+                            var elem = MathJax.Hub.getAllJax('latex')[0];
+                            MathJax.Hub.Queue(['Text', elem, latex]);
+                        }
+    
+                        e.preventDefault()
+                    })
+                })
+               
+                $('#save').click(function (e) {   //저장기능
+    localStorage.setItem('val1',saveValue);
+    localStorage.setItem('val2',infor); 
+    })
+    
+    $('#delete').click(function (e) {   //저장삭제기능
+    localStorage.removeItem('val1');
+    localStorage.removeItem('val2');
+    
+    })
+    
+    $('#get').click(function (e) {     //불러오기 기능
+    var getValue =localStorage.getItem('val1');
+    var getValue2 =localStorage.getItem('val2');
+    $('#result').text(getValue);
+    $('#list').text(getValue2);
+    })
+            })
+    
+    
+          </script>
+    </head>
+    
+    
+    <body>
+            
+        <div id="tabs">
+            <ul>
+                <li>
+                    <a href="#tab-1">
+                        <span>계산기</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#tab-2">
+                        <span>사용법</span>
+                    </a>
+                </li>
+                <li>
+                    <!--글자 크기를 늘려주고 줄여주는 버튼-->
+                        <button id="zoomin">+</button> 
+                        <button id="zoomout">-</button>
+                        글씨크기
+                </li>
+            </ul>
+            <div id="tab-1">
+                   
+                <div  id="list" ></div>
+                <div  id="latex" ></div>
+               
+               
+                <div id="result" ></div>
+                <div id="aa"> <!--스크롤 박스-->
+                    
+                    <button class="key2" value="<"><</button>
+                    <button  class="key2" value=">">></button>
+                    <button  class="key2" value="<="><=</button>
+                    <button  class="key2" value=">=">>=</button>
+                    <button  class="key2" value="(">(</button>
+                            <button  class="key2" value=")">)</button>
+                            <button class="key2" value="^">^</button>
+                            <button  class="key2" value="[">[</button>
+                            <button  class="key2" value="]">]</button>
+                            <button  class="key2" value="%">%</button>
+                            <button  class="key2" value=",">,</button>
+                            <button  class="key2" value=":">:</button>
+                            <button  class="key2" value=";">;</button>
+                            <button  class="key2" value="==">==</button>
+                            <button  class="key2" value="!=">!=</button>
+                            <button  class="key2" value="i">i</button>
+                            <button  class="key2" value="e">e</button>
+                            <button  class="key2" value="pi">π</button>
+                            <button  class="key2" value="w">w</button>
+                            <button  class="key2" value="x">x</button>
+                            <button  class="key2" value="y">y</button>
+                            <button  class="key2" value="z">z</button>
+                            <button class="key2" value="f">f</button>
+                            <button  class="key2" value="g">g</button>
+                            <button  class="key2" value="i">i</button>
+                            <button  class="key2" value="sqrt">√</button>
+                            <button  class="key2" value="exp">e^x</button>
+                            <button  class="key2" value="log(">log</button>
+                            <button  class="key2" value="cross">u × v</button>
+                            <button  class="key2" value="det">|x|</button>
+                            <button  class="key2" value="inv">A^-1</button>
+                            <button  class="key2" value="sin(">sin</button>
+                            <button  class="key2" value="cos(">cos</button>
+                         <button  class="key2" value="tan(">tan</button>
+                         <button  class="key2" value="cm">cm</button>
+                         <button  class="key2" value="inch">inch</button>
+                        
+                         
+                </div>
+                <div id="bb"> <!--계산기 숫자버튼 박스-->
+    
+                    <br>
+                    <span class="key" >7</span>
+                    <span class="key">8</span>
+                    <span class="key">9</span>
+                    <span class="key">←</span>
+                            <span class="key">=</span>
+                            
+                            <span class="key">4</span>
+                            <span class="key">5</span>
+                            <span class="key">6</span>
+                            <span class="key">+</span>
+                            <span class="key">-</span>
+                            
+    
+                            <span class="key">1</span>
+                            <span class="key">2</span>
+                            <span class="key">3</span>
+                            <span class="key">*</span>
+                            <span class="key">/</span>
+                            <span class="key">0</span>
+                            <span class="key">00</span>
+                            <span class="key">.</span>
+                            <span class="key">Enter</span>
+                            <span class="key" style="background-color:red">CL</span>
+    
+    
+                </div>
+               <br><br><br><br><br><br>
+              <!--저장,불러오기,저장삭제 버튼들-->
+                <button id="save">저장</button>      
+                <button id="get">불러오기</button>
+                <button id="delete">저장삭제</button>
+           
+            </div>
+            <div id="tab-2">
+             계산기탭: 계산기를 보여줌<br><br>
+             사용법탭: 사용법을 보여줌<br><br>
+             왼쪽 화면: 변수에 저장된 값 계산식등 계산과정을 보여주는 화면<br><br>
+             오른쪽 화면: 값을 보기 편하게 나타내줌<br><br>
+             아래화면: 누른 값이나 결과값을 나타내줌<br><br>
+             저장버튼: 계산과정과 결과값을 저장<br><br>
+             불러오기 버튼: 저장한 값을 불러옴<br><br>
+             저장삭제버튼: 저장한 값을 삭제함<br><br>
+             상단 +버튼: 글씨 크기를 키워줌<br><br>
+             상단 -버튼 : 글씨 크기를 줄여줌<br><br>
+             ← : 한글자씩 지워줌<br><br>
+             CL: 화면을 초기화 시켜줌<br><br>
+             Enter: 입력<br><br>
+             
+
+            </div>
+        </div>
+    
+    </body>
+    
+    </html>

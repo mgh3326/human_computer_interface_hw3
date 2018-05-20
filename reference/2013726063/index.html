@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script type="text/javascript">
+	
+	function sincall(){
+	alert("호출");
+	}
+	</script>
+<title>2013726063</title>
+<style type="text/css">
+body{
+display:inline
+width:500px; height:890px; background:gray;
+text-align: center;
+}
+#lay{ width:70%;background-color:black; padding : 20px; 
+border-collapse:separate; border-spacing:5px;}
+#menubar{width:70%; background-color:#29CCAF;}
+.timestone{background-color:#009999; color:white; font:15px bold;width:30px;height:20px;}
+.ta{
+font-size:30px;
+float:left;
+width:69.5%;
+border : 0px;
+background-color:lightgray;
+text-align:right;
+margin:0;
+}
+.crr{
+	text-align:center;
+	width:30px; height :30px;
+	background : url("sources/crys.png") center no-repeat;
+	font-weight:bold;
+
+	}
+.yrr{
+text-align:center;
+	width:30px; height :50px;
+	background : url("sources/Ycrys.png") center no-repeat;
+	font-weight:bold;
+
+}
+.normbutton{
+width:35px; height:35px; padding:8px;
+align-items:center;
+background-color:gray; 
+color:white;
+vertical-align:middle;
+font:20px sans-serif;
+font-weight:bold;
+border-radius:5px;
+}
+.operator{ background-color : orange;
+width:35px; height:35px; margin:30px; padding:8px;
+align-items:center;
+vertical-align:middle;
+font:14px sans-serif;
+color :white;
+font-weight:bold;
+border-radius:5px;}
+.actor{background-color : red;
+width:35px; height:35px; margin:30px; padding:8px;
+align-items:center;
+vertical-align:middle;
+font:14px sans-serif;
+color :white;
+font-weight:bold;
+border-radius:5px;
+}
+.resultbt{background-color : #6799FF;
+width:35px; height:35px; margin:30px; padding:8px;
+align-items:center;
+vertical-align:middle;
+font:14px sans-serif;
+color :white;
+font-weight:bold;
+border-radius:5px;
+}
+.non{
+background-color : black;
+width:35px; height:35px; margin:30px; padding:8px;
+align-items:center;
+vertical-align:middle;
+font:14px sans-serif;
+color :black;
+font-weight:bold;
+border-radius:5px;
+}
+.lightkey{
+background-color : lightgray;
+width:35px; height:35px; margin:30px; padding:8px;
+align-items:center;
+vertical-align:middle;
+font:14px sans-serif;
+color :black;
+font-weight:bold;
+border-radius:5px;
+}
+.framedeco{
+background-color: gray;
+border : 0px;
+width:29%;
+float:right;
+height:68.3%;
+}
+.ffkey{
+background-color : skyblue;
+width:35px; height:35px; margin:30px; padding:8px;
+align-items:center;
+vertical-align:middle;
+font:14px sans-serif;
+color :black;
+font-weight:bold;
+border-radius:5px;
+}
+.rv1{}
+.rv2{}
+.rv3{}
+.rv4{}
+.rv5{}
+.r1{}
+.r2{}
+.r3{}
+.r4{}
+.r5{}
+.des1{}
+.f0{}
+.f1{}
+.f2{}
+.f3{}
+.f4{}
+.f5{}
+.f6{}
+.key:active {
+            background-color: #a1a1a1;
+            box-shadow: 0 5px #666;
+            transform: translateY(4px);
+}
+.keys:active {
+            background-color: #a1a1a1;
+            box-shadow: 0 5px #666;
+            transform: translateY(4px);
+}
+a:link{
+color:black;
+text-decoration:none;
+}
+a:visited{
+color:black;
+text-decoration:none;
+}
+a:hover{
+color:black;
+text-decoration:none;
+}
+
+</style>
+
+ <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js' type='text/javascript'></script>
+    <script src='sources/math.js' type='text/javascript'></script>
+
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>  
+
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          "HTML-CSS": { scale: 75}
+        });
+    </script>
+      
+    <script type="text/javascript">
+        $(document).ready(function(){
+			var fnum=1;
+			var ing=0;
+			var fng=0;
+			var opng=0;
+			var i=0;
+			var func1=new Array("sin","cos","tan","exp","log","sqrt","삼각함수");
+			var func2=new Array("==", "!=","<=","<",">=",">","비교연산");
+			var func3=new Array("cross", "dot", " ","i","det","inv","행렬/벡터");
+			var func4=new Array("pi", "e", "00", " ", " ", " ","상수");
+			var track1=new Array(" ", " "," "," "," ");
+			var t2=new Array(" ", " "," "," "," ");
+            var parser = math.parser();
+            var displayValue = '0';
+            $('#ta1').text(displayValue);
+            $('#latex').html('$$' + math.parse(displayValue).toTex() + '$$');
+            $('.key').each(function(index, key){   
+			
+                $(this).click(function(e){
+                    if(displayValue == '0') displayValue = '';
+					
+                    if($(this).text() == '결과')
+                    {
+                        try
+                        {
+                            displayValue = parser.eval(displayValue).toString();
+                            var tokens = displayValue.split(' ');
+                            if(tokens[0] == 'function')
+                            {
+                                displayValue = tokens[0];
+                            }
+                            $('#ta2').text(displayValue);
+								for(i=4;i>0;i--){
+								track1[i]=track1[i-1];
+								t2[i]=t2[i-1];
+								}
+								track1[0]=displayValue;
+								t2[0]= $('#ta1').text();
+								if(track1[0]!=" "){
+								$('.r1').text(track1[0]);
+								$('.rv1').text(t2[0]);
+								}
+								if(track1[1]!=" "){
+								$('.r2').text(track1[1]);
+								$('.rv2').text(t2[1]);
+								}
+								if(track1[2]!=" "){
+								$('.r3').text(track1[2]);
+								$('.rv3').text(t2[2]);
+								}
+								if(track1[3]!=" "){
+								$('.r4').text(track1[3]);
+								$('.rv4').text(t2[3]);
+								}
+								if(track1[4]!=" "){
+								$('.r5').text(track1[4]);
+								$('.rv5').text(t2[4]);
+								}
+								
+								if(ing==1&&opng==0){
+								track1[0]='x';
+								$('.r1').text(track1[0]);
+								ing=0;
+								opng=0;
+								}
+								else if(ing==2&&opng==0){
+								track1[0]='y';
+								$('.r1').text(track1[0]);
+								ing=0;
+								}
+								else if(ing==3&&opng==0){
+								track1[0]='z';
+								$('.r1').text(track1[0]);
+								ing=0;
+								}
+								else if(ing==-1){
+								if(fng==1){
+								displayValue = $('#ta1').text();
+								}
+								else if(fng==2){
+								displayValue = $('#ta1').text();
+								}
+								
+								ing=0;
+								fng=0;
+								opng=0;
+								}
+                            displayValue = '0';
+                        }
+                        catch (e)
+                        {
+                            displayValue = '0';
+                            if(displayValue != 'function')
+                            {
+                                $('#ta2').text(e);
+                            }
+                        }               
+                    }
+                    else
+                    {
+                        if($(this).text() == 'C')
+                        {
+                            displayValue = '0';
+                            $('#ta1').text(displayValue);
+							$('#ta2').text(displayValue);
+							ing=0;
+							fng=0;
+							opng=0;
+                        }
+						else if($(this).text() == '▶'){
+						if(fnum==4){
+							
+							$(".key").filter(".f1").html(func1[0]);
+							$(".key").filter(".f2").html(func1[1]);
+							$(".key").filter(".f3").html(func1[2]);
+							$(".key").filter(".f4").html(func1[3]);
+							$(".key").filter(".f5").html(func1[4]);
+							$(".key").filter(".f6").html(func1[5]);
+							$(".keys").filter(".f0").html(func1[6]);
+							fnum=1;
+							}
+						else if(fnum==1){
+							fnum=2;
+							$(".key").filter(".f1").html(func2[0]);
+							$(".key").filter(".f2").html(func2[1]);
+							$(".key").filter(".f3").html(func2[2]);
+							$(".key").filter(".f4").html(func2[3]);
+							$(".key").filter(".f5").html(func2[4]);
+							$(".key").filter(".f6").html(func2[5]);
+							$(".keys").filter(".f0").html(func2[6]);
+						}
+						else if(fnum==2){
+							fnum=3;
+							$(".key").filter(".f1").html(func3[0]);
+							$(".key").filter(".f2").html(func3[1]);
+							$(".key").filter(".f3").html(func3[2]);
+							$(".key").filter(".f4").html(func3[3]);
+							$(".key").filter(".f5").html(func3[4]);
+							$(".key").filter(".f6").html(func3[5]);
+							$(".keys").filter(".f0").html(func3[6]);
+						}
+						else if(fnum==3){
+							fnum=4;
+							$(".key").filter(".f1").html(func4[0]);
+							$(".key").filter(".f2").html(func4[1]);
+							$(".key").filter(".f3").html(func4[2]);
+							$(".key").filter(".f4").html(func4[3]);
+							$(".key").filter(".f5").html(func4[4]);
+							$(".key").filter(".f6").html(func4[5]);
+							$(".keys").filter(".f0").html(func4[6]);
+						}
+						}
+						else if($(this).text() == '◀'){
+						if(fnum==2){
+							fnum=1;
+							$(".key").filter(".f1").html(func1[0]);
+							$(".key").filter(".f2").html(func1[1]);
+							$(".key").filter(".f3").html(func1[2]);
+							$(".key").filter(".f4").html(func1[3]);
+							$(".key").filter(".f5").html(func1[4]);
+							$(".key").filter(".f6").html(func1[5]);
+							$(".keys").filter(".f0").html(func1[6]);
+						}
+						else if(fnum==3){
+							fnum=2;
+							$(".key").filter(".f1").html(func2[0]);
+							$(".key").filter(".f2").html(func2[1]);
+							$(".key").filter(".f3").html(func2[2]);
+							$(".key").filter(".f4").html(func2[3]);
+							$(".key").filter(".f5").html(func2[4]);
+							$(".key").filter(".f6").html(func2[5]);
+							$(".keys").filter(".f0").html(func2[6]);
+							}
+							else if(fnum==4){
+							fnum=3;
+							$(".key").filter(".f1").html(func3[0]);
+							$(".key").filter(".f2").html(func3[1]);
+							$(".key").filter(".f3").html(func3[2]);
+							$(".key").filter(".f4").html(func3[3]);
+							$(".key").filter(".f5").html(func3[4]);
+							$(".key").filter(".f6").html(func3[5]);
+							$(".keys").filter(".f0").html(func3[6]);
+							}
+							else if(fnum==1){
+							fnum=4;
+							$(".key").filter(".f1").html(func4[0]);
+							$(".key").filter(".f2").html(func4[1]);
+							$(".key").filter(".f3").html(func4[2]);
+							$(".key").filter(".f4").html(func4[3]);
+							$(".key").filter(".f5").html(func4[4]);
+							$(".key").filter(".f6").html(func4[5]);
+							$(".keys").filter(".f0").html(func4[6]);
+							}
+						}
+						else if($(this).text() == 'x'){
+						displayValue += $(this).text();
+						$('#ta1').text(displayValue);
+						if(ing==0)ing=1;
+						else if(ing!=0)ing=-1;
+						}
+						else if($(this).text() == 'y'){
+						displayValue += $(this).text();
+						$('#ta1').text(displayValue);
+						if(ing==0)ing=2;
+						else if(ing!=0)ing=-1;
+						}
+						else if($(this).text() == 'z'){
+						displayValue += $(this).text();
+						$('#ta1').text(displayValue);
+						if(ing==0)ing=3;
+						else if(ing!=0)ing=-1;
+						}
+						else if($(this).text() == 'f'){
+						displayValue += $(this).text();
+						$('#ta1').text(displayValue);
+						if(fng==0)fng=1;
+						}
+						else if($(this).text() == 'g'){
+						displayValue += $(this).text();
+						$('#ta1').text(displayValue);
+						if(fng==0)fng=2;
+						}
+						else if($(this).text() == '+'||$(this).text() == '-'
+						||$(this).text() == '*'||$(this).text() == '/'||$(this).text() == '^'||$(this).text() == '%'){
+							opng=100;
+							displayValue += $(this).text();
+                            $('#ta1').text(displayValue);
+						}
+	
+                        else
+                        {                        
+                            displayValue += $(this).text();
+                            $('#ta1').text(displayValue);
+                        }
+
+                        var node = math.parse(displayValue);
+                        var latex = node.toTex({parenthesis: 'keep', implicit: 'hide'});
+                        var elem = MathJax.Hub.getAllJax('latex')[0];
+                        MathJax.Hub.Queue(['Text', elem, latex]);                      
+                    }
+
+                    e.preventDefault()
+                })
+            })
+        })
+	
+	
+    </script>
+	
+<base target=ifr>
+</head>
+<body >
+<table class=framedeco>
+<tr><td class="key" style="height:10%; font-size:30px;background-color:#29BC7F; color : lightgray;">◀</td><td style="height:10%; font-size:30px;background-color:#29BC7F;color : lightgray;" class="key">▶</td></tr>
+<tr>
+		<td  colspan=2 class="yrr f0 keys" >삼각함수</td>
+	</tr>
+<tr>
+
+		<td  colspan=2 class="crr f1 key" >sin</td>
+	</tr>
+	<tr>
+		<td  colspan=2 class="crr f2 key" >cos</td>
+
+	</tr>
+	<tr>
+		<td  colspan=2 class="crr f3 key" >tan</td>
+
+	</tr>
+	<tr>
+		<td  colspan=2 class="crr f4 key">exp</td>
+	</tr>
+	<tr>
+		<td  colspan=2 class="crr f5 key" >log</td>
+	</tr>
+	<tr>
+		<td  colspan=2 class="crr f6 key" >sqrt</td>
+	</tr>
+		</table>
+<table id=menubar><tr ><td id=t1 class="timestone keys"><xmp>←</xmp></td><td id=t2 class="timestone keys"><xmp>→</xmp></td>
+<td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td>
+</tr></table>
+<form name=p1><textarea id=ta1 name=plz class=ta cols=20 rows=5></textarea></form>
+<hr style="width:70%; margin:0; height:10px; background-color:gray;border : 0px"></hr>
+<textarea id=ta2 class=ta cols=10 rows=2></textarea>
+<table id=lay>
+<tr>
+<td class="normbutton key">1</th><th class="normbutton key">2</td><th class="normbutton key">3</th>
+<th class="non">nn</th>
+<th class="actor key" colspan=1>C</th><th class="lightkey key">=</th>
+<th class=non>nn</th>
+<th class="operator key">+</th><th class="operator key">-</th>
+</tr>
+<tr>
+<th class="normbutton key">4</th><th class="normbutton key">5</th><th class="normbutton key">6</th>
+<td class=non>nn</td><th class="lightkey key">(</th><th class="lightkey key">)</th>
+<th class=non>nn </th>
+<th class="operator key">*</th><th class="operator key">/</th>
+</tr>
+<tr>
+<th class="normbutton key">7</th><th class="normbutton key">8</th><th class="normbutton key">9</th>
+<th class=non>nn </th><th class="lightkey key" colspan=1>[</th><th class="lightkey key">]</th>
+<th class="non ">nn</th>
+<th class="operator key">^</th><th class="operator key">%</th>
+</tr>
+<tr><td colspan=2 class="normbutton key">0</td><th  class="normbutton key">.</th>
+<th class=non>nn </th><td class="resultbt key" colspan=2>결과</td><th class=non>nn </th>
+<th class="lightkey key">,</th><th class="lightkey key">;</th></tr>
+<tr><th colspan=3 class=non>nn </th><td class="ffkey key">x</td><td class="ffkey key">y</td><td class="ffkey key">z</td>
+<th colspan=1 class=non>nn </th><td class="ffkey key">f</td><td class="ffkey key">g</td></tr>
+</table>
+
+
+<table style="width:100%; margin-top:10px; "><tr><td class="r1 key" style="background-color:violet; color:white;width:10%;border-radius:5px;">
+row1
+</td>
+<td class="rv1" style="width:90%;background-color:lightgray;"> </td>
+<tr><td class="r2 key" style="background-color:violet; color:white;width:10%;border-radius:5px;">
+row2
+</td>
+<td class="rv2" style="width:90%;background-color:lightgray;"> </td>
+<tr><td class="r3 key" style="background-color:violet; color:white;width:10%;border-radius:5px;">
+row3
+</td>
+<td class="rv3" style="width:90%;background-color:lightgray;"> </td>
+<tr><td class="r4 key" style="background-color:violet; color:white;width:10%;border-radius:5px;">
+row4
+</td>
+<td class="rv4" style="width:90%;background-color:lightgray;"> </td>
+<tr><td class="r5 key" style="background-color:violet; color:white;width:10%;border-radius:5px;">
+row5
+</td>
+<td class="rv5" style="width:90%;background-color:lightgray;"> 
+</tr></table>
+<div id="latex" style="color:gray;"></div>
+</body>
+</html>

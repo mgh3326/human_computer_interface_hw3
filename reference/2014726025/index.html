@@ -1,0 +1,323 @@
+<html>
+<head>
+    <title>2014726025</title>
+    <style type="text/css">
+    *{
+        font-family: 'Open Sans', 'Helvetica', 'Arial', sans-serif;
+        box-sizing: border-box;
+    }
+        body {
+            font-weight: 30;
+            margin: 0;
+        }
+
+        h1 {
+            font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
+            font-size: 30px;
+            padding: 20px 10px;
+            text-align: center;
+            text-transform: uppercase;
+            text-rendering: optimizeLegibility;
+            color: #9aadd4;
+            background-color: rgb(156, 134, 154);
+            letter-spacing: .1em;
+            text-shadow: 
+            0 -1px 0 #fff, 
+
+            0 5px 0 #262626, 
+            0 6px 0 #242424, 
+            0 7px 0 #222, 
+            0 8px 0 #202020, 
+            0 9px 0 #1e1e1e, 
+            0 10px 0 #1c1c1c, 
+            0 11px 0 #1a1a1a, 
+            0 12px 0 #181818, 
+
+            0 22px 30px rgba(0, 0, 0, 0.9);
+        }
+#calculator {
+    width: 100%;
+}
+       
+.calc {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+.top {
+    max-width: 400px;
+    width: 100%;
+    background: #FFF9F9;
+    color: #444;
+    border-radius: 10px 10px 0 0;
+}
+        
+  
+.result {
+    box-sizing: border-box;
+    width: 100%;
+    height: 30px;
+    font-size: 16px;
+    margin: 0;
+    padding: 7px 10px 0px 10px;
+    text-align: left;
+    opacity: 0.6;
+    overflow: hidden;
+}
+  
+.screen {
+    width: 100%;
+    height: 50px;
+    border: 0;
+    font-size: 30px;
+    padding: 0px 20px 5px 5px;
+    text-align: right;
+    display: flex;
+    align-items: baseline;
+    justify-content: flex-end;
+    overflow: hidden;
+}
+.hints {
+    opacity: 0.3;
+}
+.buttons {
+    max-width: 400px;
+    width: 100%;
+    margin-bottom: 50px;
+}
+
+.cut{
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: space-around;
+    width: 100%;
+    min-height: 50px;
+    margin: auto;
+}
+
+.btn {
+    box-sizing: border-box;
+    width: 100%;
+    font-size: 1.6em;
+    text-align: center;
+    padding: 5px;
+    background: rgba(224, 224, 224, 2);
+    cursor: pointer;
+    outline: 1px solid rgba(136, 14, 79, 0.1);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    box-shadow: none;
+    transition: all 0.2s;
+    
+}
+.oper{
+    background-color: rgba(255, 155, 160, 1);
+    color: #eee;
+    font-size: 1.6em;
+}
+
+.symbol-btn {
+    font-style: italic;
+    font-size: 1.6em;
+}
+
+.function-btn {
+    font-size: 1.6em;
+    font-style: italic;
+}
+
+.eval-btn{
+    background-color: rgb(116, 119, 163);
+    color: white;
+    font-size: 2em;
+}
+       
+.clear-btn {
+    background-color: #bb1c09;
+    color: white;
+}
+.back{
+    background-color: #5c5555;
+    color : white;
+}
+.btn:hover {
+  box-shadow: 10px 10px 25px -8px rgb(75, 84, 94);
+  z-index: 1000;
+}
+       
+.btn:active {
+    box-shadow: inset 10px 10px 10px -6px rgb(75, 84, 94);
+}
+.s{
+    background-color: rgba(255, 235, 238, 1);
+    font-size: 1.8em;
+    color: black;
+}
+.back:active{
+    box-shadow: inset 10px 10px 25px -8px rgb(222, 226, 231);
+}
+    </style>
+ 
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js' type='text/javascript'></script>
+    <script src='js/math.js' type='text/javascript'></script>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            var parser = math.parser();
+
+            var Value = '0';
+            // $('.result').text(Value);
+            $('#screentext').text(Value);
+ 
+            $('.btn').each(function(index, btn){       
+                $(this).click(function(e){
+                    if(Value == '0') Value = '';
+
+                    if($(this).text() == 'EV')
+                    {
+                        try
+                        {
+                            $('.result').text(Value+"=");  
+                            Value = parser.eval(Value).toString();
+                            var tokens = Value.split(' ');
+                            if(tokens[0] == 'function')
+                            {
+                                Value = tokens[0];
+                            }
+                            $('#screentext').text(Value);  
+                            // $('.result').text(Value);                       
+                            Value = '0';
+                        }
+                        catch (e)
+                        {
+                            Value = '0';
+                            if(Value != 'function')
+                            {
+                                $('#screentext').text("식을 확인해주세요");
+                            }
+                        }               
+                    }
+                    else if($(this).text() == 'CE'){
+                        Value = Value.substring(0,Value.length -1);
+                        $('#screentext').text(Value);
+                    }
+                    else
+                    {
+                        if($(this).text() == 'AC')
+                        {
+                            Value = '0';
+                            $('#screentext').text(Value);
+                            $('.result').text("");
+                        }
+                        else
+                        {                        
+                            Value += $(this).text();
+                            $('#screentext').text(Value);
+                        }
+                    }
+
+                    e.preventDefault()
+                })
+            })
+        })
+    </script>
+</head>
+ 
+<body>
+    <h1>
+            My Calculator
+    </h1>   
+        
+    <div id="calculator">
+        <h6>2014726025 이광일</h6>
+        <div><div class="calc">
+        <div class="top">
+            <div class='result'></div>
+            <div class='screen'><span id="screentext" class="screentext animaited"><span class="hints"></span></div>
+            </div>
+        <div class="buttons">
+        
+        <div class ="cut">
+        <div class="btn clear-btn">AC</div>
+        <div class="btn back">CE</div>
+        </div>
+        <div class ="cut">
+            <div class="btn"><</div>
+            <div class="btn">></div>
+            <div class="btn"><=</div>
+            <div class="btn">>=</div>
+            <div class="btn">==</div>
+            <div class="btn">!=</div>
+        </div>
+        <div class ="cut">
+            <div class="btn symbol-btn">f</div>
+            <div class="btn symbol-btn">g</div>
+            <div class="btn">=</div>            
+            <div class="btn symbol-btn">x</div>
+            <div class="btn symbol-btn">y</div>
+            <div class="btn symbol-btn">z</div>
+        </div>
+        <div class ="cut">
+            <div class="btn">[</div>
+            <div class="btn">]</div>
+            <div class="btn function-btn">det</div>
+            <div class="btn function-btn">cross</div>
+            <div class="btn">;</div>
+            <div class="btn">:</div>
+        </div>
+        <div class ="cut">
+            <div class="btn">(</div>
+            <div class="btn">)</div>
+            <div class="btn function-btn">inv</div>
+            <div class="btn symbol-btn">i</div>
+            <div class="btn symbol-btn">e</div>
+            <div class="btn symbol-btn">pi</div>
+        </div>
+        <div class ="cut">
+            <div class="btn function-btn">sin</div>
+            <div class="btn function-btn">cos</div>
+            <div class="btn function-btn">tan</div>
+            <div class="btn symbol-btn">deg</div>
+            
+            <div class="btn function-btn">sqrt</div>
+            <div class="btn function-btn">log</div>               
+        </div>
+      
+        <div class ="cut">
+            <div class="btn num s">7</div>
+            <div class="btn num s">8</div>
+            <div class="btn num s">9</div>
+            <div class="btn oper">%</div>
+            <div class="btn oper">^</div>
+        </div>
+        <div class ="cut">
+            <div class="btn num s">4</div>
+            <div class="btn num s">5</div>
+            <div class="btn num s">6</div>
+            <div class="btn oper">/</div>
+            <div class="btn oper">*</div>
+        </div>
+        <div class ="cut">
+                <div class="btn num s">1</div>
+                <div class="btn num s">2</div>
+                <div class="btn num s">3</div>
+                <div class="btn oper">-</div>
+                <div class="btn oper">+</div>
+            
+        </div>
+        <div class ="cut">
+                <div class="btn s" style="width:20%">.</div>
+                <div class="btn num s" style="width:20%">0</div>
+                <div class="btn s" style="width:20%">,</div>
+                <div class="btn eval-btn" style="width:40%">EV</div>
+            </div>
+    </div>
+    </div></div>
+</div>
+</body>
+</html>

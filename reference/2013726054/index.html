@@ -1,0 +1,364 @@
+<!Doctype html>
+<html>
+<head>
+<title>2013726054</title>
+<style type = "text/css">
+body{ margin:0 auto;
+     }
+
+h1{
+    padding: 20px;
+    font-size: 40px;
+    font-family: hy고딕;
+    background-color:rgb(32, 156, 240);
+    text-align: center;
+    color:rgb(4, 4, 20);
+}
+
+table{
+    margin: 0 auto;
+    width: 960px;
+    height: 540px;
+    background-color: rgb(237, 241, 199);
+    border-radius: 10px;
+}
+
+#calculator{
+font-size: 0;
+width:960px;
+height:540px;
+background-color: rgb(237, 241, 199);
+padding: 0px;
+border-radius: 20px;
+margin:auto;
+
+}
+
+#result-list{
+    width: 250px;
+    background-color: rgb(206, 217, 219);
+    border-radius: 10px;
+}   
+
+.list{
+    font-size: 15px;
+    margin-bottom: 10px;
+    line-height: 300%;
+    text-align: center;
+    height: 50px;
+    background-color: rgb(106, 174, 236);
+    border-radius: 10px;
+}
+#expression{
+    text-align: right;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+}
+
+#result{
+    text-align: right;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+}
+    
+.key {
+    width: 75px;
+    text-align: center;
+    background-color: #eeeeee;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    }
+
+#list-1{}
+#list-2{}
+#list-3{}
+#list-4{}
+#list-5{}
+#list-6{}
+#list-7{}
+#list-8{}
+#list-9{}
+
+#k1{}
+#k2{}
+#k3{}
+#k4{}
+#k5{}
+#k6{}
+#k7{}
+#k8{}
+#k9{}
+#k10{}
+#k11{}
+#k12{}
+#k13{}
+.clear-key{
+        background-color: red;
+
+}
+
+.result-key{
+        background-color: palegreen;
+}
+
+</style>
+
+<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js' type='text/javascript'></script>
+<script src='javascript/math.js' type='text/javascript'></script>
+<script type="text/javascript">
+        $(document).ready(function(){
+            var parser = math.parser();
+
+            var displayValue = '0';
+            var list = 0;
+
+            var list1=new Array("sin", "cos", "tan", "exp", "log", "sqrt", "^", 
+            "pi", "(", "[", "e", ")", "]");
+            var list2=new Array("<", "<=", "==", ">", ">=", "!=", "^", ",", ":",
+            ";", "i", "cross", "det");
+
+            var result_list=new Array("", "", "", "", "", "", "", "", "");
+
+            $('#expression').text(displayValue);
+            $('#result').text(displayValue);
+ 
+            $('.key').each(function(index, key){       
+                $(this).click(function(e){
+                    if(displayValue == '0') displayValue = '';
+
+                    if($(this).text() == 'EV')
+                    {
+                        try
+                        {
+                            var i;
+                            for(i =0; i<8; i++)
+                            {
+                                result_list[i] = result_list[i+1];
+                            }
+                            result_list[8] = displayValue;
+                            displayValue = parser.eval(displayValue).toString();
+                            var tokens = displayValue.split(' ');
+                            if(tokens[0] == 'function')
+                            {
+                                displayValue = tokens[0];
+                            }
+                            $('#result').text(displayValue);                         
+                            displayValue = '0';
+                        }
+                        catch (e)
+                        {
+                            displayValue = '0';
+                            if(displayValue != 'function')
+                            {
+                                $('#result').text(e);
+                            }
+                        }
+                        $(".list").filter(".list-1").html(result_list[0]);
+                        $(".list").filter(".list-2").html(result_list[1]);
+                        $(".list").filter(".list-3").html(result_list[2]);
+                        $(".list").filter(".list-4").html(result_list[3]);
+                        $(".list").filter(".list-5").html(result_list[4]);
+                        $(".list").filter(".list-6").html(result_list[5]);
+                        $(".list").filter(".list-7").html(result_list[6]);
+                        $(".list").filter(".list-8").html(result_list[7]);
+                        $(".list").filter(".list-9").html(result_list[8]);            
+                    }
+                    else
+                    {
+                        if($(this).text() == 'CL')
+                        {
+                            displayValue = '0';
+                            $('#result').text(displayValue);
+                            $('#expression').text(displayValue);
+                        }
+                        else if($(this).text() == "☞")
+                        {
+                            if(list == 0)
+                            {
+                                list=1;
+                                $(".key").filter(".k1").html(list2[0]);
+                                $(".key").filter(".k2").html(list2[1]);
+                                $(".key").filter(".k3").html(list2[2]);
+                                $(".key").filter(".k4").html(list2[3]);
+                                $(".key").filter(".k5").html(list2[4]);
+                                $(".key").filter(".k6").html(list2[5]);
+                                $(".key").filter(".k7").html(list2[6]);
+                                $(".key").filter(".k8").html(list2[7]);
+                                $(".key").filter(".k9").html(list2[8]);
+                                $(".key").filter(".k10").html(list2[9]);
+                                $(".key").filter(".k11").html(list2[10]);
+                                $(".key").filter(".k12").html(list2[11]);
+                                $(".key").filter(".k13").html(list2[12]);
+                            }
+                            else
+                            {
+                                list=0;
+                                $(".key").filter(".k1").html(list1[0]);
+                                $(".key").filter(".k2").html(list1[1]);
+                                $(".key").filter(".k3").html(list1[2]);
+                                $(".key").filter(".k4").html(list1[3]);
+                                $(".key").filter(".k5").html(list1[4]);
+                                $(".key").filter(".k6").html(list1[5]);
+                                $(".key").filter(".k7").html(list1[6]);
+                                $(".key").filter(".k8").html(list1[7]);
+                                $(".key").filter(".k9").html(list1[8]);
+                                $(".key").filter(".k10").html(list1[9]);
+                                $(".key").filter(".k11").html(list1[10]);
+                                $(".key").filter(".k12").html(list1[11]);
+                                $(".key").filter(".k13").html(list1[12]);
+                            }
+                        }
+                        else if($(this).text() == "☜")
+                        {
+                            if(list == 0)
+                            {
+                                list = 1;
+                                $(".key").filter(".k1").html(list2[0]);
+                                $(".key").filter(".k2").html(list2[1]);
+                                $(".key").filter(".k3").html(list2[2]);
+                                $(".key").filter(".k4").html(list2[3]);
+                                $(".key").filter(".k5").html(list2[4]);
+                                $(".key").filter(".k6").html(list2[5]);
+                                $(".key").filter(".k7").html(list2[6]);
+                                $(".key").filter(".k8").html(list2[7]);
+                                $(".key").filter(".k9").html(list2[8]);
+                                $(".key").filter(".k10").html(list2[9]);
+                                $(".key").filter(".k11").html(list2[10]);
+                                $(".key").filter(".k12").html(list2[11]);
+                                $(".key").filter(".k13").html(list2[12]);
+                            }
+                            else
+                            {
+                                list = 0;
+                                $(".key").filter(".k1").html(list1[0]);
+                                $(".key").filter(".k2").html(list1[1]);
+                                $(".key").filter(".k3").html(list1[2]);
+                                $(".key").filter(".k4").html(list1[3]);
+                                $(".key").filter(".k5").html(list1[4]);
+                                $(".key").filter(".k6").html(list1[5]);
+                                $(".key").filter(".k7").html(list1[6]);
+                                $(".key").filter(".k8").html(list1[7]);
+                                $(".key").filter(".k9").html(list1[8]);
+                                $(".key").filter(".k10").html(list1[9]);
+                                $(".key").filter(".k11").html(list1[10]);
+                                $(".key").filter(".k12").html(list1[11]);
+                                $(".key").filter(".k13").html(list1[12]);
+                            }
+                        }
+                        else
+                        {                        
+                            displayValue += $(this).text();
+                            $('#expression').text(displayValue);
+                        }
+                    }
+
+                    e.preventDefault()
+                })
+            })
+        })
+    </script>
+
+
+</head>
+
+<body>
+
+    <h1>
+        2013726054 김한별
+    </h1>
+    <table>
+        <tr>
+            <td rowspan="7"  id ="result-list">
+               <div class="list list-1">
+            </div>
+               <div class="list list-2">
+            </div>
+            <div class="list list-3">
+            </div>
+            <div class = "list list-4">
+            </div>
+            <div class = "list list-5">
+            </div>
+            <div class = "list list-6">
+            </div>
+            <div class = "list list-7">
+            </div>
+            <div class = "list list-8">
+            </div>
+            <div class = "list list-9">
+            </div>
+            </td>
+            <td colspan="9" id="expression">
+                
+            </td>
+           
+        </tr>
+        <tr>
+                <td colspan="9" id="result"></td>
+        </tr>
+        <tr>
+                <td class="key k1">sin</td>
+                <td class="key k2">cos</td>
+                <td class="key k3">tan</td>
+                <td class="key" colspan="2">X</td>
+                <td class="key">+</td>
+                <td class="key">-</td>
+                <td class="key">*</td>
+                <td class="key">/</td>
+
+        </tr>
+        <tr>
+                <td class="key k4">exp</td>
+                <td class="key k5">log</td>
+                <td class="key k6">sqrt</td>
+                <td class="key" colspan="2">Y</td>
+                <td class="key">7</td>
+                <td class="key">8</td>
+                <td class="key">9</td>
+                <td class="key">%</td>
+
+        </tr>
+        <tr>
+                <td class="key">☜</td>
+                <td class="key k7">^</td>
+                <td class="key">☞</td>
+                <td class="key" colspan="2">Z</td>
+                <td class="key">4</td>
+                <td class="key">5</td>
+                <td class="key">6</td>
+                <td class="key">=</td>
+
+        </tr>
+        <tr>
+                <td class="key k8">pi</td>
+                <td class="key k9">(</td>
+                <td class="key k10">[</td>
+                <td class="key" colspan="2">f</td>
+                <td class="key">1</td>
+                <td class="key">2</td>
+                <td class="key">3</td>
+                <td class="key clear-key">CL</td>
+
+        </tr>
+        <tr>
+                <td class="key k11">e</td>
+                <td class="key k12">)</td>
+                <td class="key k13">]</td>
+                <td class="key" colspan="2">g</td>
+                <td class="key">0</td>
+                <td class="key">00</td>
+                <td class="key delete-key">.</td>
+                <td class="key result-key">EV</td>
+        </tr>
+    </table>
+
+
+    
+    
+   
+
+</body>
+
+</html>

@@ -1,0 +1,306 @@
+
+<html>
+<head>
+    <title>Ugly calculator using JQuery and math.js</title>
+    <style type="text/css">
+        body {
+            margin: 0px 0px 0px 0px;
+        }
+       
+        h1 {
+            font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
+            font-size: 30px;
+            padding: 20px 10px;
+            text-align: center;
+            text-transform: uppercase;
+            text-rendering: optimizeLegibility;
+            color: #e0dfdc;
+            background-color: #333;
+            letter-spacing: .1em;
+            text-shadow: 
+            0 -1px 0 #fff, 
+            0 1px 0 #2e2e2e, 
+            0 2px 0 #2c2c2c, 
+            0 3px 0 #2a2a2a, 
+            0 4px 0 #282828, 
+            0 5px 0 #262626, 
+            0 6px 0 #242424, 
+            0 7px 0 #222, 
+            0 8px 0 #202020, 
+            0 9px 0 #1e1e1e, 
+            0 10px 0 #1c1c1c, 
+            0 11px 0 #1a1a1a, 
+            0 12px 0 #181818, 
+            0 13px 0 #161616, 
+            0 14px 0 #141414, 
+            0 15px 0 #121212, 
+            0 22px 30px rgba(0, 0, 0, 0.9);
+        }
+       
+        #calculator {
+            font-size: 0;
+            width: 240px;
+            background-color: #484848;
+            padding: 15px;
+            margin: auto;
+            border-radius: 10px;
+        }
+       
+        #result {
+            width: 230px;
+            height: 70px;
+            margin-bottom: 15px;
+            padding: 0px 5px 0px 5px;
+            background-color: #cddecc;
+            border-radius: 5px;
+            display: inline-flex;
+            justify-content: flex-end;
+            align-items: center;
+            overflow: hidden;
+            box-shadow: inset 0 0px 3px;
+            font: 20px digital;
+        }
+ 
+        .key {
+            width: 55px;
+            height: 55px;
+            background-color: #eeeeee;
+            display: inline-flex;
+            vertical-align: middle;
+            justify-content: center;
+            align-items: center;
+            border-radius: 5px;
+            box-shadow: 0 3px 0 #a1a1a1, 0 2px 5px rgba(0, 0, 0, .75);
+            cursor: pointer;
+            font: bold 20px sans-serif;
+        }
+
+	.page-key {
+		width: 20px;
+		height: 275px;
+		position: absolute;
+		box-shadow: none;
+		font: bold 15px sans-serif;
+	}
+
+	.static-key {
+		width: 48px;
+		height: 48px;
+	}
+
+        .symbol-key {
+            font: italic 20px "Times New Roman"
+        }
+
+        .function-key {
+            font: italic 15px "Times New Roman"
+        }
+
+        .eval-key {
+            background-color: #4a9840;
+            color: white;
+        }
+       
+        .clear-key {
+            background-color: #bb1c09;
+            color: white;
+        }
+
+	.delete-key {
+		background-color: #ffff00;
+		color: black;
+	}
+
+
+        .key:active {
+            background-color: #a1a1a1;
+            box-shadow: 0 5px #666;
+            transform: translateY(4px);
+        }
+    </style>
+ 
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js' type='text/javascript'></script>
+    <script src='math.js' type='text/javascript'></script>
+
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>  
+
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          "HTML-CSS": { scale: 75}
+        });
+    </script>
+      
+    <script type="text/javascript">
+        $(document).ready(function(){
+            var parser = math.parser();
+
+            var displayValue = '0';
+            $('#result').text(displayValue);
+            $('#latex').html('$$' + math.parse(displayValue).toTex() + '$$');
+ 
+            $('.key').each(function(index, key){       
+                $(this).click(function(e){
+                    if(displayValue == '0') displayValue = '';
+
+                    if($(this).text() == 'EV')
+                    {
+                        try
+                        {
+                            displayValue = parser.eval(displayValue).toString();
+                            var tokens = displayValue.split(' ');
+                            if(tokens[0] == 'function')
+                            {
+                                displayValue = tokens[0];
+                            }
+                            $('#result').text(displayValue);                         
+                            displayValue = '0';
+                        }
+                        catch (e)
+                        {
+                            displayValue = '0';
+                            if(displayValue != 'function')
+                            {
+                                $('#result').text(e);
+                            }
+                        }               
+                    }
+                    else
+                    {
+			if($(this).text() == 'CL') { }
+                        else if($(this).text() == '<-') {}
+			else if($(this).text() == '->') {}
+			else if($(this).text() == 'DEL') 
+                            {
+                                displayValue = displayValue.substring(0, displayValue.length - 1);
+
+                                if(displayValue == '')
+                                    displayValue = '0';
+          
+                                $('#result').text(displayValue);
+                            }
+                        else
+                        {                        
+                            displayValue += $(this).text();
+                            $('#result').text(displayValue);
+                        }
+
+                        var node = math.parse(displayValue);
+                        var latex = node.toTex({parenthesis: 'keep', implicit: 'hide'});
+                        var elem = MathJax.Hub.getAllJax('latex')[0];
+                        MathJax.Hub.Queue(['Text', elem, latex]);                      
+                    }
+
+                    e.preventDefault()
+                })
+
+		$(this).dblclick(function(e){
+			if($(this).text() == 'CL')
+                        {
+                            displayValue = '0';
+                            $('#result').text(displayValue);
+                        }
+			
+			e.preventDefault()
+		})
+            })
+        })
+    </script>
+
+	<script type="text/javascript">
+		function page_function() {
+			if(document.getElementById('0').innerHTML == "%")
+			{
+				document.getElementById('0').innerHTML = "<";         
+				document.getElementById('1').innerHTML = ">";
+				document.getElementById('2').innerHTML = "=";
+				document.getElementById('3').innerHTML = "!=";
+				document.getElementById('4').innerHTML = "sin";
+				document.getElementById('5').innerHTML = "cos";
+				document.getElementById('6').innerHTML = "tan";
+				document.getElementById('7').innerHTML = "pi";
+				document.getElementById('8').innerHTML = "det";
+				document.getElementById('9').innerHTML = "[";
+				document.getElementById('10').innerHTML = "]";
+				document.getElementById('11').innerHTML = ":";
+				document.getElementById('12').innerHTML = "cross";
+				document.getElementById('13').innerHTML = "exp";
+				document.getElementById('14').innerHTML = ",";
+				document.getElementById('15').innerHTML = ";";
+				document.getElementById('16').innerHTML = "log";
+				document.getElementById('17').innerHTML = "e";
+				document.getElementById('18').innerHTML = "i";
+				document.getElementById('19').innerHTML = "inv";
+				document.getElementById('page').innerHTML = "->"
+			}
+			else
+			{
+				document.getElementById('0').innerHTML = "%";         
+				document.getElementById('1').innerHTML = "sqrt";
+				document.getElementById('2').innerHTML = "^";
+				document.getElementById('3').innerHTML = "/";
+				document.getElementById('4').innerHTML = "7";
+				document.getElementById('5').innerHTML = "8";
+				document.getElementById('6').innerHTML = "9";
+				document.getElementById('7').innerHTML = "*";
+				document.getElementById('8').innerHTML = "4";
+				document.getElementById('9').innerHTML = "5";
+				document.getElementById('10').innerHTML = "6";
+				document.getElementById('11').innerHTML = "-";
+				document.getElementById('12').innerHTML = "1";
+				document.getElementById('13').innerHTML = "2";
+				document.getElementById('14').innerHTML = "3";
+				document.getElementById('15').innerHTML = "+";
+				document.getElementById('16').innerHTML = "0";
+				document.getElementById('17').innerHTML = ".";
+				document.getElementById('18').innerHTML = "=";
+				document.getElementById('19').innerHTML = ",";
+				document.getElementById('page').innerHTML = "<-"
+			}
+		}
+	</script>
+
+</head>
+ 
+<body>
+    <h1>
+            CALCULATOR HOMEWORK VERSION
+    </h1>           
+   
+    <div id="calculator">
+        <div id="result">0</div>
+	<span class="key static-key">(</span>
+        <span class="key static-key">)</span>
+	<span class="key clear-key static-key">CL</span>
+        <span class="key delete-key static-key">DEL</span>
+	<span class="key eval-key static-key">EV</span>
+	<span class="key" id="0">%</span>
+	<span class="key" id="1">sqrt</span>
+	<span class="key" id="2">^</span>
+	<span class="key" id="3">/</span>
+	<span class="key page-key" id="page" onclick="page_function();"><-</span>
+        <span class="key" id="4">7</span>
+        <span class="key" id="5">8</span>
+        <span class="key" id="6">9</span>
+        <span class="key" id="7">*</span>
+        <span class="key" id="8">4</span>
+        <span class="key" id="9">5</span>
+        <span class="key" id="10">6</span>
+        <span class="key" id="11">-</span>
+        <span class="key" id="12">1</span>
+        <span class="key" id="13">2</span>
+        <span class="key" id="14">3</span>
+	<span class="key" id="15">+</span>
+	<span class="key" id="16">0</span>
+	<span class="key" id="17">.</span>
+	<span class="key" id="18">=</span>
+	<span class="key" id="19">,</span>
+	<span class="key static-key">x</span>
+	<span class="key static-key">y</span>
+	<span class="key static-key">z</span>
+	<span class="key static-key">f</span>
+	<span class="key static-key">g</span>
+    </div>
+</body>
+</html>

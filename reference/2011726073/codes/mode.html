@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<form name="modewin">
+<html>
+<head>
+<meta charset="UTF-8">
+<title>mode 변경</title>
+<style>
+div {padding: 5px 5px 5px 5px}
+.item { float: left;    width: 100px;}
+</style>
+    <script src='jquery.js' type='text/javascript'></script>    <script type="text/javascript">
+
+
+    $(function(){
+
+        $('#selectBtn').click(function(){
+            summode=0;
+              $('input:checkbox').each(function() {
+                 if(this.checked)
+                   summode+=this.value
+
+
+
+
+             });
+             opener.document.calculator.setmode = summode;
+          //   alert(opener.document.all.mode.value);
+
+             //self.close();
+             opener.document.location.reload();
+             window.close();
+
+        });
+
+    });
+
+
+
+
+
+    </script>
+
+
+
+</head>
+<form >
+  <body>
+    <div>
+    <span class="item"> 비교연산 </span> <input type="checkbox" name="check" value="10000">
+    </div>
+    <p>
+    <div>
+        <span class="item"> 지수/로그(exp,log) </span> <input type="checkbox" name="check"  value="1000">
+    </div>
+    <p>
+    <p>
+    <div>
+        <span class="item"> 삼각함수(sin, cos, tan) </span> <input type="checkbox" name="check"  value="100">
+    </div>
+    <p>
+    <div>
+        <span class="item">함수, 변수 입력  </span> <input type="checkbox" name="check"  value="10">
+    </div>
+    <p>
+    <div>
+        <span class="item">복소수(i), PI, e 입력   </span> <input type="checkbox" name="check"  value="1">
+    </div>
+
+    <div>
+        <input type="button" id="selectBtn" value="적용">
+    </div>
+
+</body>
+</form>
+</html>
+</form>

@@ -1,0 +1,131 @@
+.pan{
+  background-color: #29b9ac;
+  border-radius: 9px;
+  width:720px;
+  height:410px;
+}
+.ButtonPan{
+  background-color: lightgray;
+  padding: 5px;
+  padding-top: 2px;
+  margin:20px;
+  margin-top: 10px;
+}
+.RBPan{
+  background-color: #29b9ac;
+  width:95.2px;
+  height: 294.4px;
+}
+.buttonN{
+  width:70px;
+  height: 40px;
+  display: inline-block;
+  padding: 15px 25px;
+  font-size: 12px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #585858;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 4px #999;
+}
+.buttonN:hover {background-color: #424242}
+.buttonN:active {
+  background-color: #2E2E2E;
+  box-shadow: 0 3px #666;
+  transform: translateY(4px);
+}
+.buttonO{
+  width:85px;
+  height: 40px;
+  display: inline-block;
+  padding: 15px 25px;
+  font-size: 12px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  margin-left: 2px;
+  color: #fff;
+  background-color: #585858;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 4px #999;
+}
+.buttonO:hover {background-color: #424242}
+.buttonO:active {
+  background-color: #2E2E2E;
+  box-shadow: 0 3px #666;
+  transform: translateY(4px);
+}
+.ButtonGrp td{
+  padding-left: 3.3px;
+}
+.button {
+  width:70px;
+  height: 25px;
+  display: inline-block;
+  padding: 15px 25px;
+  font-size: 12px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #585858;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 4px #999;
+}
+.button:hover {background-color: #424242}
+.button:active {
+  background-color: #2E2E2E;
+  box-shadow: 0 3px #666;
+  transform: translateY(4px);
+}
+.funbtn{
+  padding:5px;
+}
+.inputText{
+  margin-left: 20px;
+  margin-top: 20px;
+  font-size: 32px;
+  border-radius: 8px;
+  width:678px;
+}
+#EnterBtn{
+  background-color: #2E64FE;
+}
+#EnterBtn:hover{
+  background-color: #0040FF;
+}
+#EnterBtn:active{
+  background-color: #013ADF;
+  box-shadow: 0 3px #666;
+  transform: translateY(4px);
+}
+#DNCbtn{
+  background-color:#B40404;
+}
+#DNCbtn:hover{
+  background-color: #8A0808;
+}
+#DNCbtn:active{
+  background-color: #610B0B;
+  transform: translateY(4px);
+  box-shadow: 0 3px #666;
+}
+#HelpBtn{
+  background-color:#B43104;
+}
+#HelpBtn:hover{
+  background-color: #8A2908;
+}
+#HelpBtn:active{
+  background-color: #61210B;
+  transform: translateY(4px);
+  box-shadow: 0 3px #666;
+}

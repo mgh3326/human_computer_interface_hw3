@@ -1,0 +1,489 @@
+<html>
+<head>
+	<title>Ugly calculator using JQuery and math.js</title>
+	<style type="text/css">
+		body {
+			margin: 0px 0px 0px 0px;
+		}
+		* {
+			margin: 0;
+			padding: 0;
+			color: #ccc;
+			font-size: 1.1em;
+			list-style: none;
+		}
+
+		#calculator {
+			float: left;
+			width: 400px;
+			padding: 15px;
+			background: #2a2b2f;
+			border-radius: 10px;
+			box-shadow: 0 0 10px 2px rgba(0,0,0,0.2), inset 0 1px 1px 0 rgba(255,255,255,0.2);
+		}
+	   
+		#result {
+			height: 50px;
+			margin: 7px auto;
+			padding: 15px;
+			background: #000;
+			border: 0;
+			border-radius: 7px;
+			font-size: 2em;
+			text-align: right;
+		}
+
+		#latex {
+			width: calc(100% - 30px);
+			height: 80px;
+			margin: 7px auto;
+			padding: 0 15px;
+			background: #000;
+			border: 0;
+			border-radius: 7px;
+			font-size: 2em;
+			text-align: right;
+			display: inline-flex;
+			justify-content: flex-end;
+			align-items: center;
+			overflow: hidden;
+			font: 14px digital;          
+		}
+	   
+		.key {
+			display: inline-block;
+			width: calc(100% - 15px);
+			margin: 5px 2px;
+			background: #111;
+			border: 1px solid #141615;
+			border-radius: 10px;
+			box-shadow: inset 0 2px 2px 0 rgba(255,255,255,0.1), inset 0 -2px 4px 0 rgba(0,0,0,0.2), 0 1px 4px 0 rgba(0,0,0,0.1);
+			/* IE10 Consumer Preview */ 
+			background-image: -ms-linear-gradient(top, rgba(50,51,55,1) 0%, rgba(36,37,41,1) 100%);
+			/* Mozilla Firefox */ 
+			background-image: -moz-linear-gradient(top, rgba(50,51,55,1) 0%, rgba(36,37,41,1) 100%);
+			/* Opera */ 
+			background-image: -o-linear-gradient(top, rgba(50,51,55,1) 0%, rgba(36,37,41,1) 100%);
+			/* Webkit (Safari/Chrome 10) */ 
+			background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, rgba(50,51,55,1)), color-stop(1, rgba(36,37,41,1)));
+			/* Webkit (Chrome 11+) */ 
+			background-image: -webkit-linear-gradient(top, rgba(50,51,55,1) 0%, rgba(36,37,41,1) 100%);
+			/* W3C Markup, IE10 Release Preview */ 
+			background-image: linear-gradient(to bottom, rgba(50,51,55,1) 0%, rgba(36,37,41,1) 100%);
+			cursor: pointer;
+			text-align: center;
+		}
+		.key:hover, .key:focus {background: #1c1c1c;}
+
+		table {
+			width: 100%;
+			text-align: center;
+		}
+		.top {
+			background: #202025;
+			border-radius: 10px;
+		}
+		.top td {
+			width: 20%;
+		}
+		.bottom td {
+			width: calc(100% / 6);
+			height: 52px;
+		}
+		.top .key {
+			height: 50px;
+			line-height: 50px;
+		}
+		.bottom .key {
+			height: 40px;
+			line-height: 40px;
+		}
+		.top td[rowspan="2"] .key {
+			height: 112px;
+			line-height: 112px;
+		}
+
+		.symbol-key {
+			font: italic 20px "Times New Roman"
+		}
+
+		.function-key {
+			font: italic 15px "Times New Roman"
+		}
+
+		.eval-key {
+			background-color: #4a9840;
+			color: white;
+			background-image: linear-gradient(to bottom, rgb(38, 134, 54) 0%, rgb(17, 72, 21) 100%);
+		}
+		.eval-key:hover {background: #14440e;}
+	   
+		.clear-key {
+			background-color: #b74b4b;
+			background-image: linear-gradient(to bottom, rgb(175, 54, 56) 0%, rgb(116, 22, 22) 100%);
+			color: white;
+		}
+		.clear-key:hover {background: #550d0d;}
+	   
+		.key:active {
+			background-color: #a1a1a1;
+			box-shadow: 0 5px #666;
+			transform: translateY(4px);
+		}
+
+		a {text-decoration: none;}
+		.showButton {border-top: 5px solid #ccc;}
+		.showButton a {
+			display: block;
+			width: 80px;
+			height: 50px;
+			line-height: 50px;
+			text-align: center;
+			font-size: .8em;
+			background: #ccc;
+			color: #bbb;
+			box-shadow: 0 0 10px 2px rgba(0,0,0,0.2), inset 0 1px 1px 0 rgba(255,255,255,0.2)
+		}
+		.showButton a.on {
+			background: #2a2b2f;
+			box-shadow: 0 0 10px 2px rgba(0,0,0,0.2), inset 0 1px 1px 0 rgba(255,255,255,0.2)
+		}
+
+		.number {
+			background-color: #535353;
+			background-image: linear-gradient(to bottom, rgb(91, 91, 91) 0%, rgb(66, 66, 66) 100%);
+		}
+
+		.leftWrap {float: left;}
+		.macro {
+			padding-top: 69px;
+		}
+		.macro li:nth-child(1) {
+			width: 80px;
+			height: 48px;
+		}
+		.macro li:nth-child(1):after {
+			content: "";
+			display: block;
+			clear: both;
+		}
+		.macro li:nth-child(1) a {
+			display: block;
+			float: left;
+			width: 100%;
+			height: calc(100% - 10px);
+			padding: 5px 0;
+			background: #2a2b2f;
+			box-shadow: 0 0 10px 2px rgba(0,0,0,0.2), inset 0 1px 1px 0 rgba(255,255,255,0.2);
+			font-size: 17px;
+			text-align: center;
+		}
+		.macro li:nth-child(2) {
+			width: 80px;
+			height: 310px;
+			overflow: hidden;
+			overflow-y: auto;
+			background: #2a2b2f;
+			box-shadow: 0 0 10px 2px rgba(0,0,0,0.2), inset 0 1px 1px 0 rgba(255,255,255,0.2);
+			text-align: center;
+		}
+		.macro li:nth-child(2) span {
+			height: 40px;
+			line-height: 40px;
+		}
+	</style>
+ 
+	<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js' type='text/javascript'></script>
+	<script src='js/math.js' type='text/javascript'></script>
+	
+	<script type="text/javascript" async
+		src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+	</script>    
+	<script type="text/x-mathjax-config">
+		MathJax.Hub.Config({
+		  "HTML-CSS": { scale: 75}
+		});
+	</script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			var parser = math.parser();
+
+			var displayValue = '0';
+			$('#result').text(displayValue);
+			$('#latex').html('$$' + math.parse(displayValue).toTex() + '$$');
+			
+			$('.top .key').each(function(index, key){       
+			    $(this).click(function(e){
+			        if(displayValue == '0') displayValue = '';
+
+			        if($(this).text() == 'EV')
+			        {
+			            try
+			            {
+			                displayValue = parser.eval(displayValue).toString();
+			                var tokens = displayValue.split(' ');
+			                if(tokens[0] == 'function')
+			                {
+			                    displayValue = tokens[0];
+			                }
+			                $('#result').text(displayValue);                         
+			                displayValue = '0';
+			            }
+			            catch (e)
+			            {
+			                displayValue = '0';
+			                if(displayValue != 'function')
+			                {
+			                    $('#result').text(e);
+			                }
+			            }               
+			        }
+			        else
+			        {
+			            if($(this).text() == 'CL')
+			            {
+			                displayValue = '0';
+			                $('#result').text(displayValue);
+			            }
+			            else
+			            {                        
+			                displayValue += $(this).text();
+			                $('#result').text(displayValue);
+			            }
+
+			            var node = math.parse(displayValue);
+						var latex = node.toTex({parenthesis: 'keep', implicit: 'hide'});
+						var elem = MathJax.Hub.getAllJax('latex')[0];
+						MathJax.Hub.Queue(['Text', elem, latex]);   
+			        }
+
+			        e.preventDefault()
+			    })
+			});
+
+
+			//[S]custom
+
+			//버튼 보이기
+			$(".showButton a").on("click", function(){
+				if($(this).hasClass("on")){
+					$(".key.type"+$(this).data("type")).hide();
+					$(this).removeClass("on");
+				}else{
+					$(".key.type"+$(this).data("type")).show();
+					$(this).addClass("on");
+				}
+			});
+
+			//자주사용
+			var lastuse = [];
+			var lastuseEle = [];
+
+			$(".bottom .key").on("click", function(){
+				var ele = $(this).clone();
+				if($.inArray($(this).text(), lastuse) != -1){
+					lastuseEle.splice($.inArray($(this).text(), lastuse), 1);
+					lastuse.splice($.inArray($(this).text(), lastuse), 1);
+				}
+				lastuse.push($(this).text());
+				lastuseEle.push(ele);
+
+				$(".macro > li:nth-child(2)").html("");
+				$.each(lastuseEle, function(){
+					$(".macro > li:nth-child(2)").prepend($(this));
+				})
+
+		        if(displayValue == '0') displayValue = '';
+
+		        if($(this).text() == 'EV')
+		        {
+		            try
+		            {
+		                displayValue = parser.eval(displayValue).toString();
+		                var tokens = displayValue.split(' ');
+		                if(tokens[0] == 'function')
+		                {
+		                    displayValue = tokens[0];
+		                }
+		                $('#result').text(displayValue);                         
+		                displayValue = '0';
+		            }
+		            catch (e)
+		            {
+		                displayValue = '0';
+		                if(displayValue != 'function')
+		                {
+		                    $('#result').text(e);
+		                }
+		            }               
+		        }
+		        else
+		        {
+		            if($(this).text() == 'CL')
+		            {
+		                displayValue = '0';
+		                $('#result').text(displayValue);
+		            }
+		            else
+		            {                        
+		                displayValue += $(this).text();
+		                $('#result').text(displayValue);
+		            }
+
+		            var node = math.parse(displayValue);
+					var latex = node.toTex({parenthesis: 'keep', implicit: 'hide'});
+					var elem = MathJax.Hub.getAllJax('latex')[0];
+					MathJax.Hub.Queue(['Text', elem, latex]);   
+		        }
+
+		        //macro에도 함수 적용
+				$(".macro .key").on("click", function(e){
+			        if(displayValue == '0') displayValue = '';
+
+			        if($(this).text() == 'EV')
+			        {
+			            try
+			            {
+			                displayValue = parser.eval(displayValue).toString();
+			                var tokens = displayValue.split(' ');
+			                if(tokens[0] == 'function')
+			                {
+			                    displayValue = tokens[0];
+			                }
+			                $('#result').text(displayValue);                         
+			                displayValue = '0';
+			            }
+			            catch (e)
+			            {
+			                displayValue = '0';
+			                if(displayValue != 'function')
+			                {
+			                    $('#result').text(e);
+			                }
+			            }               
+			        }
+			        else
+			        {
+			            if($(this).text() == 'CL')
+			            {
+			                displayValue = '0';
+			                $('#result').text(displayValue);
+			            }
+			            else
+			            {                        
+			                displayValue += $(this).text();
+			                $('#result').text(displayValue);
+			            }
+
+			            var node = math.parse(displayValue);
+						var latex = node.toTex({parenthesis: 'keep', implicit: 'hide'});
+						var elem = MathJax.Hub.getAllJax('latex')[0];
+						MathJax.Hub.Queue(['Text', elem, latex]);   
+			        }
+
+			        e.preventDefault()
+			    })
+			});
+		})
+	</script>
+</head>
+ 
+<body>
+	<div class="leftWrap">
+		<ul class="macro">
+			<li>
+				<a href="javascript:;" class="lastuse">최근사용</a>
+			</li>
+			<li>
+			</li>
+		</ul>
+		<ul class="showButton">
+			<li><a href="javascript:;" data-type="A" class="on">괄호</a></li>
+			<li><a href="javascript:;" data-type="B" class="on">비교</a></li>
+			<li><a href="javascript:;" data-type="C" class="on">삼각/행렬</a></li>
+			<li><a href="javascript:;" data-type="D" class="on">변수/함수</a></li>
+			<li><a href="javascript:;" data-type="E" class="on">기타</a></li>
+		</ul>
+	</div>
+	<div id="calculator">
+		<div id="latex"></div>
+		<div id="result"></div>
+		<table cellpadding="0" cellspacing="0" class="top">
+			<tr>
+				<td><span class="key clear-key">CL</span></td>
+				<td><span class="key">/</span></td>
+				<td><span class="key">*</span></td>
+				<td><span class="key">-</span></td>
+				<td><span class="key">^</span></td>
+			</tr>
+			<tr>
+				<td><span class="key number">7</span></td>
+				<td><span class="key number">8</span></td>
+				<td><span class="key number">9</span></td>
+				<td><span class="key">+</span></td>
+				<td><span class="key">%</span></td>
+			</tr>
+			<tr>
+				<td><span class="key number">4</span></td>
+				<td><span class="key number">5</span></td>
+				<td><span class="key number">6</span></td>
+				<td><span class="key">=</span></td>
+				<td><span class="key">,</span></td>
+			</tr>
+			<tr>
+				<td><span class="key number">1</span></td>
+				<td><span class="key number">2</span></td>
+				<td><span class="key number">3</span></td>
+				<td rowspan="2"><span class="key eval-key">EV</span></td>
+				<td><span class="key">:</span></td>
+			</tr>
+			<tr>
+				<td colspan="2"><span class="key number">0</span></td>
+				<td><span class="key">.</span></td>
+				<td><span class="key">;</span></td>
+			</tr>
+		</table>
+		<table cellpadding="0" cellspacing="0" class="bottom">
+			<tr>
+				<td><span class="key typeA">(</span></td>
+				<td><span class="key typeA">)</span></td>
+				<td><span class="key function-key typeC">sin</span></td>
+				<td><span class="key function-key typeC">cross</span></td>
+				<td><span class="key symbol-key typeE">i</span></td>
+				<td><span class="key function-key typeE">exp</span></td>
+			</tr>
+			<tr>
+				<td><span class="key typeA">[</span></td>
+				<td><span class="key typeA">]</span></td>
+				<td><span class="key function-key typeC">cos</span></td>
+				<td><span class="key function-key typeC">det</span></td>
+				<td><span class="key symbol-key typeE">e</span></td>
+				<td><span class="key function-key typeE">log</span></td>
+			</tr>
+			<tr>
+				<td><span class="key typeA"><</span></td>
+				<td><span class="key typeA">></span></td>
+				<td><span class="key function-key typeC">tan</span></td>
+				<td><span class="key symbol-key typeD">x</span></td>
+				<td><span class="key symbol-key typeE">pi</span></td>
+				<td><span class="key function-key typeE">sqrt</span></td>
+			</tr>
+			<tr>
+				<td><span class="key typeB">==</span></td>
+				<td><span class="key typeB">!=</span></td>
+				<td><span class="key symbol-key typeD">f</span></td>
+				<td><span class="key symbol-key typeD">y</span></td>
+				<td><span class="key symbol-key typeE">w</span></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td><span class="key typeB"><=</span></td>
+				<td><span class="key typeB">>=</span></td>
+				<td><span class="key symbol-key typeD">g</span></td>
+				<td><span class="key symbol-key typeD">z</span></td>
+				<td colspan="2"></td>
+			</tr>
+		</table>
+	</div>
+</body>
+</html>
