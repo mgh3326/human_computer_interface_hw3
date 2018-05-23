@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>[P2]2013726072_Calculator</title>
+
+    <style type="text/css">
+        body {
+            margin: 0px 0px 0px 0px;
+        }
+
+        #calculator {
+            font-size: 0;
+            height: 712px;
+            width: 400px;
+            background-color: #000000;
+            padding: 20px;
+            margin: auto;
+            border-radius: 10px;
+        }
+
+        h1 {
+            font-size: 1.5pc;
+            text-align: center;
+            text-transform: uppercase;
+            color: #e0dfdc;
+            letter-spacing: 0.1em;
+        }
+
+        #input_1 {
+            width: 390px;
+            height: 40px;
+            margin-top: 10px;
+            margin-bottom: 5px;
+            padding: 0px 5px 0px 5px;
+            background-color: #c7c2c2;
+            border-radius: 10px;
+            display: inline-flex;
+            justify-content: flex-end;
+            align-items: center;
+            overflow: hidden;
+            box-shadow: inset 0 0px 3px;
+            font: 20px digital;
+        }
+
+        #input_2 {
+            width: 390px;
+            height: 80px;
+            margin-top: 10px;
+            margin-bottom: 5px;
+            padding: 0px 5px 0px 5px;
+            color: #ffffff;
+            background-color: #f5f5f500;
+            border-radius: 10px;
+            display: inline-flex;
+            justify-content: flex-end;
+            align-items: center;
+            overflow: hidden;
+            box-shadow: inset 0 0px 3px;
+            font: italic 20px "Times New Roman"
+        }
+
+        #output {
+            width: 390px;
+            height: 140px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            padding: 0px 5px 0px 5px;
+            color: #ffffff;
+            background-color: #f5f5f500;
+            border-radius: 10px;
+            display: inline-flex;
+            justify-content: flex-end;
+            align-items: center;
+            overflow: hidden;
+            box-shadow: inset 0 0px 3px;
+            font: 20px digital;
+        }
+
+        #saved_display {
+            width: 390px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            padding: 0px 5px 0px 5px;
+            display: inline-flex;
+            justify-content: flex-end;
+            align-items: center;
+            overflow: hidden;
+            box-shadow: inset 0 0px 3px;
+            font: 20px digital;
+        }
+
+        .save_list {
+            width: 390px;
+            height: 15px;
+            color: #e0dfdc;
+            border: solid 1px #57575767;
+            display: inline-flex;
+            vertical-align: middle;
+            justify-content: center;
+            align-items: center;
+            padding: 5px 0px 5px 0px;
+            border-radius: 2px;
+            cursor: pointer;
+            font: 15px sans-serif;
+        }
+
+        .select_mode {
+            width: 73px;
+            height: 40px;
+            color: white;
+            background-color: black;
+            border: solid 2px #da4d4def;
+            border-radius: 10px;
+            display: inline-flex;
+            margin: 3px 3px 3px 3px;
+            vertical-align: middle;
+            justify-content: center;
+            align-items: center;
+            padding: 5px 0px 5px 0px;
+            font: 15px sans-serif;
+        }
+
+        .key {
+            width: 33px;
+            height: 20px;
+            color: white;
+            border: solid 1px #57575767;
+            display: inline-flex;
+            margin: 3px 5px 8px 0px;
+            vertical-align: middle;
+            justify-content: center;
+            align-items: center;
+            padding: 5px 0px 5px 0px;
+            border-radius: 2px;
+            cursor: pointer;
+            font: bold 20px sans-serif;
+        }
+
+        .operator_key {
+            background-color: #3a3a3a52;
+        }
+
+        .function-key {
+            width: 60px;
+            background-color: #242121b9;
+            padding: 5px 6.5px 5px 6.5px;
+            font: italic 20px "Times New Roman"
+        }
+
+        .select-key {
+            width: 59.5px;
+            border: solid 1px #a389c0b9;
+        }
+
+        .delete-key {
+            width: 93px;
+            background-color: #ff4747;
+        }
+
+        .clear-key {
+            width: 93px;
+            background-color: #5ba2ff;
+        }
+
+        .save-key {
+            width: 92.5px;
+            background-color: white;
+            color: black;
+        }
+
+        .eval-key {
+            width: 92.5px;
+            background-color: black;
+            color: white;
+        }
+
+        .key:active {
+            background-color: #a1a1a1;
+            transform: translateY(4px);
+        }
+    </style>
+
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js' type='text/javascript'></script>
+    
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjs/3.3.0/math.min.js' type='text/javascript'></script> ></script>
+
+
+ <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          "HTML-CSS": { scale: 75}
+        });
+    </script>
+
+    <script type="text/javascript">
+        var i = 0;
+        var result_list = new Array("", "", "", "", "", "", "", "", "", "");
+
+        $(document).ready(function () {
+            var parser = math.parser();
+            var displayValue = '0';
+
+            $('#input_1').text(displayValue);
+            $('#input_2').html('$$' + math.parse(displayValue).toTex() + '$$');
+
+            $('.key').each(function (index, key) {
+                $(this).click(function (e) {
+                    if (displayValue == '0') displayValue = '';
+
+                    if ($(this).text() == 'SOLVE') {
+                        try {
+                            displayValue = parser.eval(displayValue).toString();
+                            var tokens = displayValue.split(' ');
+                            if (tokens[0] == 'function') {
+                                displayValue = tokens[0];
+                            }
+                            $('#output').text(displayValue);
+                            displayValue = '0';
+                        }
+                        catch (e) {
+                            displayValue = '0';
+                            if (displayValue != 'function') {
+                                $('#output').text("잘못된 수식입니다.");
+                            }
+                        }
+                    }
+
+                    else {
+                        if ($(this).text() == 'CLEAR') {
+                            displayValue = '0';
+                            $('#input_1').text(displayValue);
+                            $('#input_2').text(displayValue);
+                            $('#output').text(displayValue);
+                        }
+                        else if ($(this).text() == 'DELETE') {
+                            displayValue = displayValue.substring(0, displayValue.length - 1);
+                            $('#input_1').text(displayValue);
+                            $('#input_2').text(displayValue);
+                            $('#output').text(displayValue);
+                        }
+                        else if ($(this).text() == 'SAVE') {
+                            try {
+                                result_list[i] = displayValue;
+                                if (i == 9) {
+                                    i = 0;
+                                } else {
+                                    i++;
+                                }
+                                displayValue = parser.eval(displayValue).toString();
+                                var tokens = displayValue.split(' ');
+                                if (tokens[0] == 'function') {
+                                    displayValue = tokens[0];
+                                }
+                                displayValue = '0';
+                                $('#input_1').text(displayValue);
+                                $('#input_2').text(displayValue);
+                                $('#output').text(displayValue);
+                            }
+                            catch (e) {
+                                displayValue = '0';
+                                if (displayValue != 'function') {
+                                    $('#output').text("잘못된 수식입니다.");
+                                }
+                            }
+                        }
+                        else {
+                            displayValue += $(this).text();
+                            $('#input_1').text(displayValue);
+                            $('#input_2').text(displayValue);
+                            $('#output').text(displayValue);
+                        }
+
+                        var node = math.parse(displayValue);
+                        var input_2 = node.toTex({ parenthesis: 'keep', implicit: 'hide' });
+                        var elem = MathJax.Hub.getAllJax('input_2')[0];
+                        MathJax.Hub.Queue(['Text', elem, input_2]);
+                    }
+                    e.preventDefault()
+                })
+            })
+        })
+
+        var btn_save = 1;
+        var btn_variable = 1;
+        var btn_function = 1;
+        var btn_matrix = 1;
+        var btn_vector = 1;
+
+        function click_saved() {
+            if (btn_save == 1) {
+                btn_save = 0
+                document.getElementById('space').style = "display:none"
+                document.getElementById('saved_display').style = "display:block"
+                document.getElementById('btn_saved').style.backgroundColor = "white";
+                document.getElementById('btn_saved').style.color = "black";
+                document.getElementById('btn_saved').innerHTML = "←BACK";
+                document.getElementById('list0').innerHTML = result_list[0];
+                document.getElementById('list1').innerHTML = result_list[1];
+                document.getElementById('list2').innerHTML = result_list[2];
+                document.getElementById('list3').innerHTML = result_list[3];
+                document.getElementById('list4').innerHTML = result_list[4];
+                document.getElementById('list5').innerHTML = result_list[5];
+                document.getElementById('list6').innerHTML = result_list[6];
+                document.getElementById('list7').innerHTML = result_list[7];
+                document.getElementById('list8').innerHTML = result_list[8];
+                document.getElementById('list9').innerHTML = result_list[9];
+            } else if (btn_save == 0) {
+                btn_save = 1;
+                document.getElementById('space').style = "display:block"
+                document.getElementById('saved_display').style = "display:none"
+                document.getElementById('btn_saved').style.backgroundColor = "black";
+                document.getElementById('btn_saved').style.color = "#c5c5c5";
+                document.getElementById('btn_saved').innerHTML = "Values";
+
+            }
+        }
+
+        function click_reset() {
+            result_list = new Array("", "", "", "", "", "", "", "", "", "");
+            index = 0;
+        }
+
+        function select_variable() {
+            if (btn_variable == 1) {
+                btn_variable = 0;
+                btn_function = 1
+                btn_matrix = 1;
+                btn_vector = 1;
+                document.getElementById('change_values').style = "display:block"
+                document.getElementById('variable').style.backgroundColor = "red";
+                document.getElementById('function').style.backgroundColor = "black";
+                document.getElementById('matrix').style.backgroundColor = "black";
+                document.getElementById('vector').style.backgroundColor = "black";
+                document.getElementById('key1').innerHTML = 'x';
+                document.getElementById('key2').innerHTML = 'y';
+                document.getElementById('key3').innerHTML = 'z';
+                document.getElementById('key4').innerHTML = 'w';
+                document.getElementById('key5').innerHTML = 'u';
+                document.getElementById('key6').innerHTML = 'v';
+            } else if (btn_variable == 0) {
+                btn_variable = 1;
+                document.getElementById('change_values').style = "display:none"
+                document.getElementById('variable').style.backgroundColor = "black";
+            }
+        }
+
+        function select_function() {
+            if (btn_function == 1) {
+                btn_variable = 1;
+                btn_function = 0;
+                btn_matrix = 1;
+                btn_vector = 1;
+                document.getElementById('change_values').style = "display:block"
+                document.getElementById('variable').style.backgroundColor = "black";
+                document.getElementById('function').style.backgroundColor = "red";
+                document.getElementById('matrix').style.backgroundColor = "black";
+                document.getElementById('vector').style.backgroundColor = "black";
+                document.getElementById('key1').innerHTML = 'f';
+                document.getElementById('key2').innerHTML = 'g';
+                document.getElementById('key3').innerHTML = 'h';
+                document.getElementById('key4').innerHTML = 'm';
+                document.getElementById('key5').innerHTML = 'v';
+                document.getElementById('key6').innerHTML = 'w';
+            } else if (btn_function == 0) {
+                btn_function = 1;
+                document.getElementById('change_values').style = "display:none"
+                document.getElementById('function').style.backgroundColor = "black";
+            }
+        }
+
+        function select_matrix() {
+            if (btn_matrix == 1) {
+                btn_variable = 1;
+                btn_function = 1;
+                btn_matrix = 0;
+                btn_vector = 1;
+                document.getElementById('change_values').style = "display:block"
+                document.getElementById('variable').style.backgroundColor = "black";
+                document.getElementById('function').style.backgroundColor = "black";
+                document.getElementById('matrix').style.backgroundColor = "red";
+                document.getElementById('vector').style.backgroundColor = "black";
+                document.getElementById('key1').innerHTML = 'matrix';
+                document.getElementById('key2').innerHTML = 'det';
+                document.getElementById('key3').innerHTML = 'inv';
+                document.getElementById('key4').innerHTML = 'A';
+                document.getElementById('key5').innerHTML = 'B';
+                document.getElementById('key6').innerHTML = 'C';
+            } else if (btn_matrix == 0) {
+                btn_matrix = 1;
+                document.getElementById('change_values').style = "display:none"
+                document.getElementById('matrix').style.backgroundColor = "black";
+            }
+        }
+
+        function select_vector() {
+            if (btn_vector == 1) {
+                btn_variable = 1;
+                btn_function = 1;
+                btn_matrix = 1;
+                btn_vector = 0;
+                document.getElementById('change_values').style = "display:block"
+                document.getElementById('variable').style.backgroundColor = "black";
+                document.getElementById('function').style.backgroundColor = "black";
+                document.getElementById('matrix').style.backgroundColor = "black";
+                document.getElementById('vector').style.backgroundColor = "red";
+                document.getElementById('key1').innerHTML = 'dot';
+                document.getElementById('key2').innerHTML = 'cross';
+                document.getElementById('key3').innerHTML = 'x';
+                document.getElementById('key4').innerHTML = 'y';
+                document.getElementById('key5').innerHTML = 'z';
+                document.getElementById('key6').innerHTML = 'w';
+            } else if (btn_vector == 0) {
+                btn_vector = 1;
+                document.getElementById('change_values').style = "display:none"
+
+                document.getElementById('vector').style.backgroundColor = "black";
+            }
+        }
+    </script>
+
+</head>
+
+<body>
+    <div id="calculator">
+        <h1>
+            Calculator_2013726072
+        </h1>
+
+        <div id="select">
+            <form>
+                <button type="button" class="select_mode" id="variable" onClick="select_variable()">Variable</button>
+                <button type="button" class="select_mode" id="function" onClick="select_function()">Function</button>
+                <button type="button" class="select_mode" id="matrix" onClick="select_matrix()">Matrix</button>
+                <button type="button" class="select_mode" id="vector" onClick="select_vector()">Vector</button>
+                <button type="button" class="select_mode" id="btn_saved" onClick="click_saved()">Values</button>
+            </form>
+        </div>
+
+        <div id="input_1"></div>
+        <div id="input_2"></div>
+        <div id="output"></div>
+
+        <div id="space">
+
+            <div id="change_values" style="display:none">
+                <form>
+                    <span class="key select-key" id="key1"></span>
+                    <span class="key select-key" id="key2"></span>
+                    <span class="key select-key" id="key3"></span>
+                    <span class="key select-key" id="key4"></span>
+                    <span class="key select-key" id="key5"></span>
+                    <span class="key select-key" id="key6"></span>
+                </form>
+            </div>
+
+            <span class="key">1</span>
+            <span class="key">2</span>
+            <span class="key">3</span>
+            <span class="key">4</span>
+            <span class="key">5</span>
+            <span class="key">6</span>
+            <span class="key">7</span>
+            <span class="key">8</span>
+            <span class="key">9</span>
+            <span class="key">0</span>
+
+            <span class="key operator_key">+</span>
+            <span class="key operator_key">-</span>
+            <span class="key operator_key">*</span>
+            <span class="key operator_key">/</span>
+            <span class="key operator_key">%</span>
+            <span class="key operator_key">^</span>
+            <span class="key operator_key">(</span>
+            <span class="key operator_key">)</span>
+            <span class="key operator_key">[</span>
+            <span class="key operator_key">]</span>
+
+            <span class="key operator_key">
+                <</span>
+                    <span class="key operator_key">></span>
+                    <span class="key operator_key">
+                        <=</span>
+                            <span class="key operator_key">>=</span>
+                            <span class="key operator_key">==</span>
+                            <span class="key operator_key">!=</span>
+                            <span class="key operator_key">.</span>
+                            <span class="key operator_key">,</span>
+                            <span class="key operator_key">:</span>
+                            <span class="key operator_key">;</span>
+
+                            <span class="key function-key">i</span>
+                            <span class="key function-key">e</span>
+                            <span class="key function-key">pi</span>
+                            <span class="key function-key">log</span>
+                            <span class="key function-key">sqrt</span>
+
+                            <span class="key function-key">sin</span>
+                            <span class="key function-key">cos</span>
+                            <span class="key function-key">tan</span>
+                            <span class="key function-key">exp</span>
+                            <span class="key function-key">=</span>
+
+                            <span class="key delete-key">DELETE</span>
+                            <span class="key clear-key">CLEAR</span>
+                            <span class="key save-key">SAVE</span>
+                            <span class="key eval-key">SOLVE</span>
+        </div>
+
+        <div id="saved_display" style="display:none">
+            <form>
+                <tr>
+                    <td rowspan="10" id="total_list">
+                        <span class="save_list" id="list0"></span>
+                        <span class="save_list" id="list1"></span>
+                        <span class="save_list" id="list2"></span>
+                        <span class="save_list" id="list3"></span>
+                        <span class="save_list" id="list4"></span>
+                        <span class="save_list" id="list5"></span>
+                        <span class="save_list" id="list6"></span>
+                        <span class="save_list" id="list7"></span>
+                        <span class="save_list" id="list8"></span>
+                        <span class="save_list" id="list9"></span>
+                    </td>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

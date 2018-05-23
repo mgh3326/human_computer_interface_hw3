@@ -1,0 +1,280 @@
+body {
+    margin: 0px 0px 0px 0px;
+}
+
+h1 {
+    font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
+    font-size: 30px;
+    padding: 20px 10px;
+    text-align: center;
+    text-transform: uppercase;
+    text-rendering: optimizeLegibility;
+    color: #e0dfdc;
+    background-color: #333;
+    letter-spacing: .1em;
+    text-shadow: 0 -1px 0 #fff, 0 1px 0 #2e2e2e, 0 2px 0 #2c2c2c, 0 3px 0 #2a2a2a, 0 4px 0 #282828, 0 5px 0 #262626, 0 6px 0 #242424, 0 7px 0 #222, 0 8px 0 #202020, 0 9px 0 #1e1e1e, 0 10px 0 #1c1c1c, 0 11px 0 #1a1a1a, 0 12px 0 #181818, 0 13px 0 #161616, 0 14px 0 #141414, 0 15px 0 #121212, 0 22px 30px rgba(0, 0, 0, 0.9);
+}
+
+#calculator {
+    font-size: 0;
+    width: 400px;
+    background: #3f2b37; /* Old browsers */
+    background: -moz-linear-gradient(top, #3f2b37 45%, #5a4156 80%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(45%, #3f2b37), color-stop(80%, #5a4156)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #3f2b37 45%, #5a4156 80%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #3f2b37 45%, #5a4156 80%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #3f2b37 45%, #5a4156 80%); /* IE10+ */
+    background: linear-gradient(to bottom, #3f2b37 45%, #5a4156 80%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#141414', endColorstr='#282828', GradientType=0); /* IE6-9 */
+    padding: 20px;
+    margin: auto;
+    border-radius: 10px;
+
+}
+
+#ohoh {
+    width: 385px;
+    height: 150px;
+    margin-bottom: 5px;
+    padding: 0px 5px 0px 5px;
+    background: #a7e5ce; /* Old browsers */
+    background: -moz-linear-gradient(top, #a7e5ce 45%, #dcedc1 80%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(45%, #a7e5ce), color-stop(80%, #dcedc1)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #a7e5ce 45%, #dcedc1 80%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #a7e5ce 45%, #dcedc1 80%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #a7e5ce 45%, #dcedc1 80%); /* IE10+ */
+    background: linear-gradient(to bottom, #a7e5ce 45%, #dcedc1 80%); /* W3C */
+    border-radius: 5px;
+    justify-content: flex-end;
+    align-items: center;
+    /*overflow: hidden;*/
+    box-shadow: inset 0 0px 3px;
+    overflow: scroll;
+
+    font: 20px digital;
+}
+
+#result {
+    width: 385px;
+    height: 35px;
+    margin-bottom: 15px;
+    padding: 0px 5px 0px 5px;
+    background: #edefe0; /* Old browsers */
+    background: -moz-linear-gradient(top, #edefe0 45%, #dcedc1 80%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(45%, #edefe0), color-stop(80%, #dcedc1)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #edefe0 45%, #dcedc1 80%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #edefe0 45%, #dcedc1 80%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #edefe0 45%, #dcedc1 80%); /* IE10+ */
+    background: linear-gradient(to bottom, #edefe0 45%, #dcedc1 80%); /* W3C */
+    border-radius: 5px;
+    display: inline-flex;
+    justify-content: flex-end;
+    align-items: center;
+    /*overflow: hidden;*/
+    box-shadow: inset 0 0px 3px;
+    font: 20px digital;
+    text-align: right;
+    /*overflow: scroll;*/
+
+}
+
+#latex {
+    width: 385px;
+    height: 70px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 0px 5px 0px 5px;
+    background-color: #cddecc;
+    border-radius: 5px;
+    display: inline-flex;
+    justify-content: flex-end;
+    align-items: center;
+    overflow: hidden;
+    box-shadow: inset 0 0px 3px;
+    font: 20px digital;
+}
+
+.key {
+    width: 60px;
+    height: 35px;
+    display: inline-flex;
+    margin-top: 3px;
+    margin-right: 5px;
+    margin-left: 0px;
+    margin-bottom: 8px;
+    vertical-align: middle;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 0px 5px 0px;
+    border-radius: 4px;
+    cursor: pointer;
+    /*box-shadow: 0 3px 0 #ed5276, 0 2px 5px rgba(251, 137, 146, 0.75);*/
+    font: bold 20px sans-serif;
+
+}
+
+.symbol-key {
+    font: italic 20px "Times New Roman";
+    background-color: #f47a81;
+    color: #000000;
+}
+
+.operator-key {
+    /*font: italic 15px "Times New Roman";*/
+    background-color: #ed5276;
+    color: #000000;
+}
+
+.num-key {
+    background-color: #e37b40;
+    color: #000000;
+}
+
+.key:active {
+    background-color: #de5b49;
+    box-shadow: 0 5px #f07f51;
+    transform: translateY(4px);
+}
+
+.menu-key {
+    background-color: rgb(93, 181, 164);
+    color: #000000;
+    width: 70px;
+    height: 35px;
+    margin-top: 3px;
+    margin-right: 9px;
+    margin-left: 0px;
+    margin-bottom: 8px;
+    /*border-radius: 100%;*/
+}
+
+.eval-key {
+    background-color: #13e864;
+    color: #000000;
+}
+
+.clear-key {
+    background-color: #d80001;
+    color: #000000;
+}
+
+.function-key {
+    /*font: italic 15px "Times New Roman";*/
+    background-color: #f3cca4;
+    color: #000000;
+}
+
+.shift-key {
+    background-color: rgb(93, 181, 164);
+    color: #000000;
+}
+
+.keyboard_key {
+    width: 25px;
+    height: 10px;
+    background-color: #eeeeee;
+    display: inline-flex;
+    margin: 3px 5px 8px 0px;
+    vertical-align: middle;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 0px 5px 0px;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: 0 3px 0 #d8d1ff, 0 2px 5px rgba(0, 0, 0, .75);
+    font: bold 20px sans-serif;
+
+}
+
+.eng {
+
+}
+
+.enter {
+    width: 50px;
+    background-color: #000000;
+    box-shadow: 0 3px 0 #d8d1ff, 0 2px 5px rgba(0, 0, 0, .75);
+    color: #ffffff;
+
+}
+
+.shift {
+
+    width: 43px;
+
+}
+
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+}
+
+.menu {
+    /* position: absolute; */
+    /* left: 50%; */
+    /* margin-left: 20px; */
+    /* padding-top: 20px; */
+    /* padding-left: 20px; */
+    /* width: 380px;
+    height: 250px; */
+    /* top, right, bottom, left */
+    margin: 5px 20px 5px 5px;
+    width: 75px;
+    height: 50px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    font-size: 14px;
+    text-align: left;
+    display: inline-block;
+}
+
+.menu-open {
+    display: none;
+}
+
+.menu-open-button {
+    border-radius: 100%;
+    background: #fd8a93;
+
+    color: #000000;
+    font-weight: bold;
+    /*font-family: sans-serif;*/
+    z-index: 1; /*저게 우선 순위 인것 같다.*/
+    -webkit-transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+    cursor: pointer;
+}
+
+.menu-open-button:hover {
+    background: #ffaaa5;
+
+    /* background: #494949; */
+    color: #ffffff;
+}
+
+/* text 세로정렬 */
+/* https://webisfree.com/2014-03-07/[html-css]-%ED%85%8D%EC%8A%A4%ED%8A%B8-%EC%88%98%EC%A7%81-%EC%84%B8%EB%A1%9C%EB%B0%A9%ED%96%A5%EC%9C%BC%EB%A1%9C-%EC%A4%91%EC%95%99-%EC%A0%95%EB%A0%AC%ED%95%98%EB%8A%94-%EB%8B%A4%EC%96%91%ED%95%9C-%EB%B0%A9%EB%B2%95-%EC%95%8C%EC%95%84%EB%B3%B4%EA%B8%B0 */
+.menu-item, .menu-open-button {
+    /* background: #000000; */
+    /* background: #15a79f; */
+    border-radius: 100%;
+    width: 75px;
+    height: 50px;
+    /* margin-left: -40px; */
+    position: absolute;
+    /* top: 120px; */
+    text-align: center;
+    line-height: 50px;
+    cursor: pointer;
+
+}

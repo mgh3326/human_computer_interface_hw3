@@ -1,0 +1,392 @@
+<html>
+
+<head>
+    <title>calculator 2014726058 문광현</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="source/calc.css">
+
+    <script src='source/jquery-3.3.1.js' type='text/javascript'></script>
+    <script src='source/math.js' type='text/javascript'></script>
+    <!-- <script type="text/javascript" async src="MathJax/MathJax.js?config=TeX-MML-AM_CHTML"></script> -->
+    <!-- 위에 저거 일단 삭제함 -->
+    <script src='source/calc.js' type='text/javascript'></script>
+
+
+    <!--<script type="text/x-mathjax-config">-->
+    <!--MathJax.Hub.Config({ "HTML-CSS": { scale: 75} }); ")-->
+    <!--</script>-->
+
+</head>
+
+<body>
+
+
+<div id="calculator">
+
+    <!--<textarea id="helper" readonly></textarea>-->
+    <label for="ohoh"></label><textarea id="ohoh" onkeydown="filter(event);"></textarea> <!-- readonly -->
+    <!-- readonly -->
+    <label for="result"></label><textarea id="result" readonly></textarea>
+    <!--<div id="ohoh"></div>-->
+    <!--<div id="result"></div>-->
+    <!-- 비교연산 -->`
+    <div class="menu">
+        <input type="checkbox" href="#" class="menu-open" name="diff-menu-open" id="diff-menu-open"/>
+        <label class="menu-open-button" for="diff-menu-open">비교연산</label>
+        <!--<div id="diff-F">-->
+        <!--<div class="key menu-item diff-">==</div>-->
+        <!--<div class="key menu-item diff-">!=</div>-->
+        <!--<div class="key menu-item diff-"><</div>-->
+        <!--<div class="key menu-item diff-">></div>-->
+        <!--<div class="key menu-item diff-"><=</div>-->
+        <!--<div class="key menu-item diff-">>=</div>-->
+        <!--</div>-->
+    </div>
+    <!-- 행렬 (procession)-->
+    <div class="menu">
+        <input type="checkbox" href="#" class="menu-open" name="const-menu-open" id="proc-menu-open"/>
+        <label class="menu-open-button" for="proc-menu-open">행렬</label>
+        <!--<div id="proc-F">-->
+        <!--<div class="key menu-item proc- spec-key">det</div>-->
+        <!--<div class="key menu-item proc- spec-key">inverse</div>-->
+        <!--</div>-->
+    </div>
+
+    <!-- 상수 -->
+    <div class="menu">
+        <input type="checkbox" href="#" class="menu-open" name="const-menu-open" id="const-menu-open"/>
+        <label class="menu-open-button" for="const-menu-open">상수</label>
+        <!--<div id="const-F">-->
+        <!--<div class="key menu-item const- var-key">e</div>-->
+        <!--<div class="key menu-item const- var-key">pi</div>-->
+        <!--</div>-->
+    </div>
+
+    <!-- 변수 -->
+    <div class="menu">
+        <input type="checkbox" href="#" class="menu-open" name="var-menu-open" id="var-menu-open"/>
+        <label class="menu-open-button" for="var-menu-open">변수</label>
+        <!--<div id="var-F">-->
+        <!--<div class="key menu-item var- var-key">x</div>-->
+        <!--<div class="key menu-item var- var-key">y</div>-->
+        <!--<div class="key menu-item var- var-key">z</div>-->
+        <!--<div class="key menu-item var- var-key">=</div>-->
+        <!--</div>-->
+    </div>
+
+    <!-- 함수 -->
+    <div class="menu">
+        <input type="checkbox" href="#" class="menu-open" name="func-menu-open" id="func-menu-open"/>
+        <label class="menu-open-button" for="func-menu-open">함수</label>
+        <!--<div id="func-F">-->
+        <!--<div class="key menu-item func- func-key">f</div>-->
+        <!--<div class="key menu-item func- func-key">g</div>-->
+        <!--<div class="key menu-item func- func-key">=</div>-->
+        <!--</div>-->
+    </div>
+
+    <!-- 특수 계산 -->
+    <div class="menu">
+        <input type="checkbox" href="#" class="menu-open" name="spec-menu-open" id="spec-menu-open"/>
+        <label class="menu-open-button" for="spec-menu-open">지수로그</label>
+        <!--<div id="spec-F">-->
+        <!--<div class="key menu-item spec- spec-key">log</div>-->
+        <!--<div class="key menu-item spec- spec-key">exp</div>-->
+        <!--<div class="key menu-item spec- spec-key">sqrt</div>-->
+        <!--<div class="key menu-item spec- spec-key">^</div>-->
+        <!--</div>-->
+    </div>
+
+    <!-- 삼각함수 -->
+    <div class="menu">
+        <input type="checkbox" href="#" class="menu-open" name="tri-menu-open" id="tri-menu-open"/>
+        <label class="menu-open-button" for="tri-menu-open">삼각함수</label>
+        <!--<div id="tri-F">-->
+        <!--<div class="key menu-item tri- spec-key">sin</div>-->
+        <!--<div class="key menu-item tri- spec-key">cos</div>-->
+        <!--<div class="key menu-item tri- spec-key">tan</div>-->
+        <!--<div class="key menu-item tri- spec-key">asin</div>-->
+        <!--<div class="key menu-item tri- spec-key">acos</div>-->
+        <!--<div class="key menu-item tri- spec-key">atan</div>-->
+        <!--</div>-->
+    </div>
+    <!-- 벡터 -->
+    <div class="menu">
+        <input type="checkbox" href="#" class="menu-open" name="tri-menu-open" id="vector-menu-open"/>
+        <label class="menu-open-button" for="vector-menu-open">벡터</label>
+        <!--<div id="tri-F">-->
+        <!--<div class="key menu-item tri- spec-key">sin</div>-->
+        <!--<div class="key menu-item tri- spec-key">cos</div>-->
+        <!--<div class="key menu-item tri- spec-key">tan</div>-->
+        <!--<div class="key menu-item tri- spec-key">asin</div>-->
+        <!--<div class="key menu-item tri- spec-key">acos</div>-->
+        <!--<div class="key menu-item tri- spec-key">atan</div>-->
+        <!--</div>-->
+    </div>
+
+    <br>
+    <span class="key menu-key shift-key ">Shift</span>
+    <span class="key menu-key">◀</span>
+    <span class="key menu-key function-key ">DEL</span>
+    <span class="key menu-key">▶</span>
+
+    <!--<span class="key">☜</span>-->
+    <span class="key menu-key clear-key">AC</span>
+
+    <!--<span class="key">←</span>-->
+
+    <span class="key menu-key function-key">ANS</span>
+    <span class="key menu-key">Mode</span>
+    <span class="key menu-key">Graph</span>
+    <span class="key menu-key">Help</span>
+
+    <!--<span class="key">→</span>-->
+    <!--<span class="key">☞</span>-->
+    <span class="key menu-key eval-key">EV</span>
+    <br>
+    <div id="yeah">
+        <!--<div id="p0">-->
+
+        <!--<span class="key function-key">log</span>-->
+        <!--<span class="key function-key">sin</span>-->
+        <!--<span class="key function-key">cos</span>-->
+        <!--<span class="key function-key">tan</span>-->
+        <!--<span class="key function-key">det</span>-->
+        <!--<span class="key function-key">deg</span>-->
+        <!--<span class="key function-key">inv</span>-->
+        <!--<span class="key function-key">sqrt</span>-->
+        <!--<span class="key function-key">exp</span>-->
+        <!--<span class="key function-key">cross</span>-->
+        <!--<span class="key function-key">asin</span>-->
+        <!--<span class="key function-key">acos</span>-->
+        <!--<span class="key function-key">atan</span>-->
+        <!--<span class="key function-key">!</span>-->
+        <!--<span class="key symbol-key">pi</span>-->
+        <!--</div>-->
+        <!--<div id="s0">-->
+        <!--&lt;!&ndash;<span class="key function-key">log10</span>&ndash;&gt;-->
+
+        <!--<span class="key operator-key">=</span>-->
+        <!--<span class="key operator-key">^</span>-->
+        <!--<span class="key operator-key">-->
+        <!--<</span>-->
+        <!--<span class="key operator-key">-->
+        <!--<</span>-->
+        <!--<span class="key operator-key">-->
+        <!--<=</span>-->
+        <!--<span class="key operator-key">>=</span>-->
+        <!--<span class="key symbol-key">[</span>-->
+        <!--<span class="key symbol-key">]</span>-->
+        <!--<span class="key symbol-key">:</span>-->
+        <!--<span class="key operator-key">==</span>-->
+        <!--<span class="key operator-key">!=</span>-->
+        <!--<span class="key symbol-key">;</span>-->
+        <!--<span class="key symbol-key">i</span>-->
+        <!--<span class="key symbol-key">w</span>-->
+
+        <!--<span class="key symbol-key">y</span>-->
+        <!--<span class="key symbol-key">z</span>-->
+        <!--<span class="key symbol-key">f</span>-->
+        <!--<span class="key symbol-key">g</span>-->
+        <!--<span class="key symbol-key">x</span>-->
+        <!--<span class="key symbol-key">e</span>-->
+        <!--</div>-->
+        <div id=num>
+            <span class="key num-key">7</span>
+            <span class="key num-key">8</span>
+            <span class="key num-key">9</span>
+            <span class="key operator-key">(</span>
+            <span class="key operator-key">)</span>
+            <span class="key symbol-key">i</span>
+
+            <span class="key num-key">4</span>
+            <span class="key num-key">5</span>
+            <span class="key num-key">6</span>
+            <span class="key operator-key">[</span>
+            <span class="key operator-key">]</span>
+            <span class="key operator-key">%</span>
+
+            <span class="key num-key">1</span>
+            <span class="key num-key">2</span>
+            <span class="key num-key">3</span>
+            <span class="key operator-key">+</span>
+            <span class="key operator-key">-</span>
+
+            <span class="key operator-key">.</span>
+            <span class="key num-key">0</span>
+            <span class="key operator-key">,</span>
+
+            <span class="key operator-key">*</span>
+            <span class="key operator-key">/</span>
+
+
+            <span class="key operator-key">:</span>
+            <span class="key operator-key">;</span>
+        </div>
+
+    </div>
+    <div id="keyboard">
+
+        <div id="capital">
+            <div class="line0">
+                <span class="key keyboard_key eng">~</span>
+                <span class="key keyboard_key eng">!</span>
+                <span class="key keyboard_key eng">@</span>
+                <span class="key keyboard_key eng">#</span>
+                <span class="key keyboard_key eng">$</span>
+                <span class="key keyboard_key eng">%</span>
+                <span class="key keyboard_key eng">^</span>
+                <span class="key keyboard_key eng">&</span>
+                <span class="key keyboard_key eng">*</span>
+                <span class="key keyboard_key eng">(</span>
+                <span class="key keyboard_key eng">)</span>
+                <span class="key keyboard_key eng">_</span>
+                <span class="key keyboard_key eng">+</span>
+            </div>
+            <div class="line1">
+                <span class="key keyboard_key eng">Q</span>
+                <span class="key keyboard_key eng">W</span>
+                <span class="key keyboard_key eng">E</span>
+                <span class="key keyboard_key eng">R</span>
+                <span class="key keyboard_key eng">T</span>
+                <span class="key keyboard_key eng">Y</span>
+                <span class="key keyboard_key eng">U</span>
+                <span class="key keyboard_key eng">I</span>
+                <span class="key keyboard_key eng">O</span>
+                <span class="key keyboard_key eng">P</span>
+                <span class="key keyboard_key eng">{</span>
+                <span class="key keyboard_key eng">}</span>
+                <span class="key keyboard_key eng">|</span>
+            </div>
+            <div class="line2">
+                <span class="key keyboard_key eng">A</span>
+                <span class="key keyboard_key eng">S</span>
+                <span class="key keyboard_key eng">D</span>
+                <span class="key keyboard_key eng">F</span>
+                <span class="key keyboard_key eng">G</span>
+                <span class="key keyboard_key eng">H</span>
+                <span class="key keyboard_key eng">J</span>
+                <span class="key keyboard_key eng">K</span>
+                <span class="key keyboard_key eng">L</span>
+                <span class="key keyboard_key eng">:</span>
+                <span class="key keyboard_key eng">"</span>
+                <span class="key keyboard_key enter">EV</span>
+
+            </div>
+            <div class="line3">
+                <span class="key keyboard_key shift">Shift</span>
+
+                <span class="key keyboard_key eng">Z</span>
+                <span class="key keyboard_key eng">X</span>
+                <span class="key keyboard_key eng">C</span>
+                <span class="key keyboard_key eng">V</span>
+                <span class="key keyboard_key eng">B</span>
+                <span class="key keyboard_key eng">N</span>
+                <span class="key keyboard_key eng">M</span>
+                <span class="key keyboard_key del">
+                        <</span>
+                <span class="key keyboard_key del">></span>
+                <span class="key keyboard_key del">/</span>
+                <span class="key keyboard_key shift">Shift</span>
+
+            </div>
+        </div>
+
+        <div id="lower">
+            <div class="line0">
+                <span class="key keyboard_key eng">`</span>
+                <span class="key keyboard_key eng">1</span>
+                <span class="key keyboard_key eng">2</span>
+                <span class="key keyboard_key eng">3</span>
+                <span class="key keyboard_key eng">4</span>
+                <span class="key keyboard_key eng">5</span>
+                <span class="key keyboard_key eng">6</span>
+                <span class="key keyboard_key eng">7</span>
+                <span class="key keyboard_key eng">8</span>
+                <span class="key keyboard_key eng">9</span>
+                <span class="key keyboard_key eng">0</span>
+                <span class="key keyboard_key eng">-</span>
+                <span class="key keyboard_key eng">=</span>
+            </div>
+            <div class="line1">
+                <span class="key keyboard_key eng">q</span>
+                <span class="key keyboard_key eng">w</span>
+                <span class="key keyboard_key eng">e</span>
+                <span class="key keyboard_key eng">r</span>
+                <span class="key keyboard_key eng">t</span>
+                <span class="key keyboard_key eng">y</span>
+                <span class="key keyboard_key eng">u</span>
+                <span class="key keyboard_key eng">i</span>
+                <span class="key keyboard_key eng">o</span>
+                <span class="key keyboard_key eng">p</span>
+                <span class="key keyboard_key eng">[</span>
+                <span class="key keyboard_key eng">]</span>
+                <span class="key keyboard_key eng">\</span>
+            </div>
+            <div class="line2">
+                <span class="key keyboard_key eng">a</span>
+                <span class="key keyboard_key eng">s</span>
+                <span class="key keyboard_key eng">d</span>
+                <span class="key keyboard_key eng">f</span>
+                <span class="key keyboard_key eng">g</span>
+                <span class="key keyboard_key eng">h</span>
+                <span class="key keyboard_key eng">j</span>
+                <span class="key keyboard_key eng">k</span>
+                <span class="key keyboard_key eng">l</span>
+                <span class="key keyboard_key eng">;</span>
+                <span class="key keyboard_key eng">'</span>
+                <span class="key keyboard_key enter">EV</span>
+
+            </div>
+            <div class="line3">
+                <span class="key keyboard_key shift">Shift</span>
+
+                <span class="key keyboard_key eng">z</span>
+                <span class="key keyboard_key eng">x</span>
+                <span class="key keyboard_key eng">c</span>
+                <span class="key keyboard_key eng">v</span>
+                <span class="key keyboard_key eng">b</span>
+                <span class="key keyboard_key eng">n</span>
+                <span class="key keyboard_key eng">m</span>
+                <span class="key keyboard_key eng">,</span>
+                <span class="key keyboard_key eng">.</span>
+                <span class="key keyboard_key eng">/</span>
+                <span class="key keyboard_key shift">Shift</span>
+
+            </div>
+        </div>
+
+    </div>
+    <br>
+    <div id="plot"></div>
+    <!--그래프 구현해야겠다.-->
+    <!--<div class="menu">-->
+    <!--<input type="checkbox" href="#" class="menu-open" name="tri-menu-open" id="my-menu-open"/>-->
+    <!--<label class="menu-open-button" for="vector-menu-open">My</label>-->
+    <!--</div>-->
+    <!--<div class="menu  ">-->
+    <!--<input type="checkbox" href="#" class="menu-open" name="tri-menu-open" id="mode-menu-open"/>-->
+    <!--<label class="menu-open-button" for="vector-menu-open">Mode</label>-->
+
+    <!--</div>-->
+    <!--<div class="menu">-->
+    <!--<input type="checkbox" href="#" class="menu-open" name="tri-menu-open" id="oh-menu-open"/>-->
+    <!--<label class="menu-open-button" for="vector-menu-open"><<</label>-->
+
+    <!--</div>-->
+    <!--<div class="menu">-->
+    <!--<input type="checkbox" href="#" class="menu-open" name="tri-menu-open" id="ohoh2-menu-open"/>-->
+    <!--<label class="menu-open-button" for="vector-menu-open">>></label>-->
+
+    <!--</div>-->
+    <!--<span style="width:95px" class="menu menu-key">My</span>-->
+    <!--<span style="width:95px" class="key menu menu-key">Mode</span>-->
+    <!--<span style="width:95px" class="menu menu-key">-->
+    <!--<<</span>-->
+    <!--<span style="width:95px" class="menu menu-key">>></span>-->
+
+
+</div>
+</body>
+
+</html>

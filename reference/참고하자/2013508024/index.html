@@ -1,0 +1,221 @@
+﻿
+<html>
+        <head>
+            <title>MS Calc_v0</title>
+            <link href="css/ui-lightness/jquery-ui-1.10.4.custom.css" rel="stylesheet">
+            <script src="js/jquery-1.10.2.js"></script>
+            <script src="js/jquery-ui-1.10.4.custom.js"></script>
+            <script src='js/math.js' type='text/javascript'></script>
+            <script>$(document).ready(function(){
+                    $(".topMenuItem").mouseenter(function() {
+                    $(this).children("ul").slideDown(250);
+                    }); 
+                    $(".topMenuItem").mouseleave(function() {
+                    $(this).children("ul").slideUp(100);
+                    });
+                });
+            </script>
+        
+
+            <style type="text/css">
+                #calculator {
+                    width: 300px;
+                }
+               
+                #result {
+                    width: 275px;
+                    height: 160px;
+                    border: 1px solid red;       
+                    font: 20px digital;
+                }
+        
+                .key {
+                    display: inline-block;          
+                    width: 50px;
+                    height: 35px;
+                    border: 1px solid black;       
+                    font: bold 20px sans-serif;
+		            text-align:center;
+                }
+		        .numbutton {
+		            background-color: rgb(150, 150, 150);
+		        }
+                .impbutton{
+                    background-color: red;
+                }
+		        .evlbutton{
+		            background-color: green;
+		        }
+                .defbutton{
+                    background-color: rgb(207, 207, 207);
+                }
+                .compbutton{
+                    background-color: blue;
+                    color: white;
+                    width: 25px;
+                }
+
+                body { font-size: 12px;}
+                .topMenu { padding-left: }
+                .topMenu ul { list-style: none; margin: 0px; padding: 0px;}
+                .topMenu li { float: left; width: 55px;
+                    background-color: blue; color: white; text-align: center;
+                    border-right: 1px solid white; border-top: 1px solid white;
+                    position: relative; height: 30px; line-height: 30px;}
+                .topMenu li ul li { float: none; text-align: left; padding-left: 10px; width: 95px;}
+                .topMenu li ul { position: absolute; top: 30px; left: 0px; display: none;}
+                .topMenu li:hover { color: white; background-color: blueviolet;}
+            </style>
+    
+                     
+            <script type="text/javascript">
+                $(document).ready(function(){
+                    var parser = math.parser();
+        
+                    var displayValue = '0';
+                    $('#result').text(displayValue);
+         
+                    $('.key').each(function(index, key){       
+                        $(this).click(function(e){
+                            if(displayValue == '0') displayValue = '';
+        
+                            if($(this).text() == 'EV')
+                            {
+                                try
+                                {
+                                    displayValue = parser.eval(displayValue).toString();
+                                    var tokens = displayValue.split(' ');
+                                    if(tokens[0] == 'function')
+                                    {
+                                        displayValue = tokens[0];
+                                    }
+                                    $('#result').text(displayValue);                         
+                                    displayValue = '0';
+                                }
+                                catch (e)
+                                {
+                                    displayValue = '0';
+                                    if(displayValue != 'function')
+                                    {
+                                        $('#result').text(e);
+                                    }
+                                }               
+                            }
+                            else
+                            {
+                                if($(this).text() == 'CL')
+                                {
+                                    displayValue = '0';
+                                    $('#result').text(displayValue);
+                                }
+                                else
+                                {                        
+                                    displayValue += $(this).text();
+                                    $('#result').text(displayValue);
+                                }
+                            }
+                        })
+                    })
+                })
+            </script>
+        </head>
+         
+        <body>
+            
+                <div class="topMenu">
+                        <ul>
+                            <li class="topMenuItem">메뉴
+                            <ul>
+                                <li>폰트 크기</li>
+                                <li>숫자 색상</li>
+                                <li>세자리 구분 색상</li>
+                                <li>괄호 색상</li>
+                            </ul>
+                            </li>
+                            <li class="topMenuItem">함수
+                            <ul>
+                                <li>함수</li>
+                                    <li class="key">f</li>
+                                    <li class="key">g</li>
+                                </li>
+                                <li>변수</li>
+				                    <li class="key">w</li>
+                		            <li class="key">z</li>
+                            </ul>
+                            </li>
+                            <li class="topMenuItem">변환
+                                <ul>
+                                    <li>길이</li>
+                                    <li>넓이</li>
+                                    <li>무게</li>
+                                    <li>부피</li>
+                                </ul>
+                            </li>
+                            <li class="topMenuItem">비교
+                                <ul>
+                                    <li class="bottomMenuItem">부등식
+                                        <li class="key"><</li>
+                                        <li class="key">></li>
+                                        <li class="key"><=</li>
+                                        <li class="key">>=</li> 
+                                        <li class="key">==</li>
+                                        <li class="key">!=</li>
+                                    </li>
+                                    <li class="bottomMenuItem">결과
+                                        <li class="key compbutton">EV</li>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>그래프</li>
+                        </ul>
+                    </div>       
+                </ul>
+                <br/><br/>
+                
+                 
+            <div id="calculator">
+                <div id="result"></div>
+                <span class="key defbutton">sqrt</span>
+                <span class="key defbutton">i</span>
+                <span class="key defbutton">x</span>
+                <span class="key defbutton">y</span>
+                <span class="key defbutton">e</span>
+                <span class="key defbutton">exp</span>
+                <span class="key defbutton">log</span>
+                <span class="key defbutton">cross</span>
+                <span class="key defbutton">(</span>
+                <span class="key defbutton">)</span>
+                <span class="key defbutton">sin</span>
+                <span class="key defbutton">cos</span>
+                <span class="key defbutton">tan</span>
+                <span class="key defbutton">[</span>
+                <span class="key defbutton">]</span>
+                <span class="key defbutton">^</span>
+                <span class="key defbutton">pi</span>
+                <span class="key defbutton">det</span>
+                <span class="key defbutton">%</span>
+                <span class="key defbutton">:</span>
+                <span class="key numbutton">7</span>
+                <span class="key numbutton">8</span>
+                <span class="key numbutton">9</span>
+                <span class="key evlbutton">EV</span>
+                <span class="key impbutton">CL</span>
+                <span class="key numbutton">4</span>
+                <span class="key numbutton">5</span>
+                <span class="key numbutton">6</span>
+                <span class="key defbutton">*</span>
+                <span class="key defbutton">/</span>
+                <span class="key numbutton">1</span>
+                <span class="key numbutton">2</span>
+                <span class="key numbutton">3</span>
+                <span class="key defbutton">+</span>
+                <span class="key defbutton">-</span>
+                <span class="key numbutton">,</span>                
+                <span class="key numbutton">0</span>
+                <span class="key numbutton">.</span>
+                <span class="key defbutton">;</span>
+                <span class="key defbutton">=</span>
+            </div>
+        
+        </body>
+</html>

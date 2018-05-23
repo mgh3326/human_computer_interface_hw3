@@ -1,0 +1,298 @@
+      #calculator{
+        top: 10px;
+        left: 10px;
+        padding: 25px;
+        padding-left: 20px;
+        padding-right: 20px;
+        margin: auto;
+        background-color: #252525;
+        width: 340px;
+        height: 540px;
+        border-radius: 10px;
+      }
+
+      #helper{
+        width: 325px;
+        padding: 5px;
+        height: 116px;
+        font-weight: bold;
+        font-size: 15px;
+        resize: none;
+        margin-bottom: 5px;
+        border-radius: 10px;
+        background-color: #66CC66;
+        border-color: #66CC66;
+        overflow-x:hidden;
+        overflow-y:auto;
+      }
+      #helper::-webkit-scrollbar { /* scroll bar style */
+        width: 5px;
+      }
+      #helper::-webkit-scrollbar-track {
+        background-color: #669966;
+        border-radius: 20px;
+      }
+      #helper::-webkit-scrollbar-thumb {
+        background-color: #66AA66;
+        border-radius: 20px;
+      }
+
+      #display{
+        width: 325px;
+        padding: 5px;
+        height: 70px;
+        font-weight: bold;
+        font-size: 18px;
+        resize: none;
+        margin-bottom: 5px;
+        border-radius: 10px;
+        background-color: #DDDDDD;
+        overflow-x:hidden;
+        overflow-y:auto;
+      }
+      #display::-webkit-scrollbar {
+        width: 5px;
+      }
+      #display::-webkit-scrollbar-track {
+        background-color: #252525;
+        border-radius: 20px;
+      }
+      #display::-webkit-scrollbar-thumb {
+        background-color: #BBBBBB;
+        border-radius: 20px;
+      }
+
+      #result{
+        width: 325px;
+        padding: 5px;
+        height: 25px;
+        font-weight: bold;
+        font-size: 21px;
+        resize: none;
+        text-align: right;
+        margin-bottom: 5px;
+        border-radius: 10px;
+        background-color: #EEEEEE;
+        overflow-x:hidden;
+        overflow-y:auto;
+      }
+      #result::-webkit-scrollbar {
+        width: 5px;
+      }
+      #result::-webkit-scrollbar-track {
+        background-color: #252525;
+        border-radius: 20px;
+      }
+      #result::-webkit-scrollbar-thumb {
+        background-color: #CCCCCC;
+        border-radius: 20px;
+      }
+
+      /* null space */
+      .null1{
+        width: 340px;
+        height: 2px;
+        background-color: #252525;
+      }
+
+      .null2{
+        width: 340px;
+        height: 15px;
+        background-color: #252525;
+      }
+
+      /* common value */
+      .bt{
+        position: relative;
+        font-weight: bold;
+        border-style: none;
+        text-align: center;
+        cursor: pointer;
+        margin: 3px 0px 3px 0px;
+      }
+
+      .mode{
+        width: 95px;
+        height: 32px;
+        bottom: 2px;
+        color: white;
+        font-size: 14px;
+        border-style: solid;
+        background-color: #252525;
+        border-color: white;
+        margin: 5px 0px 5px 0px;
+        border-radius: 6px;
+      }
+
+      label{
+        color: white;
+        font-size: 14px;
+      }
+
+      .degrees{
+        position: relative;
+        top: -10px;
+        left: 12px;
+        font-size: 14px;
+        color: white;
+      }
+
+      .radians{
+        position: relative;
+        top: 10px;
+        left: -71px;
+        font-size: 14px;
+        color: white;
+      }
+
+      .help{
+        width: 33px;
+        height: 33px;
+        font-size: 25px;
+        left: 160px;
+        background-color: #66CC66;
+        border-radius: 20px;
+      }
+
+      .num{
+        width: 63px;
+        height: 32px;
+        background-color: #DDDDDD;
+        font-size: 18px;
+        border-radius: 4px;
+      }
+
+      .dot{
+        width: 29px;
+        height: 32px;
+        background-color: #DDDDDD;
+        font-size: 18px;
+        border-radius: 4px;
+      }
+
+      .op{
+        width: 63px;
+        height: 32px;
+        background-color: #AAAAAA;
+        font-size: 17px;
+        border-radius: 4px;
+      }
+
+      .math{
+        background-color: #DD9999;
+        border-radius: 7px;
+      }
+
+      .copy-paste{
+        background-color: #99CCFF;
+        border-radius: 10px;
+      }
+
+      .back-front{
+        width: 40px;
+        height: 32px;
+        font-size: 15px;
+        background-color: #994499;
+        border-radius: 9px;
+      }
+
+      .bracket{
+        background-color: #BB9999;
+        border-radius: 7px;
+      }
+
+      /* keyboard-mode */
+      .key-mode .bt{
+        margin: 1px -2px 1px -2px;
+      }
+
+      .key-mode .math{
+        width: 55px;
+        height: 25px;
+      }
+
+      .key-mode .copy-paste{
+        width: 82px;
+        height: 25px;
+      }
+
+      .key-mode .eng{
+        width: 32px;
+        height: 31px;
+        background-color: #DDDDDD;
+        border-radius: 7px;
+      }
+
+      .key-mode .bracket{
+        width: 40px;
+        height: 30px;
+        left: 4px;
+        bottom: 3px;
+        border-radius: 7px;
+      }
+
+      .key-mode .space{
+        width: 100px;
+        height: 30px;
+        left: 4px;
+        background-color: #DDDDDD;
+        border-radius: 7px;
+      }
+
+      .key-mode .change{
+        width: 30px;
+        height: 30px;
+        margin: 0px 2px 0px 2px;
+        background-color: #AAAAAA;
+        border-radius: 20px;
+      }
+
+      .key-mode .del{
+        width: 30px;
+        height: 30px;
+        margin: 2px;
+        background-color: #AAAAAA;
+        border-radius: 20px;
+      }
+
+      .key-mode .back-front{
+        left: 30px;
+      }
+
+      .key-mode .line1 .bt{
+        left: 4px;
+      }
+
+      .key-mode .line2 .bt{
+        left: 19px;
+      }
+
+      .key-mode .line3 .bt{
+        left: 13px;
+      }
+
+      /* calculator-mode */
+      .cal-mode .math{
+        width: 51px;
+        height: 32px;
+        left: 2px;
+        font-size: 15px;
+      }
+
+      .cal-mode .copy-paste{
+        width: 79px;
+        height: 30px;
+        left: 2px;
+        border-radius: 10px;
+      }
+
+      .cal-mode .back-front{
+        margin: -2px;
+        left: 17px;
+      }
+
+      .cal-mode .bracket{
+        width: 51px;
+        height: 32px;
+        font-size: 15px;
+      }
