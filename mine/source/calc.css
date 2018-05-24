@@ -1,7 +1,10 @@
 body {
     margin: 0px 0px 0px 0px;
 }
-
+#container{width:100%;}
+#left{float:left;width:400px;}
+#right{float:right;width:400px;}
+#center{margin:0 auto;width:400px;}
 h1 {
     font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
     font-size: 30px;
@@ -278,3 +281,6 @@ h1 {
     cursor: pointer;
 
 }
+.plot{
+/*여기다가 뭐쓰냐*/
+ }
