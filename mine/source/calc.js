@@ -14,6 +14,31 @@ $(document).ready(function () {
     $('#ohoh').text(displayValue); //result에 결과물을 넣음
     $('#result').text(displayValue); //result에 결과물을 넣음
     $('#latex').html('$$' + math.parse(displayValue).toTex() + '$$'); //latex에 넣는건가?
+
+    // Semicolon (;) to ensure closing of earlier scripting
+    // Encapsulation
+    // $ is assigned to jQuery
+    ;(function($) {
+
+        // DOM Ready
+        $(function() {
+
+            // Binding a click event
+            // From jQuery v.1.7.0 use .on() instead of .bind()
+            $('#my-button').bind('click', function(e) {
+
+                // Prevents the default action to be triggered.
+                e.preventDefault();
+
+                // Triggering bPopup when click event is fired
+                $('#element_to_pop_up').bPopup();
+
+            });
+
+        });
+
+    })(jQuery);
+
     function drawGrap(ex) {
         try {
             // compile the expression once
@@ -143,6 +168,7 @@ $(document).ready(function () {
                     var ex = $('#ohoh').text();
 
                     drawGrap(ex);
+                    $('#plot').bPopup();
 
 
                 }
