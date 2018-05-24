@@ -1,5 +1,6 @@
 $(document).ready(function () {
     var parser = math.parser();
+    var my_arr = [];
     $("#p0").show();
     $("#s0").hide();
     $("#yeah").show();
@@ -102,7 +103,12 @@ $(document).ready(function () {
                         displayValue = tokens[0];
                     }
                     $('#result').text(displayValue);
-
+                    var str = "";
+                    str += $('#ohoh').text()
+                    str += " = ";
+                    str += displayValue;
+                    my_arr.push(str);
+                    // alert(str);
                     displayValue = '0';
                 } catch (err) {
                     displayValue = '0';
@@ -129,7 +135,11 @@ $(document).ready(function () {
                     $("#lower").toggle();
 
 
-                } else if ($(this).text() === 'Graph') {
+                } else if ($(this).text() === 'Help') {
+                    alert(my_arr.toString());
+
+                }
+                else if ($(this).text() === 'Graph') {
                     var ex = $('#ohoh').text();
 
                     drawGrap(ex);
