@@ -1,4 +1,3 @@
-var currentPos = 0;
 $(document).ready(function () {
     var parser = math.parser();
     $("#p0").show();
@@ -8,11 +7,38 @@ $(document).ready(function () {
     $("#lower").show();
     $("#capital").hide();
 
+    var currentPos = 0;
 
     var displayValue = '0';
     $('#ohoh').text(displayValue); //result에 결과물을 넣음
     $('#result').text(displayValue); //result에 결과물을 넣음
     $('#latex').html('$$' + math.parse(displayValue).toTex() + '$$'); //latex에 넣는건가?
+    function drawGrap(ex) {
+        try {
+            // compile the expression once
+            var expression = ex;
+            var expr = math.compile(expression);
+
+            // evaluate the expression repeatedly for different values of x
+            var xValues = math.range(-10, 10, 0.5).toArray();
+            var yValues = xValues.map(function (x) {
+                return expr.eval({x: x});
+            });
+
+            // render the plot using plotly
+            var trace1 = {
+                x: xValues,
+                y: yValues,
+                type: 'scatter'
+            };
+            var data = [trace1];
+            Plotly.newPlot('plot', data);
+        }
+        catch (err) {
+
+        }
+    }
+
     function savePosition() {
         currentPos = document.getElementById("result").selectionStart;//result를 담는 방법
         // document.getElementById("ohoh").selectionStart
@@ -76,6 +102,7 @@ $(document).ready(function () {
                         displayValue = tokens[0];
                     }
                     $('#result').text(displayValue);
+
                     displayValue = '0';
                 } catch (err) {
                     displayValue = '0';
@@ -102,12 +129,31 @@ $(document).ready(function () {
                     $("#lower").toggle();
 
 
-                } else if ($(this).text() === 'Mode') {
+                } else if ($(this).text() === 'Graph') {
+                    var ex = $('#ohoh').text();
+
+                    drawGrap(ex);
+
+
+                }
+                else if ($(this).text() === 'Mode') {
                     $("#yeah").toggle();
                     $("#keyboard").toggle();
 
 
-                } else if ($(this).text() === 'DEL') {
+                } else if ($(this).text() === '◀') {
+                    document.getElementById("ohoh").selectionStart--;//이렇게 하면 되는구만
+                    document.getElementById("ohoh").selectionEnd--;//이렇게 하면 되는구만
+
+                }
+                else if ($(this).text() === '▶') {
+                    document.getElementById("ohoh").selectionStart++;
+                    // document.getElementById("ohoh").selectionEnd ++;//이건 왜 필요없지?
+
+                }
+
+
+                else if ($(this).text() === 'DEL') {
                     if (displayValue.length > 0) { // 빈문자열이 아닐 경우
                         str = "";
                         var cursor_position = document.getElementById("ohoh").selectionStart;
@@ -131,9 +177,14 @@ $(document).ready(function () {
                     }
 
                 } else if ($(this).text() === 'ANS') {
-                    displayValue += $('#result').text();
-
-                    $('#ohoh').text(displayValue);
+                    var cursor_position = document.getElementById("ohoh").selectionStart;
+                    str = displayValue.substring(0, document.getElementById("ohoh").selectionStart);
+                    str += $('#result').text();
+                    str += displayValue.substring(document.getElementById("ohoh").selectionStart, displayValue.length);
+                    displayValue = str;
+                    $('#ohoh').text(displayValue); //이거 맨 뒤 한글자만 줄일때
+                    $('#ohoh').focus();
+                    document.getElementById("ohoh").selectionEnd = cursor_position + 1;//이렇게 하면 되는구만
                 } else if ($(this).text() === 'sin' || $(this).text() === 'cos' || $(this).text() === 'tan' ||
                     $(this).text() === 'asin' || $(this).text() === 'acos' || $(this).text() === 'atan' ||
                     $(this).text() === 'exp' || $(this).text() === 'det' || $(this).text() === 'sqrt' ||
@@ -158,7 +209,7 @@ $(document).ready(function () {
                         displayValue = str;
                         $('#ohoh').text(displayValue); //이거 맨 뒤 한글자만 줄일때
                         $('#ohoh').focus();
-                        document.getElementById("ohoh").selectionEnd = cursor_position+1;//이렇게 하면 되는구만
+                        document.getElementById("ohoh").selectionEnd = cursor_position + 1;//이렇게 하면 되는구만
 
                     }
 
