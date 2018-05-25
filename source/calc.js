@@ -18,14 +18,14 @@ $(document).ready(function () {
     // Semicolon (;) to ensure closing of earlier scripting
     // Encapsulation
     // $ is assigned to jQuery
-    ;(function($) {
+    ;(function ($) {
 
         // DOM Ready
-        $(function() {
+        $(function () {
 
             // Binding a click event
             // From jQuery v.1.7.0 use .on() instead of .bind()
-            $('#my-button').bind('click', function(e) {
+            $('#my-button').bind('click', function (e) {
 
                 // Prevents the default action to be triggered.
                 e.preventDefault();
@@ -42,11 +42,16 @@ $(document).ready(function () {
     function drawGrap(ex) {
         try {
             // compile the expression once
+
             var expression = ex;
+            var arrayOfStrings = ex.split("\n");
+            for(var i in arrayOfStrings) {
+                alert(arrayOfStrings[i]);
+            }
             var expr = math.compile(expression);
 
             // evaluate the expression repeatedly for different values of x
-            var xValues = math.range(-10, 10, 0.5).toArray();
+            var xValues = math.range(-10, 10, 1).toArray();
             var yValues = xValues.map(function (x) {
                 return expr.eval({x: x});
             });
@@ -57,7 +62,18 @@ $(document).ready(function () {
                 y: yValues,
                 type: 'scatter'
             };
-            var data = [trace1];
+            var trace2 = {
+                x: [2, 3, 4, 5],
+                y: [16, 5, 11, 9],
+                mode: 'lines'
+            };
+
+            var trace3 = {
+                x: [1, 2, 3, 4],
+                y: [12, 9, 15, 12],
+                mode: 'lines+markers'
+            };
+            var data = [trace1, trace2, trace3];
             Plotly.newPlot('plot', data);
         }
         catch (err) {
@@ -160,11 +176,21 @@ $(document).ready(function () {
                     $("#lower").toggle();
 
 
-                } else if ($(this).text() === 'Help') {
-                    alert(my_arr.toString());
+                } else if ($(this).text() === 'Enter') {
+                    var cursor_position = document.getElementById("ohoh").selectionStart;
+                    str = displayValue.substring(0, document.getElementById("ohoh").selectionStart);
+                    str += "\n";
+                    str += displayValue.substring(document.getElementById("ohoh").selectionStart, displayValue.length);
+                    displayValue = str;
+                    $('#ohoh').text(displayValue); //이거 맨 뒤 한글자만 줄일때
+                    $('#ohoh').focus();
+                    document.getElementById("ohoh").selectionEnd = cursor_position + 1;//이렇게 하면 되는구만
 
                 }
                 else if ($(this).text() === 'Graph') {
+                    // var str = $('#ohoh').text();
+                    // var res = str.split("\n");
+
                     var ex = $('#ohoh').text();
 
                     drawGrap(ex);
