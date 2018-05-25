@@ -7,6 +7,11 @@ $(document).ready(function () {
     $("#keyboard").hide();
     $("#lower").show();
     $("#capital").hide();
+    $("#tri-F").hide();
+    $("#spec-F").hide();
+    $("#diff-F").hide();
+    $("#proc-F").hide();
+    $("#var-F").hide();
 
     var currentPos = 0;
 
@@ -45,35 +50,40 @@ $(document).ready(function () {
 
             var expression = ex;
             var arrayOfStrings = ex.split("\n");
-            for(var i in arrayOfStrings) {
-                alert(arrayOfStrings[i]);
+            var xValues = math.range(-10, 10, 0.1).toArray();
+            var data = [];
+            for (var i in arrayOfStrings) {
+                var expr = math.compile(arrayOfStrings[i]);
+
+                var yValues = xValues.map(function (x) {
+                    return expr.eval({x: x});
+                });
+                var trace3 = {
+                    x: xValues,
+                    y: yValues,
+                    type: 'scatter'
+                };
+                data.push(trace3);
+
             }
-            var expr = math.compile(expression);
 
             // evaluate the expression repeatedly for different values of x
-            var xValues = math.range(-10, 10, 1).toArray();
-            var yValues = xValues.map(function (x) {
-                return expr.eval({x: x});
-            });
+
 
             // render the plot using plotly
-            var trace1 = {
-                x: xValues,
-                y: yValues,
-                type: 'scatter'
-            };
-            var trace2 = {
-                x: [2, 3, 4, 5],
-                y: [16, 5, 11, 9],
-                mode: 'lines'
-            };
-
-            var trace3 = {
-                x: [1, 2, 3, 4],
-                y: [12, 9, 15, 12],
-                mode: 'lines+markers'
-            };
-            var data = [trace1, trace2, trace3];
+            // var trace1 = {
+            //     x: xValues,
+            //     y: yValues,
+            //     type: 'scatter'
+            // };
+            // var trace2 = {
+            //     x: [2, 3, 4, 5],
+            //     y: [16, 5, 11, 9],
+            //     mode: 'lines'
+            // };
+            //
+            //
+            // var data = [trace1, trace2];
             Plotly.newPlot('plot', data);
         }
         catch (err) {
@@ -131,6 +141,36 @@ $(document).ready(function () {
         txtarea.scrollTop = scrollPos;
     }
 
+    $('.menu-open-button').each(function (index, key) {
+        $(this).click(function (e) {
+
+            if ($(this).text() === "삼각함수") {
+                $("#tri-F").toggle();
+            }
+            else if ($(this).text() === '지수로그') {
+                $("#spec-F").toggle();
+
+            }
+            else if ($(this).text() === '비교연산') {
+                $("#diff-F").toggle();
+            }
+            else if ($(this).text() === '행렬') {
+                $("#proc-F").toggle();
+            }
+            else if ($(this).text() === '상수') {
+                $("#proc-F").toggle();
+            }
+            else if ($(this).text() === '변수') {
+                $("#var-F").toggle();
+            }
+            else if ($(this).text() === '함수') {
+                $("#spec-F").toggle();
+            }
+            else if ($(this).text() === '벡터') {
+                $("#proc-F").toggle();
+            }
+        });
+    });
     $('.key').each(function (index, key) {
         $(this).click(function (e) {
             if (displayValue === '0') displayValue = '';

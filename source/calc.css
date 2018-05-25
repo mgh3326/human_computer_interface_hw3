@@ -128,6 +128,7 @@ h1 {
     cursor: pointer;
     /*box-shadow: 0 3px 0 #ed5276, 0 2px 5px rgba(251, 137, 146, 0.75);*/
     font: bold 20px sans-serif;
+    border-radius: 20%;
 
 }
 
@@ -145,6 +146,31 @@ h1 {
 
 .num-key {
     background-color: #e37b40;
+    color: #000000;
+}
+
+.tri-key {
+    background-color: #0074d9;
+    color: #000000;
+}
+
+.exponential-key {
+    background-color: #f012be;
+    color: #000000;
+}
+
+.diff-key {
+    background-color: #85144b;
+    color: #000000;
+}
+
+.spec-key {
+    background-color: #2ecc40;
+    color: #000000;
+}
+
+.var-key {
+    background-color: #ffdc00;
     color: #000000;
 }
 
@@ -245,9 +271,9 @@ h1 {
     /* width: 380px;
     height: 250px; */
     /* top, right, bottom, left */
-    margin: 5px 20px 5px 5px;
+    margin: 0px 20px 0px 5px;
     width: 75px;
-    height: 50px;
+    height: 75px;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
     font-size: 14px;
@@ -304,4 +330,7 @@ h1 {
 #element_to_pop_up {
     display: none;
     background-color: white;
+}
+#tri-F{
+    display: none;
 }
