@@ -67,23 +67,6 @@ $(document).ready(function () {
 
             }
 
-            // evaluate the expression repeatedly for different values of x
-
-
-            // render the plot using plotly
-            // var trace1 = {
-            //     x: xValues,
-            //     y: yValues,
-            //     type: 'scatter'
-            // };
-            // var trace2 = {
-            //     x: [2, 3, 4, 5],
-            //     y: [16, 5, 11, 9],
-            //     mode: 'lines'
-            // };
-            //
-            //
-            // var data = [trace1, trace2];
             Plotly.newPlot('plot', data);
         }
         catch (err) {
@@ -91,55 +74,6 @@ $(document).ready(function () {
         }
     }
 
-    function savePosition() {
-        currentPos = document.getElementById("result").selectionStart;//result를 담는 방법
-        // document.getElementById("ohoh").selectionStart
-        // var endPos = ctl.selectionEnd;
-
-    }
-
-    function setCaretPosition(txtbox, txtlen, start, end) {
-        if (txtbox.setSelectionRange) { // 커서의 위치를 지정한다.
-            txtbox.focus();
-            txtbox.setSelectionRange(start + txtlen, end + txtlen);
-        }
-    }
-
-    // textarea에서 커서 위치 파악하여 해당 위치에 삽입
-    // 참고 : http://itzone.tistory.com/272
-    function insertAtCursor(areaId, text) {
-        var txtarea = document.getElementById(areaId);
-        var scrollPos = txtarea.scrollTop;
-        var strPos = 0;
-        var br = ((txtarea.selectionStart || txtarea.selectionStart == '0') ?
-            "ff" : (document.selection ? "ie" : false));
-        if (br == "ie") {
-            txtarea.focus();
-            var range = document.selection.createRange();
-            range.moveStart('character', -txtarea.value.length);
-            strPos = range.text.length;
-        }
-        else if (br == "ff") strPos = txtarea.selectionStart;
-
-        var front = (txtarea.value).substring(0, strPos);
-        var back = (txtarea.value).substring(strPos, txtarea.value.length);
-        txtarea.value = front + text + back;
-        strPos = strPos + text.length;
-        if (br == "ie") {
-            txtarea.focus();
-            var range = document.selection.createRange();
-            range.moveStart('character', -txtarea.value.length);
-            range.moveStart('character', strPos);
-            range.moveEnd('character', 0);
-            range.select();
-        }
-        else if (br == "ff") {
-            txtarea.selectionStart = strPos;
-            txtarea.selectionEnd = strPos;
-            txtarea.focus();
-        }
-        txtarea.scrollTop = scrollPos;
-    }
 
     $('.menu-open-button').each(function (index, key) {
         $(this).click(function (e) {
@@ -236,6 +170,28 @@ $(document).ready(function () {
                     drawGrap(ex);
                     $('#plot').bPopup();
 
+
+                }
+                else if ($(this).text() === 'Graph') {
+                    var ex = $('#ohoh').text();
+                    drawGrap(ex);
+                    $('#plot').bPopup();
+                }
+                else if ($(this).text() === 'History') {
+                    if (my_arr.length === 0) {
+                        alert("검색 기록이 현재 없습니다.")
+                    }
+                    else {
+                        var str = "";
+                        for (var i in my_arr) {
+                            str += i;
+                            str += "st : ";
+                            str += my_arr[i];
+                            str += '\n';
+                        }
+                        $('#help').text(str);
+                        $('#help').bPopup();
+                    }
 
                 }
                 else if ($(this).text() === 'Mode') {

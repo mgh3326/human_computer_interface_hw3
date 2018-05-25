@@ -286,13 +286,11 @@ h1 {
 }
 
 .menu-open-button {
-    border-radius: 100%;
     background: #fd8a93;
 
     color: #000000;
     font-weight: bold;
     /*font-family: sans-serif;*/
-    z-index: 1; /*저게 우선 순위 인것 같다.*/
     -webkit-transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
     transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
@@ -327,10 +325,76 @@ h1 {
     /*display: none;*/
 }
 
-#element_to_pop_up {
+#tri-F {
     display: none;
-    background-color: white;
 }
-#tri-F{
+
+#help {
     display: none;
+    border: 5px solid #cccccc;
+    margin: 0;
+    padding: 5px;
+    background-color: #ffffff;
+    z-index: 5;
+}
+
+#help .b-close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    color: #f37a20;
+    font-weight: bold;
+    cursor: hand;
+}
+
+#help .popupContent {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    border: 0;
+}
+
+#help .popupContent iframe {
+    width: 900px;
+    height: 700px;
+    border: 0;
+    padding: 0px;
+    margin: 0;
+    z-index: 10;
+}
+
+[data-tooltip-text]:hover {
+    position: relative;
+}
+
+[data-tooltip-text]:after {
+
+    background-color: rgba(63, 43, 55, 0.6);
+
+
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+
+    color: #fffff0;
+    font-size: 16px;
+    margin-bottom: 7px;
+    padding: 7px 12px;
+    position: absolute;
+    width: auto;
+    min-width: 150px;
+    max-width: 300px;
+    word-wrap: break-word;
+    font-family: 'Source Sans Pro', sans-serif;
+    z-index: 1;
+
+    opacity: 0;
+    top: 90%;
+
+    content: attr(data-tooltip-text);
+}
+
+[data-tooltip-text]:hover:after {
+    top: 80%;
+    opacity: 1;
 }
