@@ -29,59 +29,60 @@
     <div id="help">
         Content of popup
     </div>
-    <div id="plot"></div>
+    <div id="plot" data-tooltip-text="외부 클릭시에 창이 종료됩니다."></div>
 
-    <!--<textarea id="helper" readonly></textarea>-->
     <label for="ohoh"></label><textarea id="ohoh" onkeydown="filter(event);"></textarea> <!-- readonly -->
     <!-- readonly -->
     <label for="result"></label><textarea id="result" readonly></textarea>
     <!--<div id="ohoh"></div>-->
     <!--<div id="result"></div>-->
     <!-- 삼각함수 -->
-    <div class="menu" data-tooltip-text="클릭시에 'sin' 'cos' 'tan' 'asin' 'acos' 'atan' 키가 활성화가 됩니다. 재 클릭시에 사라집니다.">
-        <div class=" menu-open-button">삼각함수</div>
+    <div class="menu " data-tooltip-text="클릭시에 'sin' 'cos' 'tan' 'asin' 'acos' 'atan' 키가 활성화가 됩니다. 재 클릭시에 사라집니다.">
+        <div class=" menu-open-button tri-key">삼각함수</div>
 
     </div>
     <!-- 특수 계산 -->
     <div class="menu" data-tooltip-text="클릭시에 'log' 'exp' 'sqrt' '^' 'f' 'g' 키가 활성화가 됩니다. 재 클릭시에 사라집니다.">
-        <div class=" menu-open-button">지수로그</div>
+        <div class=" menu-open-button exponential-key">지수로그</div>
 
+    </div>
+    <!-- 함수 -->
+    <div class="menu " data-tooltip-text="클릭시에 'log' 'exp' 'sqrt' '^' 'f' 'g' 키가 활성화가 됩니다. 재 클릭시에 사라집니다.">
+        <div class=" menu-open-button exponential-key">함수</div>
+    </div>
+
+
+    <!-- 행렬 (procession)-->
+    <div class="menu" data-tooltip-text="클릭시에 'det' 'inv' 'cross' 'e' 'pi' 'i' 키가 활성화가 됩니다. 재 클릭시에 사라집니다.">
+        <div class=" menu-open-button spec-key">행렬</div>
     </div>
 
     <!-- 비교연산 -->`
     <div class="menu" data-tooltip-text="클릭시에 '==' '!=' '<' '>' '<=' '>=' 키가 활성화가 됩니다. 재 클릭시에 사라집니다.">
-        <div class=" menu-open-button">비교연산</div>
+        <div class=" menu-open-button diff-key">비교연산</div>
 
     </div>
-    <!-- 행렬 (procession)-->
-    <div class="menu" data-tooltip-text="클릭시에 'det' 'inv' 'cross' 'e' 'pi' 'i' 키가 활성화가 됩니다. 재 클릭시에 사라집니다.">
-        <div class=" menu-open-button">행렬</div>
-    </div>
 
-    <!-- 상수 -->
-    <div class="menu" data-tooltip-text="클릭시에 'det' 'inv' 'cross' 'e' 'pi' 'i' 키가 활성화가 됩니다. 재 클릭시에 사라집니다.">
-        <div class=" menu-open-button">상수</div>
-
-    </div>
 
     <!-- 변수 -->
     <div class="menu" data-tooltip-text="클릭시에 'x' 'y' 'z' '=' 'a' 'b' 키가 활성화가 됩니다. 재 클릭시에 사라집니다.">
-        <div class=" menu-open-button">변수</div>
+        <div class=" menu-open-button var-key">변수</div>
     </div>
+    <!-- 상수 -->
+    <div class="menu" data-tooltip-text="클릭시에 'det' 'inv' 'cross' 'e' 'pi' 'i' 키가 활성화가 됩니다. 재 클릭시에 사라집니다.">
+        <div class=" menu-open-button spec-key">상수</div>
 
-    <!-- 함수 -->
-    <div class="menu" data-tooltip-text="클릭시에 'log' 'exp' 'sqrt' '^' 'f' 'g' 키가 활성화가 됩니다. 재 클릭시에 사라집니다.">
-        <div class=" menu-open-button">함수</div>
     </div>
 
 
     <!-- 벡터 -->
     <div class="menu" data-tooltip-text="클릭시에 'det' 'inv' 'cross' 'e' 'pi' 'i' 키가 활성화가 됩니다. 재 클릭시에 사라집니다.">
-        <div class=" menu-open-button">벡터</div>
+        <div class=" menu-open-button spec-key">벡터</div>
     </div>
 
     <br>
-    <span class="key menu-key shift-key " data-tooltip-text="클릭시에 개행이 진행됩니다.(그래프에 활용됩니다.)">Enter</span>
+    <span class="key menu-key mode-key">Mode</span>
+
     <span class="key menu-key" data-tooltip-text="클릭시에 커서가 왼쪽으로 이동합니다.">◀</span>
     <span class="key menu-key function-key " data-tooltip-text="글자 한개를 지웁니다.">DEL</span>
     <span class="key menu-key" data-tooltip-text="클릭시에 커서가 오른쪽으로 이동합니다.">▶</span>
@@ -89,53 +90,54 @@
     <span class="key menu-key clear-key" data-tooltip-text="디스플레이를 0으로 만듭니다.">AC</span>
 
 
-    <span class="key menu-key function-key">ANS</span>
-    <span class="key menu-key">Mode</span>
-    <span class="key menu-key">Graph</span>
-    <span class="key menu-key">History</span>
+    <span class="key menu-key function-key ans-key" data-tooltip-text="이전의 결과 값을 보여줍니다.">ANS</span>
+    <span class="key menu-key shift-key enter-key" data-tooltip-text="클릭시에 개행이 진행됩니다.(그래프에 활용됩니다.)">Enter</span>
 
-    <span class="key menu-key eval-key">EV</span>
+    <span class="key menu-key graph-key" data-tooltip-text="그래프를 그려줍니다. 엔터키를 기준으로 여러개의 그래프를 그릴 수 있습니다.">Graph</span>
+    <span class="key menu-key history-key" data-tooltip-text="계산 결과의 기록들을 볼수 있습니다.">History</span>
+
+    <span class="key menu-key eval-key" data-tooltip-text="계산합니당">EV</span>
     <br>
     <div id="tri-F">
-        <div class="key   tri-key" data-tooltip-text="sin(x)">sin</div>
-        <div class="key   tri-key">cos</div>
-        <div class="key   tri-key">tan</div>
-        <div class="key   tri-key">asin</div>
-        <div class="key   tri-key">acos</div>
-        <div class="key   tri-key">atan</div>
+        <div class="key   tri-key" data-tooltip-text="sin(이 입력됩니다.">sin</div>
+        <div class="key   tri-key" data-tooltip-text="cos(이 입력됩니다.">cos</div>
+        <div class="key   tri-key" data-tooltip-text="tan(이 입력됩니다.">tan</div>
+        <div class="key   tri-key" data-tooltip-text="asin(이 입력됩니다.">asin</div>
+        <div class="key   tri-key" data-tooltip-text="acos(이 입력됩니다.">acos</div>
+        <div class="key   tri-key" data-tooltip-text="atan(이 입력됩니다.">atan</div>
     </div>
     <div id="spec-F">
-        <div class="key exponential-key">log</div>
-        <div class="key exponential-key">exp</div>
-        <div class="key exponential-key">sqrt</div>
-        <div class="key exponential-key">^</div>
-        <div class="key exponential-key">f</div>
-        <div class="key exponential-key">g</div>
+        <div class="key exponential-key" data-tooltip-text="log(이 입력됩니다.">log</div>
+        <div class="key exponential-key" data-tooltip-text="exp(이 입력됩니다.">exp</div>
+        <div class="key exponential-key" data-tooltip-text="sqrt(이 입력됩니다.">sqrt</div>
+        <div class="key exponential-key" data-tooltip-text="제곱의 이용됩니다.">^</div>
+        <div class="key exponential-key" data-tooltip-text="함수 f가 입력됩니다.">f</div>
+        <div class="key exponential-key" data-tooltip-text="함수 g가 입력됩니다.">g</div>
     </div>
     <div id="diff-F">
-        <div class="key  diff-key">==</div>
-        <div class="key  diff-key">!=</div>
-        <div class="key  diff-key"><</div>
-        <div class="key  diff-key">></div>
-        <div class="key  diff-key"><=</div>
-        <div class="key  diff-key">>=</div>
+        <div class="key  diff-key" data-tooltip-text="등호 ==가 입력됩니다. true false로 반환됩니다.">==</div>
+        <div class="key  diff-key" data-tooltip-text="부등호 !=가 입력됩니다. true false로 반환됩니다.">!=</div>
+        <div class="key  diff-key" data-tooltip-text="부등호 <가 입력됩니다. true false로 반환됩니다."><</div>
+        <div class="key  diff-key" data-tooltip-text="부등호 >가 입력됩니다. true false로 반환됩니다.">></div>
+        <div class="key  diff-key" data-tooltip-text="부등호 <=가 입력됩니다. true false로 반환됩니다."><=</div>
+        <div class="key  diff-key" data-tooltip-text="부등호 >=가 입력됩니다. true false로 반환됩니다.">>=</div>
     </div>
     <br>
     <div id="proc-F">
-        <div class="key  spec-key">det</div>
-        <div class="key  spec-key">inv</div>
-        <div class="key spec-key">corss</div>
-        <div class="key spec-key">e</div>
-        <div class="key spec-key">pi</div>
-        <div class="key spec-key">i</div>
+        <div class="key  spec-key" data-tooltip-text="det(이 입력됩니다.">det</div>
+        <div class="key  spec-key" data-tooltip-text="inv(이 입력됩니다.">inv</div>
+        <div class="key spec-key" data-tooltip-text="cross(이 입력됩니다.">cross</div>
+        <div class="key spec-key" data-tooltip-text="e가 입력됩니다.">e</div>
+        <div class="key spec-key" data-tooltip-text="pi가 입력됩니다.">pi</div>
+        <div class="key spec-key" data-tooltip-text="i가 입력됩니다.">i</div>
     </div>
     <div id="var-F">
-        <div class="key  var-key">x</div>
-        <div class="key var-key">y</div>
-        <div class="key var-key">z</div>
-        <div class="key var-key">=</div>
-        <div class="key  var-key">a</div>
-        <div class="key var-key">b</div>
+        <div class="key  var-key" data-tooltip-text="변수 x가 입력됩니다.">x</div>
+        <div class="key var-key" data-tooltip-text="변수 y가 입력됩니다.">y</div>
+        <div class="key var-key" data-tooltip-text="변수 z가 입력됩니다.">z</div>
+        <div class="key var-key" data-tooltip-text="등호가 입력됩니다.">=</div>
+        <div class="key  var-key" data-tooltip-text="변수 a가 입력됩니다.">a</div>
+        <div class="key var-key" data-tooltip-text="변수 b가 입력됩니다.">b</div>
     </div>
     <div id="yeah">
 
@@ -308,7 +310,7 @@
 
     </div>
     <div id="Star" data-tooltip-text="★ 버튼을 누르면 버튼이 현재 디스플레이에 있는 글자로 변경됩니다.">
-        <div  class="key  star-key">★</div>
+        <div class="key  star-key">★</div>
         <div class="key star-key">★</div>
         <div class="key star-key">★</div>
         <div class="key star-key">★</div>

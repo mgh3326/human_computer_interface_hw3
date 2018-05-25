@@ -50,7 +50,7 @@ $(document).ready(function () {
 
             var expression = ex;
             var arrayOfStrings = ex.split("\n");
-            var xValues = math.range(-10, 10, 0.1).toArray();
+            var xValues = math.range(-100, 100, 0.1).toArray();
             var data = [];
             for (var i in arrayOfStrings) {
                 var expr = math.compile(arrayOfStrings[i]);

@@ -21,18 +21,6 @@ body {
     width: 400px;
 }
 
-h1 {
-    font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
-    font-size: 30px;
-    padding: 20px 10px;
-    text-align: center;
-    text-transform: uppercase;
-    text-rendering: optimizeLegibility;
-    color: #e0dfdc;
-    background-color: #333;
-    letter-spacing: .1em;
-    text-shadow: 0 -1px 0 #fff, 0 1px 0 #2e2e2e, 0 2px 0 #2c2c2c, 0 3px 0 #2a2a2a, 0 4px 0 #282828, 0 5px 0 #262626, 0 6px 0 #242424, 0 7px 0 #222, 0 8px 0 #202020, 0 9px 0 #1e1e1e, 0 10px 0 #1c1c1c, 0 11px 0 #1a1a1a, 0 12px 0 #181818, 0 13px 0 #161616, 0 14px 0 #141414, 0 15px 0 #121212, 0 22px 30px rgba(0, 0, 0, 0.9);
-}
 
 #calculator {
     font-size: 0;
@@ -140,39 +128,17 @@ h1 {
 
 .operator-key {
     /*font: italic 15px "Times New Roman";*/
-    background-color: #ed5276;
+    background-color: #d39ded;
     color: #000000;
 }
 
 .num-key {
-    background-color: #e37b40;
+    background-color: #87cbf7;
     color: #000000;
 }
 
-.tri-key {
-    background-color: #0074d9;
-    color: #000000;
-}
 
-.exponential-key {
-    background-color: #f012be;
-    color: #000000;
-}
 
-.diff-key {
-    background-color: #85144b;
-    color: #000000;
-}
-
-.spec-key {
-    background-color: #2ecc40;
-    color: #000000;
-}
-
-.var-key {
-    background-color: #ffdc00;
-    color: #000000;
-}
 
 .star-key {
     background-color: #ffdc00;
@@ -186,7 +152,7 @@ h1 {
 }
 
 .menu-key {
-    background-color: rgb(93, 181, 164);
+    background-color: rgb(255, 204, 0);
     color: #000000;
     width: 70px;
     height: 35px;
@@ -203,18 +169,43 @@ h1 {
 }
 
 .clear-key {
-    background-color: #d80001;
+    background-color: rgb(255, 45, 0);
     color: #000000;
 }
 
 .function-key {
     /*font: italic 15px "Times New Roman";*/
-    background-color: #f3cca4;
+    background-color: #46b39d;
     color: #000000;
 }
 
 .shift-key {
-    background-color: rgb(93, 181, 164);
+    background-color: rgb(255, 127, 0);
+    color: #000000;
+}
+
+.mode-key {
+    background-color: rgb(242, 163, 54);
+    color: #000000;
+}
+
+.ans-key {
+    background-color: rgb(210, 77, 37);
+    color: #000000;
+}
+
+.enter-key {
+    background-color: rgb(255, 139, 148);
+    color: #000000;
+}
+
+.graph-key {
+    background-color: rgb(220, 237, 193);
+    color: #000000;
+}
+
+.history-key {
+    background-color: rgb(63, 216, 201);
     color: #000000;
 }
 
@@ -330,10 +321,6 @@ h1 {
     /*display: none;*/
 }
 
-#tri-F {
-    display: none;
-}
-
 #help {
     display: none;
     border: 5px solid #cccccc;
@@ -410,4 +397,27 @@ h1 {
     top: 130%;
     left: 0;
     opacity: 1;
+}
+
+.tri-key {
+    background-color: #a8e6cf;
+    color: #000000;
+}
+
+.exponential-key {
+    background-color: #dcedc1;
+    color: #000000;
+}
+.diff-key {
+    background-color: #ffd3b6;
+    color: #000000;
+}
+
+.spec-key {
+    background-color: #ffaaa5;
+    color: #000000;
+}
+.var-key {
+    background-color: #ff585b;
+    color: #000000;
 }
