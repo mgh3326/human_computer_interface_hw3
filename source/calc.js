@@ -209,6 +209,18 @@ $(document).ready(function () {
                     // document.getElementById("ohoh").selectionEnd ++;//이건 왜 필요없지?
 
                 }
+                else if ($(this).text() === '★') {
+                    // alert(displayValue);
+                    if (displayValue !== "") {
+                        $(this).text(displayValue); //이거 맨 뒤 한글자만 줄일때
+                    }
+                    else {
+                        $(this).text($('#result').text()); //이거 맨 뒤 한글자만 줄일때
+                    }
+
+                    // document.getElementById("ohoh").selectionEnd ++;//이건 왜 필요없지?
+
+                }
 
 
                 else if ($(this).text() === 'DEL') {
