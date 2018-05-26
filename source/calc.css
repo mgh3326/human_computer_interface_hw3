@@ -21,7 +21,6 @@ body {
     width: 400px;
 }
 
-
 #calculator {
     font-size: 0;
     width: 400px;
@@ -137,10 +136,12 @@ body {
     color: #000000;
 }
 
-
-
-
 .star-key {
+    background-color: #ffdc00;
+    color: #000000;
+}
+
+.unstar-key {
     background-color: #ffdc00;
     color: #000000;
 }
@@ -408,6 +409,7 @@ body {
     background-color: #dcedc1;
     color: #000000;
 }
+
 .diff-key {
     background-color: #ffd3b6;
     color: #000000;
@@ -417,6 +419,7 @@ body {
     background-color: #ffaaa5;
     color: #000000;
 }
+
 .var-key {
     background-color: #ff585b;
     color: #000000;

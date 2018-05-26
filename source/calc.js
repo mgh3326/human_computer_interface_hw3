@@ -187,9 +187,10 @@ $(document).ready(function () {
                             str += i;
                             str += "st : ";
                             str += my_arr[i];
-                            str += '\n';
+                            str += "<br>";
                         }
-                        $('#help').text(str);
+                        $('#help').html(str);
+
                         $('#help').bPopup();
                     }
 
@@ -222,7 +223,15 @@ $(document).ready(function () {
 
                 }
 
+                else if ($(this).text() === '☆') {
+                    // alert(displayValue);
+                    var oh = document.getElementsByClassName("star-key")
+                    for (i = 0; i < oh.length; i++) {
+                        oh[i].innerHTML= "★";
+                    }
+                    // document.getElementById("ohoh").selectionEnd ++;//이건 왜 필요없지?
 
+                }
                 else if ($(this).text() === 'DEL') {
                     if (displayValue.length > 0) { // 빈문자열이 아닐 경우
                         str = "";
