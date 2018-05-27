@@ -47,12 +47,30 @@ $(document).ready(function () {
     function drawGrap(ex) {
         try {
             // compile the expression once
-
+            var tempnum = 0;
             var expression = ex;
             var arrayOfStrings = ex.split("\n");
-            var xValues = math.range(-100, 100, 0.1).toArray();
+            if (arrayOfStrings[arrayOfStrings.length - 1][0] === "[") {
+                tempnum = 1;
+                var tempstr = arrayOfStrings[arrayOfStrings.length - 1].substring(1, arrayOfStrings[arrayOfStrings.length - 1].length - 1);
+                var temp = tempstr.split(",");
+                if (temp.length == 1) {
+
+                    var xValues = math.range(-1 * Math.abs(temp[0]), Math.abs(temp[0]), 0.1).toArray();
+                }
+                else {//2
+                    var xValues = math.range(temp[0], temp[1], 0.01).toArray();
+
+                }
+            }
+            else {
+                var xValues = math.range(-10, 10, 0.1).toArray();
+            }
+
             var data = [];
-            for (var i in arrayOfStrings) {
+
+            for (var i = 0; i < arrayOfStrings.length - tempnum; i++) {
+
                 var expr = math.compile(arrayOfStrings[i]);
 
                 var yValues = xValues.map(function (x) {
@@ -61,7 +79,9 @@ $(document).ready(function () {
                 var trace3 = {
                     x: xValues,
                     y: yValues,
-                    type: 'scatter'
+                    type: 'scatter',
+                    name: arrayOfStrings[i]
+
                 };
                 data.push(trace3);
 
@@ -227,7 +247,7 @@ $(document).ready(function () {
                     // alert(displayValue);
                     var oh = document.getElementsByClassName("star-key")
                     for (i = 0; i < oh.length; i++) {
-                        oh[i].innerHTML= "★";
+                        oh[i].innerHTML = "★";
                     }
                     // document.getElementById("ohoh").selectionEnd ++;//이건 왜 필요없지?
 
