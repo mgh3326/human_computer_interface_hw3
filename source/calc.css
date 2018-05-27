@@ -295,7 +295,11 @@ body {
 }
 
 .menu-open-button:hover {
-    background: #ffaaa5;
+
+    /* background: #494949; */
+    color: #ffffff;
+}
+.key:hover {
 
     /* background: #494949; */
     color: #ffffff;
@@ -355,7 +359,8 @@ body {
     margin: 0;
     z-index: 10;
 }
-
+/* http://programmingsummaries.tistory.com/369 */
+/* 참고 */
 [data-tooltip-text]:hover {
     position: relative;
 }
